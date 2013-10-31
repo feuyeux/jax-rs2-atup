@@ -1,0 +1,14 @@
+*.class
+*.jar
+*.war
+*.ear
+.settings
+target
+.classpath
+.DS_Store
+.project
+.db
+.idea
+*.iml
+nb-configuration.xml
+Thumbs.db
