@@ -10,7 +10,7 @@
 	<artifactId>atup-core</artifactId>
 	<packaging>jar</packaging>
 	<name>ATUP Core</name>
-	
+
 	<dependencies>
 		<!-- servlet -->
 		<dependency>

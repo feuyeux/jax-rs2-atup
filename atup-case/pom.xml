@@ -10,8 +10,36 @@
 	<artifactId>atup-case</artifactId>
 	<packaging>war</packaging>
 	<name>ATUP Case</name>
-	
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>${maven-war-plugin.version}</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>false</downloadSources>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<dependencies>
+		<dependency>
+			<groupId>org.feuyeux.jaxrs2.atup</groupId>
+			<artifactId>atup-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<!-- servlet -->
 		<dependency>
 			<groupId>org.apache.tomcat</groupId>

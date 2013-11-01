@@ -11,7 +11,6 @@
 	<packaging>war</packaging>
 	<name>ATUP Device</name>
 
-
 	<build>
 		<plugins>
 			<plugin>
@@ -22,13 +21,22 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<downloadSources>false</downloadSources>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.feuyeux.jaxrs2.atup</groupId>
-			<artifactId>core</artifactId>
+			<artifactId>atup-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
