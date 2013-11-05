@@ -1,29 +1,30 @@
 package org.feuyeux.jaxrs2.atup.core.rest;
 
-import java.util.Set;
-
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.MediaType;
 import org.glassfish.jersey.client.ClientConfig;
 import org.springframework.util.CollectionUtils;
 
+import javax.ws.rs.client.*;
+import javax.ws.rs.core.MediaType;
+import java.util.Set;
+
 /**
  * ATUP Rest Request
- * 
+ *
  * @author feuyeux@gmail.com
  * @since 1.0
- * 09/09/2013
+ *        09/09/2013
  */
 public class AtupRequest<T> {
+    public static final String GET = "GET";
+    public static final String DELETE = "DELETE";
+    public static final String PUT = "PUT";
+    public static final String POST = "POST";
     private ClientConfig clientConfig;
     private Set<Class<?>> clientRegisters;
 
     //security
     //timeout
-    
+
     public AtupRequest() {
     }
 
@@ -35,8 +36,13 @@ public class AtupRequest<T> {
         this.clientRegisters = clientRegisters;
     }
 
-    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams, MediaType requestDataType,
-            Class<T> returnType) {
+    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams,
+                  MediaType requestDataType, Class<T> returnType) {
+        return rest(method, requestUrl, headParams, queryParams, requestDataType, returnType, null);
+    }
+
+    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams,
+                  MediaType requestDataType, Class<T> returnType, T requestData) {
         if (clientConfig == null) {
             clientConfig = new ClientConfig();
         }
@@ -62,11 +68,23 @@ public class AtupRequest<T> {
             }
         }
 
+        javax.ws.rs.core.Response response;
+        Entity<T> entity;
         switch (method) {
-            case "GET":
-                javax.ws.rs.core.Response response = invocationBuilder.get();
+            case GET:
+                response = invocationBuilder.get();
                 return response.readEntity(returnType);
-
+            case DELETE:
+                response = invocationBuilder.delete();
+                return response.readEntity(returnType);
+            case PUT:
+                entity = Entity.entity(requestData, requestDataType);
+                response = invocationBuilder.put(entity);
+                return response.readEntity(returnType);
+            case POST:
+                entity = Entity.entity(requestData, requestDataType);
+                response = invocationBuilder.post(entity);
+                return response.readEntity(returnType);
             default:
                 return null;
         }
