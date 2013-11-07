@@ -1,31 +1,24 @@
 package org.feuyeux.jaxrs2.atup.core.domain;
 
-import java.io.Serializable;
+import org.feuyeux.jaxrs2.atup.core.info.AtupUserInfo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
 
 /**
  * ATUP User Entity
- * 
+ *
  * @author feuyeux@gmail.com
  * @since 1.0
- * 09/09/2013
+ *        09/09/2013
  */
 @Entity
 @Table(name = "atup_user")
 @XmlRootElement
 public class AtupUser implements Serializable {
     private static final long serialVersionUID = 1L;
-
-
     private Integer userId;
     private Integer userRole;
     private String userName;
@@ -39,6 +32,19 @@ public class AtupUser implements Serializable {
         this.userId = userId;
         this.userRole = userRole;
         this.userName = userName;
+    }
+
+    public AtupUser(Integer userRole, String userName, String passWord) {
+        this.userRole = userRole;
+        this.userName = userName;
+        this.passWord = passWord;
+    }
+
+    public AtupUser(AtupUserInfo userInfo) {
+        this.userId = userInfo.getUserId();
+        this.userRole = userInfo.getUserRole();
+        this.userName = userInfo.getUserName();
+        this.passWord = userInfo.getPassWord();
     }
 
     @Id

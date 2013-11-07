@@ -1,19 +1,17 @@
 package org.feuyeux.jaxrs2.atup.core.info;
 
-import java.io.Serializable;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * ATUP Test Job Info
- * 
+ *
  * @author feuyeux@gmail.com
  * @since 1.0
- * 09/09/2013
+ *        09/09/2013
  */
 
 @XmlRootElement
-public class AtupTestJobInfo implements Serializable {
+public class AtupTestJobInfo {
     private static final long serialVersionUID = 1L;
     public static final Integer HIGH = 3;
     public static final Integer MEDIUM = 2;

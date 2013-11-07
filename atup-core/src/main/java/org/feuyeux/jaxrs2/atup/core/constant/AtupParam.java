@@ -10,7 +10,7 @@ public class AtupParam {
     public static final Integer RESULT_OK = 0;
     public static final Integer RESULT_ERROR = 1;
     public static final Integer RESULT_UNKOWN = 2;
-    
+
     public static final Integer USER_ADMIN = 0;
     public static final Integer USER_READONLY = 1;
 }

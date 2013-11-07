@@ -1,32 +1,21 @@
 package org.feuyeux.jaxrs2.atup.core.domain;
 
-import java.io.Serializable;
-import java.util.Date;
+import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * ATUP Test Result Entity
- * 
+ *
  * @author feuyeux@gmail.com
  * @since 1.0
- * 09/09/2013
+ *        09/09/2013
  */
 @Entity
 @Table(name = "test_result")

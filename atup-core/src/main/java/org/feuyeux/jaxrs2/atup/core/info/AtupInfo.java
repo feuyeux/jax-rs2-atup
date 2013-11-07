@@ -1,44 +1,27 @@
 package org.feuyeux.jaxrs2.atup.core.info;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
+import java.io.Serializable;
 
 /**
  * ATUP Device Info
- * 
+ *
  * @author feuyeux@gmail.com
  * @since 1.0
- * 09/09/2013
+ *        09/09/2013
  */
 @XmlRootElement
-public class AtupDeviceInfo {
-    private AtupDevice entity;
-    private String errorInfo;
-    private Integer statusCode;
+public abstract class AtupInfo implements Serializable {
+    protected String errorInfo;
+    protected Integer statusCode = AtupErrorCode.NONE;
 
-    public AtupDeviceInfo() {
+    public AtupInfo() {
     }
 
-    public AtupDeviceInfo(AtupDevice entity) {
-        this.entity = entity;
-    }
-
-    public AtupDeviceInfo(AtupDevice entity, String errorInfo, Integer statusCode) {
-        this.entity = entity;
+    public AtupInfo(String errorInfo, Integer statusCode) {
         this.errorInfo = errorInfo;
         this.statusCode = statusCode;
-    }
-
-    @XmlElement
-    public AtupDevice getEntity() {
-        return entity;
-    }
-
-    public void setEntity(AtupDevice entity) {
-        this.entity = entity;
     }
 
     @XmlAttribute

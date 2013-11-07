@@ -1,7 +1,5 @@
 package org.feuyeux.jaxrs2.atup.device.resource;
 
-import javax.ws.rs.core.MediaType;
-
 import org.apache.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.rest.AtupRequest;
@@ -10,10 +8,12 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+import javax.ws.rs.core.MediaType;
+
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TestDeviceResource {
-    private final static Logger LOGGER = Logger.getLogger(TestDeviceResource.class);
+public class TSDeviceResource {
+    private final static Logger LOGGER = Logger.getLogger(TSDeviceResource.class);
 
     @Test
     public void testFindAll() {
