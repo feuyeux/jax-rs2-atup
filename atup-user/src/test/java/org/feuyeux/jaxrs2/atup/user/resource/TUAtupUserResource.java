@@ -1,7 +1,7 @@
 package org.feuyeux.jaxrs2.atup.user.resource;
 
+import org.feuyeux.jaxrs2.atup.core.fake.CreateUser;
 import org.feuyeux.jaxrs2.atup.core.info.AtupUserInfo;
-import org.feuyeux.jaxrs2.atup.user.CreateUser;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

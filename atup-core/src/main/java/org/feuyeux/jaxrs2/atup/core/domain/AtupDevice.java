@@ -21,7 +21,6 @@ import java.util.Date;
 @XmlRootElement
 public class AtupDevice implements Serializable {
     private static final long serialVersionUID = 1L;
-
     private Integer deviceId;
     private AtupUser user;
     private String deviceHost;
@@ -44,6 +43,16 @@ public class AtupDevice implements Serializable {
         this.deviceType = deviceType;
     }
 
+    public AtupDevice(AtupUser user, String deviceHost, String deviceName, Integer deviceStatus, Integer deviceType, Date createTime, Date updateTime) {
+        this.user = user;
+        this.deviceHost = deviceHost;
+        this.deviceName = deviceName;
+        this.deviceStatus = deviceStatus;
+        this.deviceType = deviceType;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EMP_SEQ")
     @SequenceGenerator(name = "EMP_SEQ")
@@ -57,7 +66,7 @@ public class AtupDevice implements Serializable {
         this.deviceId = deviceId;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "userId")
     //@XmlElement
     public AtupUser getUser() {

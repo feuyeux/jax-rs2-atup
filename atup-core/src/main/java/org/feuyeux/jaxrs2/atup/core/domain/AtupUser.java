@@ -70,7 +70,7 @@ public class AtupUser implements Serializable {
         this.userRole = userRole;
     }
 
-    @Column(name = "user_name")
+    @Column(name = "user_name", unique = true)
     @XmlAttribute
     public String getUserName() {
         return userName;

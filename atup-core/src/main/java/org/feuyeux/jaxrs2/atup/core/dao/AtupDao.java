@@ -16,7 +16,7 @@ import java.util.List;
 public class AtupDao<T> {
     private static final Logger LOGGER = Logger.getLogger(AtupDao.class);
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
     private Class<T> entityClass;
 
     @SuppressWarnings("unchecked")
@@ -56,9 +56,9 @@ public class AtupDao<T> {
 
     @Transactional
     public boolean remove(final Integer bookId) {
-        final T book0 = findById(bookId);
-        if (book0 != null) {
-            entityManager.remove(book0);
+        final T entity = findById(bookId);
+        if (entity != null) {
+            entityManager.remove(entity);
             return true;
         } else {
             return false;

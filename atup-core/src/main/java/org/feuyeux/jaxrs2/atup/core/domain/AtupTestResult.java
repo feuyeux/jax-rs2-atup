@@ -20,9 +20,14 @@ import java.util.Date;
 @Entity
 @Table(name = "test_result")
 @XmlRootElement
+@NamedQueries({
+        @NamedQuery(name = "findResultByTestCase", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.testCase= :testCase"),
+        @NamedQuery(name = "findResultByStatus", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.resultStatus= :resultStatus"),
+        @NamedQuery(name = "findResultByUser", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.user= :user")
+})
+
 public class AtupTestResult implements Serializable {
     private static final long serialVersionUID = 1L;
-
     private Integer resultId;
     private AtupTestCase testCase;
     private AtupUser user;
@@ -30,6 +35,18 @@ public class AtupTestResult implements Serializable {
     private String resultBody;
     private Date createTime;
     private Date updateTime;
+
+    public AtupTestResult() {
+    }
+
+    public AtupTestResult(AtupTestCase testCase, AtupUser user, Integer resultStatus, String resultBody, Date createTime, Date updateTime) {
+        this.testCase = testCase;
+        this.user = user;
+        this.resultStatus = resultStatus;
+        this.resultBody = resultBody;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EMP_SEQ")
@@ -44,7 +61,7 @@ public class AtupTestResult implements Serializable {
         this.resultId = resultId;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "caseId")
     @XmlElement
     public AtupTestCase getTestCase() {
@@ -55,7 +72,7 @@ public class AtupTestResult implements Serializable {
         this.testCase = testCase;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "userId")
     @XmlElement
     public AtupUser getUser() {

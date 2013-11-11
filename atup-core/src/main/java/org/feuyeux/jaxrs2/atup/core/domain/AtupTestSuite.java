@@ -15,13 +15,29 @@ import java.io.Serializable;
 @Entity
 @Table(name = "test_suite")
 @XmlRootElement
+@NamedQueries({
+        @NamedQuery(name = "findBySuiteStatus", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteStatus= :suiteStatus"),
+        @NamedQuery(name = "findBySuiteName", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteName= :suiteName")
+})
 public class AtupTestSuite implements Serializable {
     private static final long serialVersionUID = 1L;
-
     private Integer suiteId;
     private String suiteName;
     private Integer suiteType;
     private Integer suiteStatus;
+
+    public AtupTestSuite() {
+    }
+
+    public AtupTestSuite(String suiteName, Integer suiteType, Integer suiteStatus) {
+        this.suiteName = suiteName;
+        this.suiteType = suiteType;
+        this.suiteStatus = suiteStatus;
+    }
+
+    public AtupTestSuite(Integer suiteId) {
+        this.suiteId = suiteId;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EMP_SEQ")
