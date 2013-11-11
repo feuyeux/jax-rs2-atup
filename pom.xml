@@ -19,14 +19,14 @@
         <JDK.version>1.7</JDK.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <jersey.version>2.3</jersey.version>
+        <jersey.version>2.4.1</jersey.version>
         <junit.version>4.11</junit.version>
         <slf4j.version>1.4.3</slf4j.version>
         <log4j.version>1.2.16</log4j.version>
 
-        <spring.version>3.2.3.RELEASE</spring.version>
+        <spring.version>3.2.5.RELEASE</spring.version>
         <eclipselink.version>2.5.0</eclipselink.version>
-        <jquery.version>2.0.0</jquery.version>
+        <jquery.version>2.0.3</jquery.version>
         <mysql-connector.version>5.1.25</mysql-connector.version>
 
         <maven-compiler-plugin.version>2.5.1</maven-compiler-plugin.version>
@@ -57,63 +57,8 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
-
-    <profiles>
-        <profile>
-            <id>TI</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven-failsafe-plugin.version}</version>
-                        <configuration>
-                            <includes>
-                                <include>**/**/**/**/**/TU**.java</include>
-                                <include>**/**/**/**/**/TI**.java</include>
-                            </includes>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>TS</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-failsafe-plugin</artifactId>
-                        <version>${maven-failsafe-plugin.version}</version>
-                        <configuration>
-                            <includes>
-                                <include>**/**/**/**/**/TS**.java</include>
-                            </includes>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>integration-test</goal>
-                                    <goal>verify</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
 
     <dependencyManagement>
         <dependencies>
