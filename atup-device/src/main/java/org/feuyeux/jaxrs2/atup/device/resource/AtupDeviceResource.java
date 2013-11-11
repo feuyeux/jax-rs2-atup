@@ -1,6 +1,7 @@
 package org.feuyeux.jaxrs2.atup.device.resource;
 
 import org.apache.log4j.Logger;
+import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
@@ -13,7 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("devices")
+@Path(AtupApi.DEVICE_PATH)
 public class AtupDeviceResource {
     private static final Logger LOGGER = Logger.getLogger(AtupDeviceResource.class);
     @Autowired

@@ -1,5 +1,6 @@
 package org.feuyeux.jaxrs2.atup.core.domain;
 
+import org.feuyeux.jaxrs2.atup.core.info.AtupTestCaseInfo;
 import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
 
 import javax.persistence.*;
@@ -46,6 +47,14 @@ public class AtupTestCase implements Serializable {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.caseStatus = caseStatus;
+    }
+
+    public AtupTestCase(AtupTestCaseInfo testCaseInfo) {
+        this.caseName = testCaseInfo.getCaseName();
+        this.suite = testCaseInfo.getSuite();
+        this.device = testCaseInfo.getDevice();
+        this.caseBody = testCaseInfo.getCaseBody();
+        this.caseStatus = testCaseInfo.getCaseStatus();
     }
 
     @Id

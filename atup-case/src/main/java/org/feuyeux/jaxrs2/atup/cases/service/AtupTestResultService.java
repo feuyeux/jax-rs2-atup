@@ -1,12 +1,12 @@
 package org.feuyeux.jaxrs2.atup.cases.service;
 
+import org.feuyeux.jaxrs2.atup.cases.dao.AtupTestResultDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AtupTestSuiteService {
-
+public class AtupTestResultService {
     @Autowired
-    org.feuyeux.jaxrs2.atup.cases.dao.AtupTestSuiteDao dao;
+    AtupTestResultDao dao;
 
 }

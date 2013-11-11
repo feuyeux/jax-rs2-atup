@@ -1,6 +1,7 @@
 package org.feuyeux.jaxrs2.atup.device.resource;
 
 import org.apache.log4j.Logger;
+import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.rest.AtupRequest;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class TSDeviceResource {
     @Test
     public void testFindAll() {
         AtupRequest<AtupDevice> request = new AtupRequest<AtupDevice>();
-        AtupDevice device = request.rest("GET", "http://localhost:8080/device/api/devices/1", null, null, MediaType.APPLICATION_JSON_TYPE, AtupDevice.class);
+        AtupDevice device = request.rest("GET", "http://localhost:8080/device/api/" + AtupApi.DEVICE_PATH + "/1", null, null, MediaType.APPLICATION_JSON_TYPE, AtupDevice.class);
         LOGGER.info(device);
     }
 }

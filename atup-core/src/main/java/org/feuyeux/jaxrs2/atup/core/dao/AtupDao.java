@@ -55,8 +55,8 @@ public class AtupDao<T> {
     }
 
     @Transactional
-    public boolean remove(final Integer bookId) {
-        final T entity = findById(bookId);
+    public boolean remove(final Integer entityId) {
+        final T entity = findById(entityId);
         if (entity != null) {
             entityManager.remove(entity);
             return true;
