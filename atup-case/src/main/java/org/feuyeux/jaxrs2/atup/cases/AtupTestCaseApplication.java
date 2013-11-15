@@ -1,6 +1,5 @@
 package org.feuyeux.jaxrs2.atup.cases;
 
-import org.feuyeux.jaxrs2.atup.cases.resource.AtupTestCaseResource;
 import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
