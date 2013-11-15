@@ -8,7 +8,6 @@ import javax.ws.rs.Path;
 
 @Path(AtupApi.TEST_CASE_PATH)
 public class AtupTestCaseResource {
-
     @Autowired
     AtupTestCaseService service;
 
@@ -16,3 +15,4 @@ public class AtupTestCaseResource {
 
     }
 }
+

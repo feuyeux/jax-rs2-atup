@@ -4,11 +4,13 @@
 *.ear
 .settings
 target
-.classpath
+work
 .DS_Store
+.classpath
 .project
 .db
 .idea
 *.iml
 nb-configuration.xml
 Thumbs.db
+.*~
