@@ -1,8 +1,10 @@
 package org.feuyeux.jaxrs2.atup.core.info;
 
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
+import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestSuite;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import java.util.Date;
 
 public class AtupTestCaseInfo extends AtupInfo {
@@ -15,10 +17,18 @@ public class AtupTestCaseInfo extends AtupInfo {
     private Date updateTime;
     private Integer caseStatus;
 
-    public AtupTestCaseInfo() {
-
+    public AtupTestCaseInfo(AtupTestCase testCase) {
+        caseId = testCase.getCaseId();
+        caseName = testCase.getCaseName();
+        suite = testCase.getSuite();
+        device = testCase.getDevice();
+        caseBody = testCase.getCaseBody();
+        caseStatus = testCase.getCaseStatus();
+        createTime = testCase.getCreateTime();
+        updateTime = testCase.getUpdateTime();
     }
 
+    @XmlAttribute
     public Integer getCaseId() {
         return caseId;
     }

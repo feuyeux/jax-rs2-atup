@@ -43,7 +43,11 @@ public class AtupDao<T> {
         return findAll(false, 0, 0);
     }
 
-    public List<T> findAll(final boolean isPaging, final int firstResult, final int maxResults) {
+    public List<T> findAll(final int firstResult, final int maxResults) {
+        return findAll(true, firstResult, maxResults);
+    }
+
+    private List<T> findAll(final boolean isPaging, final int firstResult, final int maxResults) {
         final CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         final CriteriaQuery<T> cq = cb.createQuery(entityClass);
         final TypedQuery<T> q = entityManager.createQuery(cq);
