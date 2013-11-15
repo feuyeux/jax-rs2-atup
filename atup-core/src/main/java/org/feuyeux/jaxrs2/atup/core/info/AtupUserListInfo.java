@@ -6,6 +6,13 @@ public class AtupUserListInfo extends AtupInfo {
 
     private List<AtupUserInfo> userList;
 
+    public AtupUserListInfo() {
+    }
+
+    public AtupUserListInfo(List<AtupUserInfo> userList) {
+        this.userList = userList;
+    }
+
     public List<AtupUserInfo> getUserList() {
         return userList;
     }

@@ -62,7 +62,7 @@ public class TUTestResultDao {
 
     @Test
     public void testFindByUser() {
-        List<AtupTestResult> caseList = dao.findByUser(CreateUser.buildUser());
+        List<AtupTestResult> caseList = dao.findByUser(CreateUser.buildUser(), 0, 100);
         if (!caseList.isEmpty()) {
             Assert.assertEquals(AtupParam.RESULT_OK, caseList.get(0).getResultStatus());
         }

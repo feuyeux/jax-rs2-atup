@@ -6,6 +6,13 @@ public class AtupTestResultListInfo extends AtupInfo {
 
     private List<AtupTestResultInfo> resultList;
 
+    public AtupTestResultListInfo() {
+    }
+
+    public AtupTestResultListInfo(String errorInfo, Integer statusCode) {
+        super(errorInfo, statusCode);
+    }
+
     public List<AtupTestResultInfo> getResultList() {
         return resultList;
     }

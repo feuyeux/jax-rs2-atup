@@ -17,6 +17,9 @@ public class AtupTestCaseInfo extends AtupInfo {
     private Date updateTime;
     private Integer caseStatus;
 
+    public AtupTestCaseInfo() {
+    }
+
     public AtupTestCaseInfo(AtupTestCase testCase) {
         caseId = testCase.getCaseId();
         caseName = testCase.getCaseName();

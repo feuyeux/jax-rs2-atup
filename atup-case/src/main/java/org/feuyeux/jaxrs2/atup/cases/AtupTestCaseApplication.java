@@ -7,6 +7,6 @@ import javax.ws.rs.ApplicationPath;
 @ApplicationPath("/api/*")
 public class AtupTestCaseApplication extends ResourceConfig {
     public AtupTestCaseApplication() {
-        register(AtupTestCaseResource.class);
+        packages("org.feuyeux.jaxrs2.atup.cases.resource");
     }
 }

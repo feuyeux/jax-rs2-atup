@@ -6,6 +6,17 @@ import java.util.List;
 public class AtupTestCaseListInfo extends AtupInfo {
     private List<AtupTestCaseInfo> testCaseList;
 
+    public AtupTestCaseListInfo(List<AtupTestCaseInfo> testCaseList) {
+        this.testCaseList = testCaseList;
+    }
+
+    public AtupTestCaseListInfo() {
+    }
+
+    public AtupTestCaseListInfo(String errorInfo, Integer statusCode) {
+        super(errorInfo, statusCode);
+    }
+
     @XmlElement
     public List<AtupTestCaseInfo> getTestCaseList() {
         return testCaseList;

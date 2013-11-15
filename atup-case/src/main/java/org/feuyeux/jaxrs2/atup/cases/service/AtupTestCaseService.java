@@ -38,6 +38,9 @@ public class AtupTestCaseService {
                 AtupTestCaseInfo caseInfo = new AtupTestCaseInfo(testCase);
                 caseInfoList.add(caseInfo);
             }
+            result = new AtupTestCaseListInfo(caseInfoList);
+        } else {
+            result = new AtupTestCaseListInfo();
         }
         return result;
     }

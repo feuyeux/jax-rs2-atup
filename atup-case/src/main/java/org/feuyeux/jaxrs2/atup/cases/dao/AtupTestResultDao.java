@@ -7,6 +7,7 @@ import org.feuyeux.jaxrs2.atup.core.domain.AtupTestResult;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -19,8 +20,11 @@ public class AtupTestResultDao extends AtupDao<AtupTestResult> {
         return entityManager.createNamedQuery("findResultByStatus").setParameter("resultStatus", resultStatus).getResultList();
     }
 
-    public List<AtupTestResult> findByUser(AtupUser user) {
-        return entityManager.createNamedQuery("findResultByUser").setParameter("user", user).getResultList();
+    public List<AtupTestResult> findByUser(AtupUser user, Integer start, Integer size) {
+        Query query = entityManager.createNamedQuery("findResultByUser").setParameter("user", user);
+        query.setFirstResult(start);
+        query.setMaxResults(size);
+        return query.getResultList();
     }
 
     public List<AtupTestResult> findByTestCase(AtupTestCase testCase) {

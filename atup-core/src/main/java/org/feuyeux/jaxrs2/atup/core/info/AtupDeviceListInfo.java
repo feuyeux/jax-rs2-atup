@@ -6,6 +6,13 @@ public class AtupDeviceListInfo extends AtupInfo {
 
     private List<AtupDeviceInfo> deviceList;
 
+    public AtupDeviceListInfo(List<AtupDeviceInfo> deviceList) {
+        this.deviceList = deviceList;
+    }
+
+    public AtupDeviceListInfo() {
+    }
+
     public List<AtupDeviceInfo> getDeviceList() {
         return deviceList;
     }

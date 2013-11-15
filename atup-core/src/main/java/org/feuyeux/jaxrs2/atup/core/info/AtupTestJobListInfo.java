@@ -6,6 +6,9 @@ public class AtupTestJobListInfo extends AtupInfo {
 
     private List<AtupTestJobInfo> jobList;
 
+    public AtupTestJobListInfo() {
+    }
+
     public List<AtupTestJobInfo> getJobList() {
         return jobList;
     }
