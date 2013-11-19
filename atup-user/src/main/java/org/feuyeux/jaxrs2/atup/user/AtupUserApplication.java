@@ -5,7 +5,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 
 import javax.ws.rs.ApplicationPath;
 
-@ApplicationPath("/api/*")
+@ApplicationPath("/rest-api/*")
 public class AtupUserApplication extends ResourceConfig {
     public AtupUserApplication() {
         register(AtupUserResource.class);

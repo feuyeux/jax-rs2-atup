@@ -12,6 +12,7 @@
     <name>ATUP Device</name>
 
     <build>
+        <finalName>atup-device</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

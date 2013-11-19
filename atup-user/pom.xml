@@ -12,6 +12,7 @@
     <name>ATUP User Management</name>
 
     <build>
+        <finalName>atup-user</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

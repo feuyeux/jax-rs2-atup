@@ -12,6 +12,7 @@
     <name>ATUP Case</name>
 
     <build>
+        <finalName>atup-case</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
