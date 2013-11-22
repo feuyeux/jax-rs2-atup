@@ -12,9 +12,7 @@ function renderQueryGet(data) {
 function renderPathGet(data) {
     $('#resultDiv').html("path result: " + data.bookId + "-" + data.bookName + "-" + data.publisher);
 }
-function renderPut(data) {
-    $('#resultDiv').html("DONE! id=" + data.bookId);
-}
+
 function renderDelete(data) {
     $('#resultDiv').html(data);
 }

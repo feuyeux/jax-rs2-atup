@@ -1,6 +1,5 @@
-function rest(httpMethod, param, contenttype, datatype, callback) {
+function rest(restUrl, httpMethod, param, contenttype, datatype, callback) {
     jQuery('#resultDiv').html("Loading...");
-    var restUrl = ATUP_CASE_BASE_URI;
     var request = jQuery.ajax({type: httpMethod, url: restUrl, data: param, contentType: contenttype, dataType: datatype});
     request.done(function (data) {
         try {
@@ -60,19 +59,9 @@ function putInfo() {
     rest(PUT_METHOD, putData, contentType, 'json', renderPut);
 }
 
-/*POST*/
-function postInfo() {
-    var contentType = $("input[name='saveRadio']:checked").val();
-    var postData;
-    var nameValue = $("#bookName").val();
-    var publisherValue = $("#publisher").val();
-    if (contentType === "application/xml") {
-        postData = "<book bookName='" + nameValue + "'/>";
-    } else {
-        postData = JSON.stringify({bookName: nameValue, publisher: publisherValue});
-    }
-    rest(POST_METHOD, postData, contentType, 'json', renderPut);
-};
+function renderPut(data) {
+    $('#resultDiv').html("DONE! id=" + data.bookId);
+}
 
 /*DELETE*/
 function deleteInfo() {
