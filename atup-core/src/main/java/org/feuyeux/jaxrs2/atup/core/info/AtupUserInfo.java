@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class AtupUserInfo extends AtupInfo {
+    private static final long serialVersionUID = 1L;
     @XmlAttribute
     private Integer userId;
     @XmlAttribute

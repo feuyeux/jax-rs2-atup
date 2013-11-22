@@ -13,10 +13,10 @@ public class AtupTestSuiteDao extends AtupDao<AtupTestSuite> {
     }
 
     public List<AtupTestSuite> findByStatus(Integer suiteStatus) {
-        return entityManager.createNamedQuery("findBySuiteStatus").setParameter("suiteStatus", suiteStatus).getResultList();
+        return entityManager.createNamedQuery("findBySuiteStatus", AtupTestSuite.class).setParameter("suiteStatus", suiteStatus).getResultList();
     }
 
     public List<AtupTestSuite> findBySuiteName(String suiteName) {
-        return entityManager.createNamedQuery("findBySuiteName").setParameter("suiteName", suiteName).getResultList();
+        return entityManager.createNamedQuery("findBySuiteName", AtupTestSuite.class).setParameter("suiteName", suiteName).getResultList();
     }
 }

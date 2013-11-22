@@ -1,7 +1,3 @@
-var ATUP_CASE_BASE_URI = 'atup-case/rest-api';
-var ATUP_DEVICE_BASE_URI = 'atup-device/rest-api';
-var ATUP_USER_BASE_URI = 'atup-user/rest-api';
-
 function rest(httpMethod, param, contenttype, datatype, callback) {
     jQuery('#resultDiv').html("Loading...");
     var restUrl = ATUP_CASE_BASE_URI;

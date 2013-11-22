@@ -41,4 +41,13 @@ public class TUAtupUserDao {
         AtupUser findUser = dao.findById(newUser.getUserId());
         Assert.assertEquals(user.getUserName(), findUser.getUserName());
     }
+
+    @Test
+    public void testFindByName() {
+        AtupUser user = CreateUser.buildUser();
+        AtupUser newUser = dao.save(user);
+        AtupUser findUser = dao.findByName(newUser.getUserName());
+        Assert.assertEquals(user.getUserName(), findUser.getUserName());
+    }
+
 }

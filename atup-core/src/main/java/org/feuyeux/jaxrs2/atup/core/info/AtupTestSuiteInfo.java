@@ -3,6 +3,7 @@ package org.feuyeux.jaxrs2.atup.core.info;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestSuite;
 
 public class AtupTestSuiteInfo extends AtupInfo {
+    private static final long serialVersionUID = 1L;
     private Integer suiteId;
     private String suiteName;
     private Integer suiteType;

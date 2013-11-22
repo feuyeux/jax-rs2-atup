@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 @XmlRootElement
 public abstract class AtupInfo implements Serializable {
+    private static final long serialVersionUID = 1L;
     protected String errorInfo;
     protected Integer statusCode = AtupErrorCode.NONE;
 

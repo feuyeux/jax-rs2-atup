@@ -9,4 +9,8 @@ public class AtupUserDao extends AtupDao<AtupUser> {
     public AtupUserDao() {
         super();
     }
+
+    public AtupUser findByName(String userName) {
+        return entityManager.createNamedQuery("findByUserName", AtupUser.class).setParameter("userName", userName).getSingleResult();
+    }
 }

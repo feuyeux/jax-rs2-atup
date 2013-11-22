@@ -5,6 +5,7 @@ import org.feuyeux.jaxrs2.atup.core.domain.AtupTestResult;
 import java.util.Date;
 
 public class AtupTestResultInfo extends AtupInfo {
+    private static final long serialVersionUID = 1L;
     private Integer resultId;
     private AtupTestCaseInfo testCase;
     private AtupUserInfo user;

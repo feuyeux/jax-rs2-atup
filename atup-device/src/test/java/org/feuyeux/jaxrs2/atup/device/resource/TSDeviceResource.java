@@ -15,11 +15,12 @@ import javax.ws.rs.core.MediaType;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TSDeviceResource {
     private final static Logger LOGGER = Logger.getLogger(TSDeviceResource.class);
+    public static final String BASE_URI = "http://localhost:8080/atup-device/restapi/";
 
     @Test
     public void testFindAll() {
         AtupRequest<AtupDevice> request = new AtupRequest<AtupDevice>();
-        AtupDevice device = request.rest("GET", "http://localhost:8080/device/api/" + AtupApi.DEVICE_PATH + "/1", null, null, MediaType.APPLICATION_JSON_TYPE, AtupDevice.class);
+        AtupDevice device = request.rest("GET", BASE_URI + AtupApi.DEVICE_PATH + "/1", null, null, MediaType.APPLICATION_JSON_TYPE, AtupDevice.class);
         LOGGER.info(device);
     }
 }

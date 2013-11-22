@@ -5,6 +5,9 @@ import org.feuyeux.jaxrs2.atup.core.info.AtupUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class AtupUserService {
 
@@ -14,5 +17,18 @@ public class AtupUserService {
     public AtupUser createUser(AtupUserInfo userInfo) {
         AtupUser user = new AtupUser(userInfo);
         return dao.save(user);
+    }
+
+    public AtupUser getUser(String userName) {
+        return dao.findByName(userName);
+    }
+
+    public List<AtupUserInfo> getUserList() {
+        List<AtupUser> list = dao.findAll();
+        List<AtupUserInfo> result = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            result.add(new AtupUserInfo(list.get(i)));
+        }
+        return result;
     }
 }

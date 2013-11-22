@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import java.util.List;
 
 public class AtupTestCaseListInfo extends AtupInfo {
+    private static final long serialVersionUID = 1L;
     private List<AtupTestCaseInfo> testCaseList;
 
     public AtupTestCaseListInfo(List<AtupTestCaseInfo> testCaseList) {

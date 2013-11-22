@@ -4,21 +4,19 @@ import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import org.feuyeux.jaxrs2.atup.core.info.AtupErrorCode;
 import org.feuyeux.jaxrs2.atup.core.info.AtupUserInfo;
+import org.feuyeux.jaxrs2.atup.core.info.AtupUserListInfo;
 import org.feuyeux.jaxrs2.atup.user.service.AtupUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path(AtupApi.USER_PATH)
 @Component
 public class AtupUserResource {
-
     @Autowired
     AtupUserService service;
 
@@ -38,5 +36,22 @@ public class AtupUserResource {
             AtupUserInfo result = new AtupUserInfo(e.getMessage(), AtupErrorCode.PERSIST_ERROR);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
         }
+    }
+
+    @GET
+    @Path("{user}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public AtupUserInfo getUser(@PathParam("user") String userName) {
+        AtupUser user = service.getUser(userName);
+        AtupUserInfo result = new AtupUserInfo(user);
+        return result;
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public AtupUserListInfo getUsers() {
+        List<AtupUserInfo> users = service.getUserList();
+        AtupUserListInfo result = new AtupUserListInfo(users);
+        return result;
     }
 }

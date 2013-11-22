@@ -8,10 +8,7 @@ import org.feuyeux.jaxrs2.atup.core.info.AtupErrorInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestResultListInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path(AtupApi.TEST_RESULT_PATH)
@@ -22,6 +19,7 @@ public class AtupTestResultResource {
     @GET
     @Path("results")
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public AtupTestResultListInfo getResults(AtupUser user, @QueryParam("start") Integer start,
                                              @QueryParam("size") Integer size) {
         if (start == null || size == null) {

@@ -7,7 +7,7 @@ import org.feuyeux.jaxrs2.atup.core.domain.AtupTestResult;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
@@ -17,17 +17,17 @@ public class AtupTestResultDao extends AtupDao<AtupTestResult> {
     }
 
     public List<AtupTestResult> findByStatus(Integer resultStatus) {
-        return entityManager.createNamedQuery("findResultByStatus").setParameter("resultStatus", resultStatus).getResultList();
+        return entityManager.createNamedQuery("findResultByStatus", AtupTestResult.class).setParameter("resultStatus", resultStatus).getResultList();
     }
 
     public List<AtupTestResult> findByUser(AtupUser user, Integer start, Integer size) {
-        Query query = entityManager.createNamedQuery("findResultByUser").setParameter("user", user);
+        TypedQuery<AtupTestResult> query = entityManager.createNamedQuery("findResultByUser", AtupTestResult.class).setParameter("user", user);
         query.setFirstResult(start);
         query.setMaxResults(size);
         return query.getResultList();
     }
 
     public List<AtupTestResult> findByTestCase(AtupTestCase testCase) {
-        return entityManager.createNamedQuery("findResultByTestCase").setParameter("testCase", testCase).getResultList();
+        return entityManager.createNamedQuery("findResultByTestCase", AtupTestResult.class).setParameter("testCase", testCase).getResultList();
     }
 }

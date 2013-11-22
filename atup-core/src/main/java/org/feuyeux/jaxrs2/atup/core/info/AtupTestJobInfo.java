@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class AtupTestJobInfo {
-    private static final long serialVersionUID = 1L;
+
     public static final Integer HIGH = 3;
     public static final Integer MEDIUM = 2;
     public static final Integer LOW = 1;

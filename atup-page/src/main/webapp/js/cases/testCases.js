@@ -1,4 +1,3 @@
-/*Render DOM*/
 function renderGetAll(data) {
     var entityList = data.bookList.book;
     var result = "";

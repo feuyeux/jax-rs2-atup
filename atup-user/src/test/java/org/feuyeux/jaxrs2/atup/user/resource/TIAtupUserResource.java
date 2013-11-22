@@ -39,11 +39,33 @@ public class TIAtupUserResource extends JerseyTest {
         Response response = target().path(AtupApi.USER_PATH).request().post(e);
         AtupUserInfo result = response.readEntity(AtupUserInfo.class);
         if (result.getStatusCode() == AtupErrorCode.NONE) {
-
             Assert.assertEquals(user.getUserName(), result.getUserName());
         } else {
             Assert.fail();
             LOG.info(result.getErrorInfo());
         }
+    }
+
+    public void testGetUser() {
+        String userName = null;
+        AtupUserInfo user = CreateUser.buildUserInfo();
+        Entity<AtupUserInfo> e = Entity.entity(user, MediaType.APPLICATION_JSON_TYPE);
+        Response response = target().path(AtupApi.USER_PATH).request().post(e);
+        AtupUserInfo result = response.readEntity(AtupUserInfo.class);
+        if (result.getStatusCode() == AtupErrorCode.NONE) {
+            userName = result.getUserName();
+            Assert.assertEquals(user.getUserName(), result.getUserName());
+        } else {
+            Assert.fail();
+            LOG.info(result.getErrorInfo());
+        }
+
+        if (userName != null) {
+            AtupUserInfo atupUserInfo = target().path(AtupApi.USER_PATH).path(userName).request().get(AtupUserInfo.class);
+        }
+    }
+
+    public void testGetUsers() {
+
     }
 }

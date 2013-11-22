@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import java.util.Date;
 
 public class AtupTestCaseInfo extends AtupInfo {
+    private static final long serialVersionUID = 1L;
     private Integer caseId;
     private String caseName;
     private AtupTestSuite suite;

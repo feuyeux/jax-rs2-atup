@@ -17,6 +17,10 @@ import java.io.Serializable;
 @Entity
 @Table(name = "atup_user")
 @XmlRootElement
+
+@NamedQueries({
+        @NamedQuery(name = "findByUserName", query = "SELECT atupUser FROM AtupUser atupUser WHERE atupUser.userName= :userName"),
+})
 public class AtupUser implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer userId;
