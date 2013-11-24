@@ -17,10 +17,7 @@ function rest(restUrl, httpMethod, param, contenttype, datatype, callback) {
     });
 }
 
-/*GET*/
-function getList() {
-    rest(GET_METHOD, null, null, 'json', renderGetAll);
-}
+
 function getInfoByQuery() {
     var url = $("#queryUrl").val();
     rest(GET_METHOD, null, null, 'json', renderQueryGet);
