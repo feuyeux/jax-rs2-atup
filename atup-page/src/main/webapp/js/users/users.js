@@ -7,6 +7,12 @@ function loadUsers() {
 function renderGetAll(data) {
     $.each(data.userList, function (i, user) {
         $("#usersDiv").html("");
-        $("#usersDiv").append("<div>User ID " + user.userId + " User Name " + user.userName + " User Role " + user.userRole + "</div>");
+        $("#usersDiv").append("<div><span style='width:300px;display:inline-block;'>User ID </span>");
+        $("#usersDiv").append(user.userId);
+        $("#usersDiv").append("<div><span style='width:300px;display:inline-block;'>User Name </span>");
+        $("#usersDiv").append(user.userName);
+        $("#usersDiv").append("<div><span style='width:300px;display:inline-block;'>User Role </span>");
+        $("#usersDiv").append(user.userRole);
+        $("#usersDiv").append("</div>");
     });
 }
