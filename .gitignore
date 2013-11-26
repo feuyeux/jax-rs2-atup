@@ -13,4 +13,4 @@ work
 *.iml
 nb-configuration.xml
 Thumbs.db
-.*~
+.xml~
