@@ -31,4 +31,12 @@ public class AtupUserService {
         }
         return result;
     }
+
+    public AtupUser updateUser(AtupUserInfo userInfo) {
+        AtupUser updatedUser = dao.update(new AtupUser(userInfo));
+        if (updatedUser == null) {
+            //TODO
+        }
+        return updatedUser;
+    }
 }

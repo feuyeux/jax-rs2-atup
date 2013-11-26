@@ -34,7 +34,21 @@ public class AtupUserResource {
             return Response.ok().entity(result).build();
         } catch (Exception e) {
             AtupUserInfo result = new AtupUserInfo(e.getMessage(), AtupErrorCode.PERSIST_ERROR);
-            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e).build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
+        }
+    }
+    
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public javax.ws.rs.core.Response updateUser(AtupUserInfo userInfo) {
+        try {
+            AtupUser newUser = service.updateUser(userInfo);
+            AtupUserInfo result = new AtupUserInfo(newUser);
+            return Response.ok().entity(result).build();
+        } catch (Exception e) {
+            AtupUserInfo result = new AtupUserInfo(e.getMessage(), AtupErrorCode.PERSIST_ERROR);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
         }
     }
 

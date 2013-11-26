@@ -29,7 +29,7 @@ public class TUTestSuiteDao {
         AtupTestSuite entity = CreatTestSuite.buildTestSuite();
         AtupTestSuite savedEntity = dao.save(entity);
         savedEntity.setSuiteType(AtupParam.EDGE_SUITE);
-        AtupTestSuite updatedEntity = dao.store(savedEntity);
+        AtupTestSuite updatedEntity = dao.update(savedEntity);
         Assert.assertEquals(AtupParam.EDGE_SUITE, updatedEntity.getSuiteType());
     }
 

@@ -1,6 +1,6 @@
 function rest(restUrl, httpMethod, param, contenttype, datatype, callback) {
     jQuery('#resultDiv').html("Loading...");
-    var request = jQuery.ajax({type: httpMethod, url: restUrl, data: param, contentType: contenttype, dataType: datatype});
+    var request = jQuery.ajax({type: httpMethod, url: restUrl, data: param, contentType: contenttype, dataType: datatype, crossDomain :true});
     request.done(function (data) {
         try {
             if (data === null || data === undefined) {
@@ -25,35 +25,6 @@ function getInfoByQuery() {
 function getInfoByPath() {
     var url = $("#pathUrl").val();
     rest(GET_METHOD, null, null, 'json', renderPathGet);
-}
-
-/*PUT*/
-function putInfo() {
-    var contentType = $("input[name='updateRadio']:checked").val();
-    var putData;
-    var idValue = $("#bookId0").val();
-    var nameValue = $("#bookName0").val();
-    var publisherValue = $("#publisher0").val();
-    if (contentType === "application/xml") {
-        putData = "<book";
-        if (nameValue !== "") {
-            putData += " bookName='" + nameValue + "'";
-        }
-        if (publisherValue !== "") {
-            putData += " publisher='" + publisherValue + "'";
-        }
-        putData += "/>";
-    } else {
-        var book = new Object();
-        if (nameValue !== "") {
-            book.bookName = nameValue;
-        }
-        if (publisherValue !== "") {
-            book.publisher = publisherValue;
-        }
-        putData = JSON.stringify(book);
-    }
-    rest(PUT_METHOD, putData, contentType, 'json', renderPut);
 }
 
 function renderPut(data) {

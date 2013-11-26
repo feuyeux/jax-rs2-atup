@@ -30,7 +30,7 @@ public class TUTestCaseDao {
         AtupTestCase entity = CreateTestCase.buildTestCase();
         AtupTestCase savedEntity = dao.save(entity);
         savedEntity.setCaseStatus(AtupParam.DISABLED_CASE);
-        AtupTestCase updatedEntity = dao.store(savedEntity);
+        AtupTestCase updatedEntity = dao.update(savedEntity);
         Assert.assertEquals(AtupParam.DISABLED_CASE, updatedEntity.getCaseStatus());
     }
 

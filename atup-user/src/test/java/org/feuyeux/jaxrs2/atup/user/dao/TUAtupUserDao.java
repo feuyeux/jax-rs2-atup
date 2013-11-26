@@ -27,7 +27,7 @@ public class TUAtupUserDao {
         AtupUser user = CreateUser.buildUser();
         AtupUser newUser = dao.save(user);
         newUser.setUserName(CreateUser.TEST_NAME1);
-        AtupUser updatedUser = dao.store(newUser);
+        AtupUser updatedUser = dao.update(newUser);
         Assert.assertEquals(CreateUser.TEST_NAME1, updatedUser.getUserName());
 
         boolean deleted = dao.remove(updatedUser.getUserId());

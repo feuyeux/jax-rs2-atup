@@ -15,13 +15,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class AtupUserInfo extends AtupInfo {
     private static final long serialVersionUID = 1L;
-    @XmlAttribute
     private Integer userId;
-    @XmlAttribute
     private Integer userRole;
-    @XmlAttribute
     private String userName;
-    @XmlAttribute
     private String passWord;
 
     public AtupUserInfo() {
@@ -44,6 +40,7 @@ public class AtupUserInfo extends AtupInfo {
         super(errorInfo, statusCode);
     }
 
+    @XmlAttribute
     public Integer getUserId() {
         return userId;
     }
@@ -52,6 +49,7 @@ public class AtupUserInfo extends AtupInfo {
         this.userId = userId;
     }
 
+    @XmlAttribute
     public Integer getUserRole() {
         return userRole;
     }
@@ -60,6 +58,7 @@ public class AtupUserInfo extends AtupInfo {
         this.userRole = userRole;
     }
 
+    @XmlAttribute
     public String getUserName() {
         return userName;
     }
@@ -68,6 +67,7 @@ public class AtupUserInfo extends AtupInfo {
         this.userName = userName;
     }
 
+    @XmlAttribute
     public String getPassWord() {
         return passWord;
     }

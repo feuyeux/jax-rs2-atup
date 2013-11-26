@@ -4,3 +4,6 @@
 
 Unit Test
 mvn clean install -PTI
+
+REST WADL:
+http://localhost:8008/atup-user/rest-api/application.wadl

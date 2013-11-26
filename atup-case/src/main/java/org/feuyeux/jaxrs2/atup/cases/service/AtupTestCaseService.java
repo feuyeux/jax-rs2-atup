@@ -26,7 +26,7 @@ public class AtupTestCaseService {
 
     public AtupTestCase updateTestCase(AtupTestCaseInfo testCaseInfo) {
         AtupTestCase testCase = new AtupTestCase(testCaseInfo);
-        return dao.store(testCase);
+        return dao.update(testCase);
     }
 
     public AtupTestCaseListInfo getCases(Integer start, Integer size) {

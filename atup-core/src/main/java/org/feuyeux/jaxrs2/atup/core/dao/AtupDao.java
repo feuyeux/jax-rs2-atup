@@ -70,8 +70,9 @@ public class AtupDao<T> {
     }
 
     @Transactional
-    public T store(final T entity) {
-        return entityManager.merge(entity);
+    public T update(final T entity) {
+        T newEntity = entityManager.merge(entity);
+        return newEntity;
     }
 
     @Transactional

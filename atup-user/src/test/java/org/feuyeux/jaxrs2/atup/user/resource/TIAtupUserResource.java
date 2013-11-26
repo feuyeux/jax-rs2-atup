@@ -1,6 +1,5 @@
 package org.feuyeux.jaxrs2.atup.user.resource;
 
-
 import org.apache.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.fake.CreateUser;
@@ -20,7 +19,7 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TIAtupUserResource extends JerseyTest {
     private static final Logger LOG = Logger.getLogger(TIAtupUserResource.class);
@@ -62,6 +61,7 @@ public class TIAtupUserResource extends JerseyTest {
 
         if (userName != null) {
             AtupUserInfo atupUserInfo = target().path(AtupApi.USER_PATH).path(userName).request().get(AtupUserInfo.class);
+            Assert.assertEquals(userName, atupUserInfo.getUserName());
         }
     }
 

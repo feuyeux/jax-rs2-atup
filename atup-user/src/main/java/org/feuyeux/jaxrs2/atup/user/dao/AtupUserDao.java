@@ -13,4 +13,15 @@ public class AtupUserDao extends AtupDao<AtupUser> {
     public AtupUser findByName(String userName) {
         return entityManager.createNamedQuery("findByUserName", AtupUser.class).setParameter("userName", userName).getSingleResult();
     }
+
+    @Override
+    public AtupUser update(AtupUser entity) {
+        AtupUser updateEntity = findByName(entity.getUserName());
+        if (updateEntity != null) {
+            entity.setUserId(updateEntity.getUserId());
+            return super.update(entity);
+        } else {
+            return null;
+        }
+    }
 }

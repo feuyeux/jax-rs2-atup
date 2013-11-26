@@ -20,6 +20,16 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+			<plugin>
+				<!-- support eclipse's web server -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>${maven-eclipse-plugin.version}</version>
+				<configuration>
+					<downloadSources>false</downloadSources>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 

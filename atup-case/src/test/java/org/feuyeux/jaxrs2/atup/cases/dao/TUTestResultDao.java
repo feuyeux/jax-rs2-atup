@@ -32,7 +32,7 @@ public class TUTestResultDao {
         AtupTestResult entity = CreateTestResult.buildTestResult();
         AtupTestResult savedEntity = dao.save(entity);
         savedEntity.setResultStatus(AtupParam.RESULT_ERROR);
-        AtupTestResult updatedEntity = dao.store(savedEntity);
+        AtupTestResult updatedEntity = dao.update(savedEntity);
         Assert.assertEquals(AtupParam.RESULT_ERROR, updatedEntity.getResultStatus());
     }
 
