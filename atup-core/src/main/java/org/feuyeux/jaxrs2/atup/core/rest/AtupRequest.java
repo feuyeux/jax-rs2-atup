@@ -88,6 +88,5 @@ public class AtupRequest<T> {
             default:
                 return null;
         }
-
     }
 }
