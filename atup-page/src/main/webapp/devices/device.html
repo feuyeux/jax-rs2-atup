@@ -2,12 +2,25 @@
 <html>
 <head>
     <title>Device Page</title>
-    <script src="webjars/jquery/2.0.3/jquery.js"></script>
-    <script src="js/atupConstant.js"></script>
-    <script src="js/atupRest.js"></script>
-    <script src="js/devices/device.js"></script>
+    <script src="../webjars/jquery/2.0.3/jquery.js"></script>
+    <script src="../js/atupConstant.js"></script>
+    <script src="../js/atupRest.js"></script>
+    <script src="../js/devices/device.js"></script>
 </head>
 <body>
 
+<div style="margin-top: 20px;"/>
+<h5>Create Device</h5>
+<div ><span style='width:100px;display:inline-block;'>Device IP:</span>
+<input type="text" id="deviceIp0" name="deviceIp0" value=""/></div>
+<div> <span style='width:100px;display:inline-block;'>Device Name:</span>
+<input type="text" id="deviceName0" name="deviceName0" value=""/></div>
+<div> <span style='width:100px;display:inline-block;'>Device Type:</span>
+<input type="text" id="deviceType0" name="deviceType0" value=""/></div>
+<div>
+    <input id="createButton" type="button" value="Create" onclick="createDevice();"/>
+</div>
+
+<div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
 </body>
 </html>

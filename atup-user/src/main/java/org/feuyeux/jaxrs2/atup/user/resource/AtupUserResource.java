@@ -37,7 +37,7 @@ public class AtupUserResource {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
         }
     }
-    
+
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -67,5 +67,17 @@ public class AtupUserResource {
         List<AtupUserInfo> users = service.getUserList();
         AtupUserListInfo result = new AtupUserListInfo(users);
         return result;
+    }
+
+    @GET
+    @Path("signin")
+    @Produces(MediaType.APPLICATION_JSON)
+    public AtupUserInfo getUser(@QueryParam("user") String userName, @QueryParam("password") String password) {
+        AtupUser user = service.getUser(userName);
+        AtupUserInfo result = new AtupUserInfo(user);
+        if (result.getPassWord().equals(password)) {
+            return result;
+        }
+        return null;
     }
 }

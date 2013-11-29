@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Sign In</title>
-    <script src="webjars/jquery/2.0.3/jquery.js"></script>
-    <script src="js/atupConstant.js"></script>
-    <script src="js/atupRest.js"></script>
+<title>Sign In</title>
+	<script src="webjars/jquery/2.0.3/jquery.js"></script>
+	<script src="js/atupConstant.js"></script>
+	<script src="js/atupRest.js"></script>
+	<script src="js/users/user.js"></script>
 </head>
 <body>
-
+	<div ><span style='width:100px;display:inline-block;'>User Name:</span>
+	<input type="text" id="userName" name="userName" value=""/></div>
+	<div> <span style='width:100px;display:inline-block;'>Password:</span>
+	<input type="password" id="password" name="password" value=""/></div>	
+	<div>
+	    <input id="signInButton" type="button" value="Sign In" onclick="signIn();"/>
+	</div>
 </body>
 </html>

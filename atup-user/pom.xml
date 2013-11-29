@@ -22,15 +22,6 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.9</version>
-                <configuration>
-                    <downloadSources>false</downloadSources>
-                    <wtpversion>2.0</wtpversion>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 

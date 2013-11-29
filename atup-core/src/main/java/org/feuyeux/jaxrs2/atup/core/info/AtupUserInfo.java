@@ -23,6 +23,10 @@ public class AtupUserInfo extends AtupInfo {
     public AtupUserInfo() {
     }
 
+    public AtupUserInfo(Integer userId) {
+        this.userId = userId;
+    }
+
     public AtupUserInfo(Integer userRole, String userName, String passWord) {
         this.userRole = userRole;
         this.userName = userName;

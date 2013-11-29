@@ -1,3 +1,5 @@
+var storage = window.sessionStorage;
+
 var HOST = "http://localhost:8008/";
 var ATUP_CASE_BASE_URI = 'atup-case/rest-api';
 var ATUP_DEVICE_BASE_URI = 'atup-device/rest-api';
@@ -8,6 +10,7 @@ var TEST_CASE_PATH = "/testcases";
 var TEST_RESULT_PATH = "/testresults";
 var USER_PATH = "/users";
 var DEVICE_PATH = "/devices";
+var SIGNIN_PATH = "/users/signin";
 
 var NO_RESULT = "There's no result from the server";
 
