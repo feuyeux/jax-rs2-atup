@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Atup Index</title>
-<script src="webjars/jquery/2.0.3/jquery.js"></script>
-<script src="js/atupConstant.js"></script>
-<script src="js/atupRest.js"></script>
-<script>
-	function checkSignIn() {		
-		var storageUserId = (storage.getItem("userId"));
-		if (storageUserId == null) {
-			window.location.href = "signIn.html";
-		} else {
-			alert(storageUserId);
-		}
-	}
-	checkSignIn();
-</script>
+    <title>Atup Index</title>
+    <script src="webjars/jquery/2.0.3/jquery.js"></script>
+    <script src="js/atupConstant.js"></script>
+    <script src="js/atupRest.js"></script>
+    <script>
+        function checkSignIn() {
+            var storageUserId = (storage.getItem("userId"));
+            if (storageUserId == null) {
+                window.location.href = "signIn.html";
+            } else {
+                var user = storage.getItem("userName");
+                jQuery("#welcomeDiv").html("Welcome " + user);
+            }
+        }
+        checkSignIn();
+    </script>
 </head>
-<body>
 
+<body>
+<div id="welcomeDiv"></div>
 </body>
 </html>
