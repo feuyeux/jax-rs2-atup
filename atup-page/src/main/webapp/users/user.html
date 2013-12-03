@@ -10,27 +10,30 @@
 <body>
 
 <h5>Update User</h5>
-<div ><span style='width:100px;display:inline-block;'>User Name:</span>
-<input type="text" id="userName" name="userName" value=""/></div>
-<div> <span style='width:100px;display:inline-block;'>Password:</span>
-<input type="password" id="password" name="password" value=""/></div>
-<div> <span style='width:100px;display:inline-block;'>Password:</span>
-<input type="text" id="role" name="role" value=""/></div>
+
+<div><span style='width:100px;display:inline-block;'>User Name:</span>
+    <input type="text" id="userName" name="userName" value=""/></div>
+<div><span style='width:100px;display:inline-block;'>Password:</span>
+    <input type="password" id="password" name="password" value=""/></div>
+<div><span style='width:100px;display:inline-block;'>Confirm PW:</span>
+    <input type="text" id="role" name="role" value=""/></div>
 <div>
     <input id="createButton" type="button" value="Update" onclick="updateUser();"/>
 </div>
 
 <div style="margin-top: 20px;"/>
 <h5>Create User</h5>
-<div ><span style='width:100px;display:inline-block;'>User Name:</span>
-<input type="text" id="userName0" name="userName0" value=""/></div>
-<div> <span style='width:100px;display:inline-block;'>Password:</span>
-<input type="password" id="password0" name="password0" value=""/></div>
+
+<div><span style='width:100px;display:inline-block;'>User Name:</span>
+    <input type="text" id="userName0" name="userName0" value=""/></div>
+<div><span style='width:100px;display:inline-block;'>Password:</span>
+    <input type="password" id="password0" name="password0" value=""/></div>
 <div>
     <input id="createButton" type="button" value="Create" onclick="createUser();"/>
 </div>
 
 <input type="hidden" id="userId" name="userId"/>
+
 <div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
 </body>
 </html>

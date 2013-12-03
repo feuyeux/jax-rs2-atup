@@ -38,6 +38,18 @@ function deleteInfo() {
     rest(DELETE_METHOD, null, null, 'text', renderDelete);
 }
 
+function checkSignIn() {
+    var storageUserId = storage.getItem("userId");
+    if (storageUserId == null) {
+        window.location.href = "signIn.html";
+    } else {
+        var user = storage.getItem("userName");
+        var welcomeDiv = jQuery("#welcomeDiv");
+        var message = "Welcome " + user;
+        welcomeDiv.html(message);
+    }
+}
+
 //https://github.com/blueimp/JavaScript-MD5
 !function (a) {
     "use strict";

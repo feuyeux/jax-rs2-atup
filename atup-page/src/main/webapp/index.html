@@ -6,20 +6,14 @@
     <script src="js/atupConstant.js"></script>
     <script src="js/atupRest.js"></script>
     <script>
-        function checkSignIn() {
-            var storageUserId = (storage.getItem("userId"));
-            if (storageUserId == null) {
-                window.location.href = "signIn.html";
-            } else {
-                var user = storage.getItem("userName");
-                jQuery("#welcomeDiv").html("Welcome " + user);
-            }
-        }
         checkSignIn();
     </script>
 </head>
 
 <body>
 <div id="welcomeDiv"></div>
+<a href="http://localhost:8080/users/users.html">User List</a>
+<a href="http://localhost:8080/users/user.html">User</a>
+<a href="http://localhost:8080/devices/device.html">Device</a>
 </body>
 </html>

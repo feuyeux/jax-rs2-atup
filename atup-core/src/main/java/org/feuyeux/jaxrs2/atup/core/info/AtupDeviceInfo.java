@@ -1,7 +1,14 @@
 package org.feuyeux.jaxrs2.atup.core.info;
 
+import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
+import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 
+@XmlRootElement
 public class AtupDeviceInfo extends AtupInfo {
     private static final long serialVersionUID = 1L;
 
@@ -24,6 +31,18 @@ public class AtupDeviceInfo extends AtupInfo {
         this.deviceType = deviceType;
     }
 
+    public AtupDeviceInfo(AtupDevice atupDevice) {
+        deviceId = atupDevice.getDeviceId();
+        deviceHost = atupDevice.getDeviceHost();
+        deviceName = atupDevice.getDeviceName();
+        deviceStatus = atupDevice.getDeviceStatus();
+        deviceType = atupDevice.getDeviceType();
+        createTime = atupDevice.getCreateTime();
+        updateTime = atupDevice.getUpdateTime();
+        userInfo = new AtupUserInfo(atupDevice.getUser());
+    }
+
+    @XmlAttribute
     public String getDeviceHost() {
         return deviceHost;
     }
@@ -32,6 +51,7 @@ public class AtupDeviceInfo extends AtupInfo {
         this.deviceHost = deviceHost;
     }
 
+    @XmlAttribute
     public String getDeviceName() {
         return deviceName;
     }
@@ -40,6 +60,7 @@ public class AtupDeviceInfo extends AtupInfo {
         this.deviceName = deviceName;
     }
 
+    @XmlAttribute
     public Integer getDeviceStatus() {
         return deviceStatus;
     }
@@ -48,6 +69,7 @@ public class AtupDeviceInfo extends AtupInfo {
         this.deviceStatus = deviceStatus;
     }
 
+    @XmlAttribute
     public Integer getDeviceType() {
         return deviceType;
     }
@@ -56,6 +78,7 @@ public class AtupDeviceInfo extends AtupInfo {
         this.deviceType = deviceType;
     }
 
+    @XmlAttribute
     public Integer getDeviceId() {
         return deviceId;
     }
@@ -64,6 +87,7 @@ public class AtupDeviceInfo extends AtupInfo {
         this.deviceId = deviceId;
     }
 
+    @XmlAttribute
     public AtupUserInfo getUserInfo() {
         return userInfo;
     }
@@ -72,6 +96,8 @@ public class AtupDeviceInfo extends AtupInfo {
         this.userInfo = userInfo;
     }
 
+    @XmlAttribute
+    @XmlJavaTypeAdapter(JaxbDateSerializer.class)
     public Date getCreateTime() {
         return createTime;
     }
@@ -80,6 +106,8 @@ public class AtupDeviceInfo extends AtupInfo {
         this.createTime = createTime;
     }
 
+    @XmlAttribute
+    @XmlJavaTypeAdapter(JaxbDateSerializer.class)
     public Date getUpdateTime() {
         return updateTime;
     }

@@ -1,5 +1,6 @@
 package org.feuyeux.jaxrs2.atup.core.domain;
 
+import org.feuyeux.jaxrs2.atup.core.info.AtupDeviceInfo;
 import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
 
 import javax.persistence.*;
@@ -51,6 +52,17 @@ public class AtupDevice implements Serializable {
         this.deviceType = deviceType;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    public AtupDevice(AtupDeviceInfo deviceInfo) {
+        deviceId = deviceInfo.getDeviceId();
+        deviceHost = deviceInfo.getDeviceHost();
+        deviceName = deviceInfo.getDeviceName();
+        deviceStatus = deviceInfo.getDeviceStatus();
+        deviceType = deviceInfo.getDeviceType();
+        createTime = deviceInfo.getCreateTime();
+        updateTime = deviceInfo.getUpdateTime();
+        user = new AtupUser(deviceInfo.getUserInfo());
     }
 
     @Id
