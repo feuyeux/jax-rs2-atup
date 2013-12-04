@@ -1,8 +1,11 @@
 package org.feuyeux.jaxrs2.atup.device.resource;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -15,6 +18,7 @@ import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
+import org.feuyeux.jaxrs2.atup.core.info.AtupDeviceListInfo;
 import org.feuyeux.jaxrs2.atup.device.service.AtupDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -40,7 +44,7 @@ public class AtupDeviceResource {
     public AtupDevice createDevice(@Context final HttpHeaders headers, AtupDevice deviceInfo) {
         try {
             String userId = headers.getRequestHeader("Atup-User").get(0);
-            AtupUser currentUser=new AtupUser();
+            AtupUser currentUser = new AtupUser();
             currentUser.setUserId(Integer.valueOf(userId));
             deviceInfo.setUser(currentUser);
             AtupDevice atupDevice = service.createDevice(deviceInfo);
@@ -49,5 +53,31 @@ public class AtupDeviceResource {
             LOGGER.error(e);
             return null;
         }
+    }
+
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public AtupDevice updateDevice(@Context final HttpHeaders headers, AtupDevice deviceInfo) {
+        try {
+            String userId = headers.getRequestHeader("Atup-User").get(0);
+            AtupUser currentUser = new AtupUser();
+            currentUser.setUserId(Integer.valueOf(userId));
+            deviceInfo.setUser(currentUser);
+            AtupDevice atupDevice = service.updateDevice(deviceInfo);
+            return atupDevice;
+        } catch (Exception e) {
+            LOGGER.error(e);
+            return null;
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public AtupDeviceListInfo getUsers(@Context final HttpHeaders headers) {
+        String userId = headers.getRequestHeader("Atup-User").get(0);
+        List<AtupDevice> devices = service.getDeviceList(Integer.valueOf(userId));
+        AtupDeviceListInfo result = new AtupDeviceListInfo(devices);
+        return result;
     }
 }

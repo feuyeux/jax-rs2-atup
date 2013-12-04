@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TUTestSuiteDao {
     @Autowired
@@ -43,8 +43,8 @@ public class TUTestSuiteDao {
 
     @Test
     public void testFindByName() {
-        List<AtupTestSuite> suiteList = dao.findBySuiteName(CreatTestSuite.SUITE_NAME);
-        Assert.assertEquals(CreatTestSuite.SUITE_NAME, suiteList.get(0).getSuiteName());
+        AtupTestSuite suite = dao.findBySuiteName(CreatTestSuite.SUITE_NAME);
+        Assert.assertEquals(CreatTestSuite.SUITE_NAME, suite.getSuiteName());
     }
 
     @Test

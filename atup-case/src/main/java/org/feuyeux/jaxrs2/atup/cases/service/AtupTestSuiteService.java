@@ -31,4 +31,12 @@ public class AtupTestSuiteService {
         }
         return result;
     }
+
+    public AtupTestSuite createSuite(AtupTestSuite testSuite) {
+        return dao.save(testSuite);
+    }
+
+    public AtupTestSuite updateSuite(AtupTestSuite testSuite) {
+        return dao.update(testSuite);
+    }
 }

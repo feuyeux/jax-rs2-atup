@@ -18,3 +18,6 @@ var GET_METHOD = 'GET';
 var POST_METHOD = 'POST';
 var PUT_METHOD = 'PUT';
 var DELETE_METHOD = 'DELETE';
+
+var SPAN_BEGIN = "<span style='width:100px;display:inline-block;'>";
+var SPAN_BEGIN1 = "<span style='width:150px;display:inline-block;'>";

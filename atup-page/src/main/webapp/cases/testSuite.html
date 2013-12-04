@@ -2,12 +2,35 @@
 <html>
 <head>
     <title>Test Suite Page</title>
-    <script src="webjars/jquery/2.0.3/jquery.js"></script>
-    <script src="js/atupConstant.js"></script>
-    <script src="js/atupRest.js"></script>
-    <script src="js/cases/testSuite.js"></script>
+    <script src="../webjars/jquery/2.0.3/jquery.js"></script>
+    <script src="../js/atupConstant.js"></script>
+    <script src="../js/atupRest.js"></script>
+    <script src="../js/cases/testSuite.js"></script>
 </head>
 <body>
+<div id="topDiv"></div>
+
+<h5>Update Test Suite</h5>
+<div><span style='width:130px;display:inline-block;'>Test Suite Name:</span>
+    <input type="text" id="suiteName" name="suiteName" value=""/></div>
+<div><span style='width:130px;display:inline-block;'>Test Suite Status:</span>
+    <input type="text" id="suiteStatus" name="suiteStatus" value=""/></div>
+<div><span style='width:130px;display:inline-block;'>Test Suite Type:</span>
+    <input type="text" id="suiteType" name="suiteType" value=""/></div>
+<div>
+    <input id="updateButton" type="button" value="Update" onclick="updateSuite();"/>
+</div>
+
+<div style="margin-top: 20px;"/>
+<h5>Create  Test Suite</h5>
+<div><span style='width:130px;display:inline-block;'>Test Suite Name:</span>
+    <input type="text" id="suiteName0" name="suiteName0" value=""/></div>
+
+<div>
+    <input id="createButton" type="button" value="Create" onclick="createSuite();"/>
+</div>
+
+<div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
 
 </body>
 </html>

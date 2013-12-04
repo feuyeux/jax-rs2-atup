@@ -17,7 +17,6 @@ import java.io.Serializable;
 @Entity
 @Table(name = "atup_user")
 @XmlRootElement
-
 @NamedQueries({
         @NamedQuery(name = "findByUserName", query = "SELECT atupUser FROM AtupUser atupUser WHERE atupUser.userName= :userName"),
 })

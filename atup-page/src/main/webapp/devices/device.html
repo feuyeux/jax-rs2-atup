@@ -9,9 +9,22 @@
 </head>
 <body>
 <div id="topDiv"></div>
+
+<h5>Update Device</h5>
+<div><span style='width:130px;display:inline-block;'>Device IP:</span>
+    <input type="text" id="deviceIp" name="deviceIp" value=""/></div>
+<div><span style='width:130px;display:inline-block;'>Device Name:</span>
+    <input type="text" id="deviceName" name="deviceName" value=""/></div>
+<div><span style='width:130px;display:inline-block;'>Device Type:</span>
+    <input type="text" id="deviceType" name="deviceType" value=""/></div>
+<div><span style='width:130px;display:inline-block;'>Device Status:</span>
+    <input type="text" id="deviceStatus" name="deviceStatus" value=""/></div>
+<div>
+    <input id="updateButton" type="button" value="Update" onclick="updateDevice();"/>
+</div>
+
 <div style="margin-top: 20px;"/>
 <h5>Create Device</h5>
-
 <div><span style='width:130px;display:inline-block;'>Device IP:</span>
     <input type="text" id="deviceIp0" name="deviceIp0" value=""/></div>
 <div><span style='width:130px;display:inline-block;'>Device Name:</span>
