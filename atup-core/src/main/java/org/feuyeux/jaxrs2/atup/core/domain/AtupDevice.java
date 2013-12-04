@@ -1,14 +1,24 @@
 package org.feuyeux.jaxrs2.atup.core.domain;
 
-import org.feuyeux.jaxrs2.atup.core.info.AtupDeviceInfo;
-import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
+import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.io.Serializable;
-import java.util.Date;
+
+import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
 
 /**
  * ATUP Device Entity
@@ -54,16 +64,16 @@ public class AtupDevice implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public AtupDevice(AtupDeviceInfo deviceInfo) {
-        deviceId = deviceInfo.getDeviceId();
-        deviceHost = deviceInfo.getDeviceHost();
-        deviceName = deviceInfo.getDeviceName();
-        deviceStatus = deviceInfo.getDeviceStatus();
-        deviceType = deviceInfo.getDeviceType();
-        createTime = deviceInfo.getCreateTime();
-        updateTime = deviceInfo.getUpdateTime();
-        user = new AtupUser(deviceInfo.getUserInfo());
-    }
+//    public AtupDevice(AtupDeviceInfo deviceInfo) {
+//        deviceId = deviceInfo.getDeviceId();
+//        deviceHost = deviceInfo.getDeviceHost();
+//        deviceName = deviceInfo.getDeviceName();
+//        deviceStatus = deviceInfo.getDeviceStatus();
+//        deviceType = deviceInfo.getDeviceType();
+//        createTime = deviceInfo.getCreateTime();
+//        updateTime = deviceInfo.getUpdateTime();
+//        user = new AtupUser(deviceInfo.getUserInfo());
+//    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EMP_SEQ")
@@ -78,7 +88,7 @@ public class AtupDevice implements Serializable {
         this.deviceId = deviceId;
     }
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "userId")
     //@XmlElement
     public AtupUser getUser() {

@@ -5,15 +5,18 @@
     <script src="webjars/jquery/2.0.3/jquery.js"></script>
     <script src="js/atupConstant.js"></script>
     <script src="js/atupRest.js"></script>
-    <script>
-        checkSignIn();
+    <script type="text/javascript">
+    jQuery(document).ready(function(){
+    	checkSignIn();
+    });
     </script>
 </head>
 
 <body>
-<div id="welcomeDiv"></div>
-<a href="http://localhost:8080/users/users.html">User List</a>
-<a href="http://localhost:8080/users/user.html">User</a>
-<a href="http://localhost:8080/devices/device.html">Device</a>
+	<div id="topDiv"></div>
+	<a href="http://localhost:8080/atup-page/users/users.html">User List</a><br/>
+	<a href="http://localhost:8080/atup-page/users/user.html">User</a><br/>
+	<a href="http://localhost:8080/atup-page/devices/device.html">Device</a><br/>
+	<div id="resultDiv"></div>
 </body>
 </html>
