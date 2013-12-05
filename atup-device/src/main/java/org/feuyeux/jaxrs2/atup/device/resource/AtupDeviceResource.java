@@ -74,7 +74,7 @@ public class AtupDeviceResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public AtupDeviceListInfo getUsers(@Context final HttpHeaders headers) {
+    public AtupDeviceListInfo getDevicesByUser(@Context final HttpHeaders headers) {
         String userId = headers.getRequestHeader("Atup-User").get(0);
         List<AtupDevice> devices = service.getDeviceList(Integer.valueOf(userId));
         AtupDeviceListInfo result = new AtupDeviceListInfo(devices);

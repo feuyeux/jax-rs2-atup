@@ -6,12 +6,23 @@
     <script src="../js/atupConstant.js"></script>
     <script src="../js/atupRest.js"></script>
     <script src="../js/cases/testCase.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function(){
+    	initial();
+    });
+    </script>
 </head>
 <body>
 <div id="topDiv"></div>
 <a href="http://localhost:8080/atup-page/cases/testSuite.html">Manage Test Suite</a><br/>
 
-<select id="suiteList"></select>
+
+<div style="margin-top: 20px;"/>
+<h5>Create Test Case</h5>
+<div><span style='width:150px;display:inline-block;'>Test Suite:</span><select id="suiteList"></select></div>
+<div><span style='width:150px;display:inline-block;'>Case Name:</span><input type="text" id="caseName0" name="caseName0" value=""/></div> 
+<div><span style='width:150px;display:inline-block;'>Case Description:</span><input type="text" id="caseBody0" name="caseBody0" value="" maxlength="150"/></div>
+<div><span style='width:150px;display:inline-block;'>Device:</span><select id="deviceList"></select></div>
 
 <div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
 </body>
