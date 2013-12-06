@@ -105,7 +105,7 @@ public class AtupDevice implements Serializable {
         this.user = user;
     }
 
-    @Column(name = "device_host")
+    @Column(name = "device_host", unique = true)
     @XmlAttribute
     public String getDeviceHost() {
         return deviceHost;
@@ -115,7 +115,7 @@ public class AtupDevice implements Serializable {
         this.deviceHost = deviceHost;
     }
 
-    @Column(name = "device_name")
+    @Column(name = "device_name", unique = true)
     @XmlAttribute
     public String getDeviceName() {
         return deviceName;

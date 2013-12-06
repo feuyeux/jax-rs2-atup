@@ -25,7 +25,6 @@ public class AtupTestCaseInfo extends AtupInfo {
         caseId = testCase.getCaseId();
         caseName = testCase.getCaseName();
         suite = testCase.getSuite();
-        device = testCase.getDevice();
         caseBody = testCase.getCaseBody();
         caseStatus = testCase.getCaseStatus();
         createTime = testCase.getCreateTime();

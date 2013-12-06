@@ -1,5 +1,7 @@
 package org.feuyeux.jaxrs2.atup.cases.dao;
 
+import java.util.List;
+
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
 import org.feuyeux.jaxrs2.atup.core.fake.CreateTestCase;
@@ -10,9 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TUTestCaseDao {
     @Autowired
@@ -44,10 +44,8 @@ public class TUTestCaseDao {
 
     @Test
     public void findByName() {
-        List<AtupTestCase> caseList = dao.findByName(CreateTestCase.CASE_NAME);
-        if (!caseList.isEmpty()) {
-            Assert.assertEquals(CreateTestCase.CASE_NAME, caseList.get(0).getCaseName());
-        }
+        AtupTestCase testCase = dao.findByName(CreateTestCase.CASE_NAME);
+        Assert.assertEquals(CreateTestCase.CASE_NAME, testCase.getCaseName());
     }
 
     @Test

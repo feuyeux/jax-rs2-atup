@@ -2,6 +2,19 @@
 #综合示例 ATUP#
 [**http://feuyeux.github.io/jax-rs2-atup/**](http://feuyeux.github.io/jax-rs2-atup)
 
+
+Context.xml:
+	
+	<Resource name="jdbc/AtupDataSource"
+	auth="Container" type="javax.sql.DataSource"
+	driverClassName="org.gjt.mm.mysql.Driver"
+	url="jdbc:mysql://localhost:3306/jaxrs2_atup"
+	username="root"
+	password="root"
+	maxActive="20"
+	maxIdle="10"
+	maxWait="-1" />
+
 ![atup-topology.png](atup-topology.png)
 
 #### atup-core ####

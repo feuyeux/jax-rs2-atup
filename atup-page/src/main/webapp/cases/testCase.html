@@ -14,16 +14,25 @@
 </head>
 <body>
 <div id="topDiv"></div>
-<a href="http://localhost:8080/atup-page/cases/testSuite.html">Manage Test Suite</a><br/>
-
 
 <div style="margin-top: 20px;"/>
 <h5>Create Test Case</h5>
-<div><span style='width:150px;display:inline-block;'>Test Suite:</span><select id="suiteList"></select></div>
+<div><span style='width:150px;display:inline-block;'>Test Suite:</span><select id="suiteList0"></select><a href="http://localhost:8080/atup-page/cases/testSuite.html">Manage Test Suite</a></div>
 <div><span style='width:150px;display:inline-block;'>Case Name:</span><input type="text" id="caseName0" name="caseName0" value=""/></div> 
 <div><span style='width:150px;display:inline-block;'>Case Description:</span><input type="text" id="caseBody0" name="caseBody0" value="" maxlength="150"/></div>
-<div><span style='width:150px;display:inline-block;'>Device:</span><select id="deviceList"></select></div>
-
+<div>
+    <input id="createButton" type="button" value="Create" onclick="createCase();"/>
+</div>
+<div style="margin-top: 20px;"/>
+<h5>Update Test Case</h5>
+<div><span style='width:150px;display:inline-block;'>Test Suite:</span><select id="suiteList"></select><a href="http://localhost:8080/atup-page/cases/testSuite.html">Manage Test Suite</a></div>
+<div><span style='width:150px;display:inline-block;'>Case Name:</span><input type="text" id="caseName" name="caseName" value=""/></div>
+<div><span style='width:150px;display:inline-block;'>Case Description:</span><input type="text" id="caseBody" name="caseBody" value="" maxlength="150"/></div>
+<div><span style='width:150px;display:inline-block;'>Status:</span><input type="text" id="caseStatus" name="caseStatus" value=""/></div>
+<div>
+    <input id="updateButton" type="button" value="Update" onclick="updateCase();"/>
+</div>
 <div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
+<a href="http://localhost:8080/atup-page/index.html">Index</a>
 </body>
 </html>

@@ -1,20 +1,27 @@
 package org.feuyeux.jaxrs2.atup.cases.resource;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
+import org.apache.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.cases.service.AtupTestCaseService;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
+import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
 import org.feuyeux.jaxrs2.atup.core.info.AtupErrorCode;
 import org.feuyeux.jaxrs2.atup.core.info.AtupErrorInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestCaseListInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
 @Path(AtupApi.TEST_CASE_PATH)
 public class AtupTestCaseResource {
+    private static final Logger LOGGER = Logger.getLogger(AtupTestCaseResource.class);
     @Autowired
     AtupTestCaseService service;
 
@@ -25,13 +32,47 @@ public class AtupTestCaseResource {
     @GET
     @Path("cases")
     @Produces(MediaType.APPLICATION_JSON)
-    public AtupTestCaseListInfo getCases(@QueryParam("start") Integer start,
-                                         @QueryParam("size") Integer size) {
+    public AtupTestCaseListInfo getCases(@QueryParam("start") Integer start, @QueryParam("size") Integer size) {
         if (start == null || size == null) {
             return new AtupTestCaseListInfo(AtupErrorInfo.INVALID_PARAM, AtupErrorCode.INVALID_PARAM);
         }
         AtupTestCaseListInfo result = service.getCases(start, size);
         return result;
     }
-}
 
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public AtupTestCase createSuite(AtupTestCase testCase) {
+        try {
+            return service.createSuite(testCase);
+        } catch (Exception e) {
+            LOGGER.error(e);
+            return null;
+        }
+    }
+
+    @GET
+    @Path("{caseName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public AtupTestCase getCases(@PathParam("caseName") String caseName) {
+        try {
+            AtupTestCase existingTestCase = service.getCaseByName(caseName);
+            return existingTestCase;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public AtupTestCase updateSuite(AtupTestCase testCase) {
+        try {
+            return service.updateSuite(testCase);
+        } catch (Exception e) {
+            LOGGER.error(e);
+            return null;
+        }
+    }
+}

@@ -20,12 +20,9 @@ import java.util.Date;
 @Entity
 @Table(name = "test_result")
 @XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "findResultByTestCase", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.testCase= :testCase"),
+@NamedQueries({ @NamedQuery(name = "findResultByTestCase", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.testCase= :testCase"),
         @NamedQuery(name = "findResultByStatus", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.resultStatus= :resultStatus"),
-        @NamedQuery(name = "findResultByUser", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.user= :user")
-})
-
+        @NamedQuery(name = "findResultByUser", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.user= :user") })
 public class AtupTestResult implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer resultId;
@@ -33,6 +30,7 @@ public class AtupTestResult implements Serializable {
     private AtupUser user;
     private Integer resultStatus;
     private String resultBody;
+    private AtupDevice device;
     private Date createTime;
     private Date updateTime;
 
@@ -61,7 +59,7 @@ public class AtupTestResult implements Serializable {
         this.resultId = resultId;
     }
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "caseId")
     @XmlElement
     public AtupTestCase getTestCase() {
@@ -72,7 +70,7 @@ public class AtupTestResult implements Serializable {
         this.testCase = testCase;
     }
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "userId")
     @XmlElement
     public AtupUser getUser() {
@@ -125,5 +123,16 @@ public class AtupTestResult implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "deviceId")
+    @XmlElement
+    public AtupDevice getDevice() {
+        return device;
+    }
+
+    public void setDevice(AtupDevice device) {
+        this.device = device;
     }
 }

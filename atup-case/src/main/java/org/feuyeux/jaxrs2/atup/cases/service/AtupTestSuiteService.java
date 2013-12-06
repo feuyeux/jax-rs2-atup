@@ -1,13 +1,13 @@
 package org.feuyeux.jaxrs2.atup.cases.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestSuite;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestSuiteInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestSuiteListInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class AtupTestSuiteService {

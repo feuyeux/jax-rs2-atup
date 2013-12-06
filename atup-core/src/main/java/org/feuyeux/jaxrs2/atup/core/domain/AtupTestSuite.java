@@ -15,10 +15,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "test_suite")
 @XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "findBySuiteStatus", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteStatus= :suiteStatus"),
-        @NamedQuery(name = "findBySuiteName", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteName= :suiteName")
-})
+@NamedQueries({ @NamedQuery(name = "findBySuiteStatus", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteStatus= :suiteStatus"),
+        @NamedQuery(name = "findBySuiteName", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteName= :suiteName") })
 public class AtupTestSuite implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer suiteId;
@@ -52,7 +50,7 @@ public class AtupTestSuite implements Serializable {
         this.suiteId = suiteId;
     }
 
-    @Column(name = "suite_name")
+    @Column(name = "suite_name", unique = true)
     @XmlAttribute
     public String getSuiteName() {
         return suiteName;

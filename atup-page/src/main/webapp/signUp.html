@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Sign In</title>
+	<script src="webjars/jquery/2.0.3/jquery.js"></script>
+	<script src="js/atupConstant.js"></script>
+	<script src="js/atupRest.js"></script>
+	<script src="js/users/user.js"></script>
+</head>
+<body>
+<div><span style='width:100px;display:inline-block;'>User Name:</span>
+    <input type="text" id="userName0" name="userName0" value=""/></div>
+<div><span style='width:100px;display:inline-block;'>Password:</span>
+    <input type="password" id="password0" name="password0" value=""/></div>
+<div>
+    <input id="createButton" type="button" value="Create" onclick="createUser();"/>
+    <div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
+    <a href="http://localhost:8080/atup-page/index.html">Index</a><br/>
+</div>
+</body>
+</html>

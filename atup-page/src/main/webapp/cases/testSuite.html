@@ -9,7 +9,15 @@
 </head>
 <body>
 <div id="topDiv"></div>
+<div style="margin-top: 20px;"/>
+<h5>Create  Test Suite</h5>
+<div><span style='width:130px;display:inline-block;'>Test Suite Name:</span>
+    <input type="text" id="suiteName0" name="suiteName0" value=""/></div>
+<div>
+    <input id="createButton" type="button" value="Create" onclick="createSuite();"/>
+</div>
 
+<div style="margin-top: 20px;"/>
 <h5>Update Test Suite</h5>
 <div><span style='width:130px;display:inline-block;'>Test Suite Name:</span>
     <input type="text" id="suiteName" name="suiteName" value=""/></div>
@@ -21,16 +29,8 @@
     <input id="updateButton" type="button" value="Update" onclick="updateSuite();"/>
 </div>
 
-<div style="margin-top: 20px;"/>
-<h5>Create  Test Suite</h5>
-<div><span style='width:130px;display:inline-block;'>Test Suite Name:</span>
-    <input type="text" id="suiteName0" name="suiteName0" value=""/></div>
-
-<div>
-    <input id="createButton" type="button" value="Create" onclick="createSuite();"/>
-</div>
-
 <div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
-
+<a href="testCase.html">Test Case</a>
+<a href="http://localhost:8080/atup-page/index.html">Index</a>
 </body>
 </html>

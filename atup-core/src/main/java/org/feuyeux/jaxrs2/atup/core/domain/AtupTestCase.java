@@ -21,16 +21,13 @@ import java.util.Date;
 @Entity
 @Table(name = "test_case")
 @XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "findByStatus", query = "SELECT testCase FROM AtupTestCase testCase WHERE testCase.caseStatus= :caseStatus"),
-        @NamedQuery(name = "findByName", query = "SELECT testCase FROM AtupTestCase testCase WHERE testCase.caseName= :caseName")
-})
+@NamedQueries({ @NamedQuery(name = "findByStatus", query = "SELECT testCase FROM AtupTestCase testCase WHERE testCase.caseStatus= :caseStatus"),
+        @NamedQuery(name = "findByName", query = "SELECT testCase FROM AtupTestCase testCase WHERE testCase.caseName= :caseName") })
 public class AtupTestCase implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer caseId;
     private String caseName;
     private AtupTestSuite suite;
-    private AtupDevice device;
     private String caseBody;
     private Date createTime;
     private Date updateTime;
@@ -39,10 +36,9 @@ public class AtupTestCase implements Serializable {
     public AtupTestCase() {
     }
 
-    public AtupTestCase(String caseName, AtupTestSuite suite, AtupDevice device, String caseBody, Date createTime, Date updateTime, Integer caseStatus) {
+    public AtupTestCase(String caseName, AtupTestSuite suite, String caseBody, Date createTime, Date updateTime, Integer caseStatus) {
         this.caseName = caseName;
         this.suite = suite;
-        this.device = device;
         this.caseBody = caseBody;
         this.createTime = createTime;
         this.updateTime = updateTime;
@@ -52,7 +48,6 @@ public class AtupTestCase implements Serializable {
     public AtupTestCase(AtupTestCaseInfo testCaseInfo) {
         this.caseName = testCaseInfo.getCaseName();
         this.suite = testCaseInfo.getSuite();
-        this.device = testCaseInfo.getDevice();
         this.caseBody = testCaseInfo.getCaseBody();
         this.caseStatus = testCaseInfo.getCaseStatus();
     }
@@ -70,7 +65,7 @@ public class AtupTestCase implements Serializable {
         this.caseId = caseId;
     }
 
-    @Column(name = "case_name")
+    @Column(name = "case_name", unique = true)
     @XmlAttribute
     public String getCaseName() {
         return caseName;
@@ -80,8 +75,8 @@ public class AtupTestCase implements Serializable {
         this.caseName = caseName;
     }
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "suiteId", unique = true)
+    @ManyToOne
+    @JoinColumn(name = "suiteId")
     @XmlElement
     public AtupTestSuite getSuite() {
         return suite;
@@ -89,17 +84,6 @@ public class AtupTestCase implements Serializable {
 
     public void setSuite(AtupTestSuite suite) {
         this.suite = suite;
-    }
-
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "deviceId")
-    @XmlElement
-    public AtupDevice getDevice() {
-        return device;
-    }
-
-    public void setDevice(AtupDevice device) {
-        this.device = device;
     }
 
     @Column(name = "case_body")

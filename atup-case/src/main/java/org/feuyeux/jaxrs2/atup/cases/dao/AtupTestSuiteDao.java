@@ -5,6 +5,7 @@ import java.util.List;
 import org.feuyeux.jaxrs2.atup.core.dao.AtupDao;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestSuite;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class AtupTestSuiteDao extends AtupDao<AtupTestSuite> {
@@ -20,12 +21,12 @@ public class AtupTestSuiteDao extends AtupDao<AtupTestSuite> {
         return entityManager.createNamedQuery("findBySuiteName", AtupTestSuite.class).setParameter("suiteName", suiteName).getSingleResult();
     }
 
-    @Override
+    @Transactional
     public AtupTestSuite update(AtupTestSuite entity) {
         AtupTestSuite updateEntity = findBySuiteName(entity.getSuiteName());
         if (updateEntity != null) {
             entity.setSuiteId(updateEntity.getSuiteId());
-            return super.update(entity);
+            return entityManager.merge(entity);
         } else {
             return null;
         }

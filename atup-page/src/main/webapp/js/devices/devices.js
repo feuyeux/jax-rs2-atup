@@ -9,10 +9,10 @@ function renderGetAll(data) {
 	} else {
 		jQuery("#devicesDiv").html(
 				"<div align='left'>" + SPAN_BEGIN + "Device ID</span>" + SPAN_BEGIN + "Device Name</span>" + SPAN_BEGIN + "Device IP</span>" + SPAN_BEGIN
-						+ "Device Status</span>" + SPAN_BEGIN1 + "Last Updated</span></div>");
+						+ "Status</span>" + SPAN_BEGIN2 + "Last Updated</span></div>");
 		jQuery.each(list, function(i, device) {
 			var line = "<div align='left'>" + SPAN_BEGIN + device.deviceId + "</span>" + SPAN_BEGIN + device.deviceName + "</span>" + SPAN_BEGIN + device.deviceHost
-					+ "</span>" + SPAN_BEGIN + device.deviceStatus + "</span>" + SPAN_BEGIN1 + device.updateTime + "</span>" + "</span></div>";
+					+ "</span>" + SPAN_BEGIN + device.deviceStatus + "</span>" + SPAN_BEGIN2 + device.updateTime + "</span>" + "</span></div>";
 			jQuery("#devicesDiv").append(line);
 		});
 	}

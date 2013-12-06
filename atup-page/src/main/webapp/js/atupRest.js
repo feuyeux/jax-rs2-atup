@@ -41,7 +41,7 @@ function deleteInfo() {
 function checkSignIn() {
 	var storageUserId = storage.getItem("userId");
 	if (storageUserId == null) {
-		window.location.href = "signIn.html";
+		window.location.href = HOST+ATUP_PAGE_BASE_URI+"signIn.html";
 	} else {
 		var user = storage.getItem("userName");
 		var welcomeDiv = jQuery('#topDiv').html("Welcome " + user);

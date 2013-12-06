@@ -70,12 +70,6 @@ public class AtupDao<T> {
     }
 
     @Transactional
-    public T update(final T entity) {
-        T newEntity = entityManager.merge(entity);
-        return newEntity;
-    }
-
-    @Transactional
     public T save(final T entity) {
         entityManager.persist(entity);
         entityManager.flush();

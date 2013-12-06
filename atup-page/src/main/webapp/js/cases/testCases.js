@@ -1,18 +1,19 @@
+function loadCases(start, size) {
+	checkSignIn();
+	rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/cases?start=" + start + "&size=" + size, GET_METHOD, null, renderGetAll);
+}
 function renderGetAll(data) {
-    var entityList = data.bookList.book;
-    var result = "";
-    for (var i = 0; i < entityList.length; i++) {
-        result += entityList[i].bookId + "-" + entityList[i].bookName + "-" + entityList[i].publisher + "<br/>";
-    }
-    $('#resultDiv').html(result);
-}
-function renderQueryGet(data) {
-    $('#resultDiv').html("query result: " + data.bookId + "-" + data.bookName + "-" + data.publisher);
-}
-function renderPathGet(data) {
-    $('#resultDiv').html("path result: " + data.bookId + "-" + data.bookName + "-" + data.publisher);
-}
-
-function renderDelete(data) {
-    $('#resultDiv').html(data);
+	var list = data.testCaseList;
+	if (list == null) {
+		jQuery("#CasesDiv").html("No Test Case found.");
+	} else {
+		jQuery("#CasesDiv").html(
+				"<div align='left'>" + SPAN_BEGIN + "Case ID</span>" + SPAN_BEGIN + "Case Name</span>" + SPAN_BEGIN + "Case Status</span>" + SPAN_BEGIN
+						+ "Case body</span>" + SPAN_BEGIN2 + "Last Updated</span></div>");
+		jQuery.each(list, function(i, testCase) {
+			var line = "<div align='left'>" + SPAN_BEGIN + testCase.caseId + "</span>" + SPAN_BEGIN + testCase.caseName + "</span>" + SPAN_BEGIN
+					+ testCase.caseStatus + "</span>" + SPAN_BEGIN + testCase.caseBody + "</span>" + SPAN_BEGIN + testCase.updateTime + "</span></div>";
+			jQuery("#casesDiv").append(line);
+		});
+	}
 }
