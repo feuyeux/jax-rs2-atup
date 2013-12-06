@@ -4,7 +4,7 @@ function loadDevices() {
 }
 function renderGetAll(data) {
 	var list = data.deviceList;
-	if (list == null) {
+	if (list == null || list.length == 0) {
 		jQuery("#devicesDiv").html("No device for the current user.");
 	} else {
 		jQuery("#devicesDiv").html(

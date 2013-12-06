@@ -5,14 +5,15 @@ function loadCases(start, size) {
 function renderGetAll(data) {
 	var list = data.testCaseList;
 	if (list == null) {
-		jQuery("#CasesDiv").html("No Test Case found.");
+		jQuery("#casesDiv").html("No Test Case found.");
 	} else {
-		jQuery("#CasesDiv").html(
+		jQuery("#casesDiv").html(
 				"<div align='left'>" + SPAN_BEGIN + "Case ID</span>" + SPAN_BEGIN + "Case Name</span>" + SPAN_BEGIN + "Case Status</span>" + SPAN_BEGIN
 						+ "Case body</span>" + SPAN_BEGIN2 + "Last Updated</span></div>");
 		jQuery.each(list, function(i, testCase) {
-			var line = "<div align='left'>" + SPAN_BEGIN + testCase.caseId + "</span>" + SPAN_BEGIN + testCase.caseName + "</span>" + SPAN_BEGIN
-					+ testCase.caseStatus + "</span>" + SPAN_BEGIN + testCase.caseBody + "</span>" + SPAN_BEGIN + testCase.updateTime + "</span></div>";
+			var line = "<div align='left'>" + SPAN_BEGIN + testCase.caseId + "</span>" + SPAN_BEGIN + "<a href='../jobs/jobsQueue.html?caseId="+testCase.caseId+"&caseName=" + testCase.caseName
+					+ "'>" + testCase.caseName + "</a></span>" + SPAN_BEGIN + testCase.caseStatus + "</span>" + SPAN_BEGIN + testCase.caseBody + "</span>" + SPAN_BEGIN2
+					+ testCase.updateTime + "</span></div>";
 			jQuery("#casesDiv").append(line);
 		});
 	}

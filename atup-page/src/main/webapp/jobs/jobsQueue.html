@@ -1,1 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Job Page</title>
+    <script src="../webjars/jquery/2.0.3/jquery.js"></script>
+    <script src="../js/atupConstant.js"></script>
+    <script src="../js/atupRest.js"></script>
+    <script src="../js/jobs/testJob.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function(){
+    	initial();
+    });
+    </script>
+</head>
+<body>
+<div id="topDiv"></div>
+
+<div style="margin-top: 20px;"/>
+<h5>Schedule A Test Job</h5>
+<div><span style='width:100px;display:inline-block;'>Case Name:</span><input type="text" id="caseId" name="caseId" readonly="readonly"/></div> 
+<div><span style='width:100px;display:inline-block;'>Case Name:</span><input type="text" id="caseName" name="caseName" readonly="readonly"/></div> 
+<div><span style='width:100px;display:inline-block;'>Device to run:</span><select id="deviceList"></select></div>
+<div><span style='width:100px;display:inline-block;'>Priority:</span><select id="priorityList"></select></div>
+<div>
+    <input id="createButton" type="button" value="Schedule" onclick="createJob();"/>
+</div>
+
+<div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
 <a href="http://localhost:8080/atup-page/index.html">Index</a>
+</body>
+</html>

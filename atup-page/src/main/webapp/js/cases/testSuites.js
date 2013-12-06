@@ -1,10 +1,10 @@
-function loadSuites(start,size) {
+function loadSuites(start, size) {
 	checkSignIn();
-	rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH+"/suites?start="+start+"&size="+size, GET_METHOD, null, renderGetAll);
+	rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=" + start + "&size=" + size, GET_METHOD, null, renderGetAll);
 }
 function renderGetAll(data) {
 	var list = data.suiteList;
-	if (list == null) {
+	if (list == null || list.length == 0) {
 		jQuery("#suitesDiv").html("No Test Suite found.");
 	} else {
 		jQuery("#suitesDiv").html(

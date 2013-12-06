@@ -12,10 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class AtupTestJobInfo {
-
-    public static final Integer HIGH = 3;
-    public static final Integer MEDIUM = 2;
-    public static final Integer LOW = 1;
     private Integer jobId;
     private Integer userId;
     private Integer deviceId;
