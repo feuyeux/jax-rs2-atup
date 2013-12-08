@@ -5,10 +5,16 @@
     <script src="../webjars/jquery/2.0.3/jquery.js"></script>
     <script src="../js/atupConstant.js"></script>
     <script src="../js/atupRest.js"></script>
-    <script src="../js/results/results.js"></script>
+    <script src="../js/results/testResults.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function(){
+     loadResults(0,100);
+    });
+    </script>
 </head>
 <body>
 <div id="topDiv"></div>
+<div id="resultsDiv"></div>
 <a href="http://localhost:8080/atup-page/index.html">Index</a>
 </body>
 </html>

@@ -1,8 +1,8 @@
 package org.feuyeux.jaxrs2.atup.cases;
 
-import org.glassfish.jersey.server.ResourceConfig;
-
 import javax.ws.rs.ApplicationPath;
+
+import org.glassfish.jersey.server.ResourceConfig;
 
 @ApplicationPath("/rest-api/*")
 public class AtupTestCaseApplication extends ResourceConfig {

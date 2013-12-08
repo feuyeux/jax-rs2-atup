@@ -1,7 +1,6 @@
 function rest(restUrl, httpMethod, param, callback) {
 	rest0(restUrl, httpMethod, param, "application/json", "json", callback)
 }
-
 function rest0(restUrl, httpMethod, param, contenttype, datatype, callback) {
 	jQuery('#resultDiv').html("Loading...");
 	var userId = storage.getItem("userId");
@@ -12,7 +11,9 @@ function rest0(restUrl, httpMethod, param, contenttype, datatype, callback) {
 			if (data === null || data === undefined) {
 				jQuery('#resultDiv').html(NO_RESULT);
 			} else {
-				callback(data);
+				if (callback != null) {
+					callback(data);
+				}
 			}
 		} catch (e) {
 			jQuery('#resultDiv').html(e);
@@ -41,7 +42,7 @@ function deleteInfo() {
 function checkSignIn() {
 	var storageUserId = storage.getItem("userId");
 	if (storageUserId == null) {
-		window.location.href = HOST+ATUP_PAGE_BASE_URI+"signIn.html";
+		window.location.href = HOST + ATUP_PAGE_BASE_URI + "signIn.html";
 	} else {
 		var user = storage.getItem("userName");
 		var welcomeDiv = jQuery('#topDiv').html("Welcome " + user);

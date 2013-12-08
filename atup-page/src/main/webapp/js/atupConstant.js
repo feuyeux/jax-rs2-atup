@@ -9,6 +9,8 @@ var ATUP_PAGE_BASE_URI = 'atup-page/';
 var TEST_SUITE_PATH = "/testsuites";
 var TEST_CASE_PATH = "/testcases";
 var TEST_RESULT_PATH = "/testresults";
+var TEST_JOB_PATH = "/testjobs";
+
 var USER_PATH = "/users";
 var DEVICE_PATH = "/devices";
 var SIGNIN_PATH = "/users/signin";

@@ -1,2 +1,20 @@
-<div><span style='width:150px;display:inline-block;'>Device:</span><select id="deviceList0"></select></div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Device List</title>
+    <script src="../webjars/jquery/2.0.3/jquery.js"></script>
+    <script src="../js/atupConstant.js"></script>
+    <script src="../js/atupRest.js"></script>
+    <script src="../js/jobs/testJobs.js"></script>
+    <script type="text/javascript">
+    jQuery(document).ready(function(){
+    	loadJobs();
+    });
+    </script>
+</head>
+<body>
+<div id="topDiv"></div>
+<div id="jobsDiv"></div>
 <a href="http://localhost:8080/atup-page/index.html">Index</a>
+</body>
+</html>

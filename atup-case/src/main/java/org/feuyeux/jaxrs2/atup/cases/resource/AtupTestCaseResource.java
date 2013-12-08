@@ -32,22 +32,22 @@ public class AtupTestCaseResource {
     @GET
     @Path("cases")
     @Produces(MediaType.APPLICATION_JSON)
-    public AtupTestCaseListInfo getCases(@QueryParam("start") Integer start, @QueryParam("size") Integer size) {
+    public AtupTestCaseListInfo getCases(@QueryParam("start") final Integer start, @QueryParam("size") final Integer size) {
         if (start == null || size == null) {
             return new AtupTestCaseListInfo(AtupErrorInfo.INVALID_PARAM, AtupErrorCode.INVALID_PARAM);
         }
-        AtupTestCaseListInfo result = service.getCases(start, size);
+        final AtupTestCaseListInfo result = service.getCases(start, size);
         return result;
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public AtupTestCase createSuite(AtupTestCase testCase) {
+    public AtupTestCase createSuite(final AtupTestCase testCase) {
         try {
             return service.createSuite(testCase);
-        } catch (Exception e) {
-            LOGGER.error(e);
+        } catch (final Exception e) {
+            AtupTestCaseResource.LOGGER.error(e);
             return null;
         }
     }
@@ -55,23 +55,23 @@ public class AtupTestCaseResource {
     @GET
     @Path("{caseName}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AtupTestCase getCases(@PathParam("caseName") String caseName) {
+    public AtupTestCase getCases(@PathParam("caseName") final String caseName) {
         try {
-            AtupTestCase existingTestCase = service.getCaseByName(caseName);
+            final AtupTestCase existingTestCase = service.getCaseByName(caseName);
             return existingTestCase;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             return null;
         }
     }
-    
+
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public AtupTestCase updateSuite(AtupTestCase testCase) {
+    public AtupTestCase updateSuite(final AtupTestCase testCase) {
         try {
             return service.updateSuite(testCase);
-        } catch (Exception e) {
-            LOGGER.error(e);
+        } catch (final Exception e) {
+            AtupTestCaseResource.LOGGER.error(e);
             return null;
         }
     }

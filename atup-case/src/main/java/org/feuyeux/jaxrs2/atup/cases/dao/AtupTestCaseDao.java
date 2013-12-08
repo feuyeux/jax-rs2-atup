@@ -14,17 +14,17 @@ public class AtupTestCaseDao extends AtupDao<AtupTestCase> {
         super();
     }
 
-    public List<AtupTestCase> findByStatus(Integer caseStatus) {
+    public List<AtupTestCase> findByStatus(final Integer caseStatus) {
         return entityManager.createNamedQuery("findByStatus", AtupTestCase.class).setParameter("caseStatus", caseStatus).getResultList();
     }
 
-    public AtupTestCase findByName(String caseName) {
+    public AtupTestCase findByName(final String caseName) {
         return entityManager.createNamedQuery("findByName", AtupTestCase.class).setParameter("caseName", caseName).getSingleResult();
     }
 
     @Transactional
-    public AtupTestCase update(AtupTestCase entity) {
-        AtupTestCase updateEntity = findByName(entity.getCaseName());
+    public AtupTestCase update(final AtupTestCase entity) {
+        final AtupTestCase updateEntity = findByName(entity.getCaseName());
         if (updateEntity != null) {
             entity.setCaseId(updateEntity.getCaseId());
             entity.setUpdateTime(Calendar.getInstance().getTime());
@@ -36,7 +36,7 @@ public class AtupTestCaseDao extends AtupDao<AtupTestCase> {
     }
 
     @Transactional
-    public AtupTestCase update2(AtupTestCase entity) {
+    public AtupTestCase update2(final AtupTestCase entity) {
         return entityManager.merge(entity);
     }
 }

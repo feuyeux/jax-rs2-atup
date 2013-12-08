@@ -20,24 +20,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AtupTestSuiteResource {
     private static final Logger LOGGER = Logger.getLogger(AtupTestSuiteResource.class);
     @Autowired
-    AtupTestSuiteService service;
+    private AtupTestSuiteService service;
 
     @GET
     @Path("suites")
     @Produces(MediaType.APPLICATION_JSON)
-    public AtupTestSuiteListInfo getCases(@QueryParam("start") Integer start, @QueryParam("size") Integer size) {
-        AtupTestSuiteListInfo result = service.getSuites(start, size);
+    public AtupTestSuiteListInfo getCases(@QueryParam("start") final Integer start, @QueryParam("size") final Integer size) {
+        final AtupTestSuiteListInfo result = service.getSuites(start, size);
         return result;
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public AtupTestSuite createSuite(AtupTestSuite testSuite) {
+    public AtupTestSuite createSuite(final AtupTestSuite testSuite) {
         try {
             return service.createSuite(testSuite);
-        } catch (Exception e) {
-            LOGGER.error(e);
+        } catch (final Exception e) {
+            AtupTestSuiteResource.LOGGER.error(e);
             return null;
         }
     }
@@ -45,11 +45,11 @@ public class AtupTestSuiteResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public AtupTestSuite updateSuite(AtupTestSuite testSuite) {
+    public AtupTestSuite updateSuite(final AtupTestSuite testSuite) {
         try {
             return service.updateSuite(testSuite);
-        } catch (Exception e) {
-            LOGGER.error(e);
+        } catch (final Exception e) {
+            AtupTestSuiteResource.LOGGER.error(e);
             return null;
         }
     }

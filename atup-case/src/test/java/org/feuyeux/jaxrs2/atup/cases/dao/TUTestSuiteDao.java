@@ -1,5 +1,7 @@
 package org.feuyeux.jaxrs2.atup.cases.dao;
 
+import java.util.List;
+
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestSuite;
 import org.feuyeux.jaxrs2.atup.core.fake.CreatTestSuite;
@@ -10,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.List;
-
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TUTestSuiteDao {
@@ -20,36 +20,36 @@ public class TUTestSuiteDao {
 
     @Test
     public void testCreateTestSuite() {
-        AtupTestSuite entity = CreatTestSuite.buildTestSuite();
+        final AtupTestSuite entity = CreatTestSuite.buildTestSuite();
         dao.save(entity);
     }
 
     @Test
     public void testUpdateTestSuite() {
-        AtupTestSuite entity = CreatTestSuite.buildTestSuite();
-        AtupTestSuite savedEntity = dao.save(entity);
+        final AtupTestSuite entity = CreatTestSuite.buildTestSuite();
+        final AtupTestSuite savedEntity = dao.save(entity);
         savedEntity.setSuiteType(AtupParam.EDGE_SUITE);
-        AtupTestSuite updatedEntity = dao.update(savedEntity);
+        final AtupTestSuite updatedEntity = dao.update(savedEntity);
         Assert.assertEquals(AtupParam.EDGE_SUITE, updatedEntity.getSuiteType());
     }
 
     @Test
     public void testDeleteTestSuite() {
-        AtupTestSuite entity = CreatTestSuite.buildTestSuite();
-        AtupTestSuite savedEntity = dao.save(entity);
-        boolean deleted = dao.remove(savedEntity.getSuiteId());
+        final AtupTestSuite entity = CreatTestSuite.buildTestSuite();
+        final AtupTestSuite savedEntity = dao.save(entity);
+        final boolean deleted = dao.remove(savedEntity.getSuiteId());
         Assert.assertEquals(true, deleted);
     }
 
     @Test
     public void testFindByName() {
-        AtupTestSuite suite = dao.findBySuiteName(CreatTestSuite.SUITE_NAME);
+        final AtupTestSuite suite = dao.findBySuiteName(CreatTestSuite.SUITE_NAME);
         Assert.assertEquals(CreatTestSuite.SUITE_NAME, suite.getSuiteName());
     }
 
     @Test
     public void testFindByStatus() {
-        List<AtupTestSuite> suiteList = dao.findByStatus(AtupParam.NORMAL_SUITE);
+        final List<AtupTestSuite> suiteList = dao.findByStatus(AtupParam.NORMAL_SUITE);
         Assert.assertEquals(AtupParam.NORMAL_SUITE, suiteList.get(0).getSuiteStatus());
     }
 }

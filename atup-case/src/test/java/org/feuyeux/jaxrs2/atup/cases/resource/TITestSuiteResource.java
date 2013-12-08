@@ -1,5 +1,12 @@
 package org.feuyeux.jaxrs2.atup.cases.resource;
 
+import java.util.List;
+
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestSuiteInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestSuiteListInfo;
@@ -12,13 +19,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
-import java.util.List;
-
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TITestSuiteResource extends JerseyTest {
     @Override
@@ -30,10 +31,10 @@ public class TITestSuiteResource extends JerseyTest {
 
     @Test
     public void testGetList() {
-        WebTarget webTarget = target(AtupApi.TEST_RESULT_PATH).path("results").queryParam("start", 0).queryParam("size", 100);
-        Invocation.Builder request = webTarget.request(MediaType.APPLICATION_JSON_TYPE);
-        AtupTestSuiteListInfo result = request.get(AtupTestSuiteListInfo.class);
-        List<AtupTestSuiteInfo> testSuiteList = result.getSuiteList();
+        final WebTarget webTarget = target(AtupApi.TEST_RESULT_PATH).path("results").queryParam("start", 0).queryParam("size", 100);
+        final Invocation.Builder request = webTarget.request(MediaType.APPLICATION_JSON_TYPE);
+        final AtupTestSuiteListInfo result = request.get(AtupTestSuiteListInfo.class);
+        final List<AtupTestSuiteInfo> testSuiteList = result.getSuiteList();
         if (testSuiteList != null && testSuiteList.size() > 0) {
             Assert.assertNotNull(testSuiteList.get(0).getSuiteId());
         } else {

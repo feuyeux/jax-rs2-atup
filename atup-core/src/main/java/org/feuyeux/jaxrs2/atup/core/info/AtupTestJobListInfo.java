@@ -9,6 +9,10 @@ public class AtupTestJobListInfo extends AtupInfo {
     public AtupTestJobListInfo() {
     }
 
+    public AtupTestJobListInfo(List<AtupTestJobInfo> jobList) {
+        this.jobList = jobList;
+    }
+
     public List<AtupTestJobInfo> getJobList() {
         return jobList;
     }

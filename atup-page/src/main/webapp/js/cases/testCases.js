@@ -1,5 +1,6 @@
 function loadCases(start, size) {
 	checkSignIn();
+	jQuery("#casesDiv").html("Loading...");
 	rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/cases?start=" + start + "&size=" + size, GET_METHOD, null, renderGetAll);
 }
 function renderGetAll(data) {

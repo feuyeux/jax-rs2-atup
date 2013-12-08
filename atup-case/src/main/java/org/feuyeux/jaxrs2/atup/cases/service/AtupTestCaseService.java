@@ -19,27 +19,27 @@ public class AtupTestCaseService {
     @Autowired
     org.feuyeux.jaxrs2.atup.cases.dao.AtupTestSuiteDao suiteDao;
 
-    public boolean deleteTestCase(Integer testCaseId) {
+    public boolean deleteTestCase(final Integer testCaseId) {
         return dao.remove(testCaseId);
     }
 
-    public AtupTestCase createTestCase(AtupTestCaseInfo testCaseInfo) {
-        AtupTestCase testCase = new AtupTestCase(testCaseInfo);
+    public AtupTestCase createTestCase(final AtupTestCaseInfo testCaseInfo) {
+        final AtupTestCase testCase = new AtupTestCase(testCaseInfo);
         return dao.save(testCase);
     }
 
-    public AtupTestCase updateTestCase(AtupTestCaseInfo testCaseInfo) {
-        AtupTestCase testCase = new AtupTestCase(testCaseInfo);
+    public AtupTestCase updateTestCase(final AtupTestCaseInfo testCaseInfo) {
+        final AtupTestCase testCase = new AtupTestCase(testCaseInfo);
         return dao.update(testCase);
     }
 
-    public AtupTestCaseListInfo getCases(Integer start, Integer size) {
+    public AtupTestCaseListInfo getCases(final Integer start, final Integer size) {
         AtupTestCaseListInfo result = null;
-        List<AtupTestCase> list = dao.findAll(start, size);
+        final List<AtupTestCase> list = dao.findAll(start, size);
         if (list != null && list.size() > 0) {
-            List<AtupTestCaseInfo> caseInfoList = new ArrayList<>(list.size());
-            for (AtupTestCase testCase : list) {
-                AtupTestCaseInfo caseInfo = new AtupTestCaseInfo(testCase);
+            final List<AtupTestCaseInfo> caseInfoList = new ArrayList<>(list.size());
+            for (final AtupTestCase testCase : list) {
+                final AtupTestCaseInfo caseInfo = new AtupTestCaseInfo(testCase);
                 caseInfoList.add(caseInfo);
             }
             result = new AtupTestCaseListInfo(caseInfoList);
@@ -49,8 +49,8 @@ public class AtupTestCaseService {
         return result;
     }
 
-    public AtupTestCase createSuite(AtupTestCase testCase) {
-        AtupTestSuite editingTestSuite = suiteDao.findById(testCase.getSuite().getSuiteId());
+    public AtupTestCase createSuite(final AtupTestCase testCase) {
+        final AtupTestSuite editingTestSuite = suiteDao.findById(testCase.getSuite().getSuiteId());
         testCase.setSuite(editingTestSuite);
         final Date time = Calendar.getInstance().getTime();
         testCase.setCreateTime(time);
@@ -58,12 +58,12 @@ public class AtupTestCaseService {
         return dao.save(testCase);
     }
 
-    public AtupTestCase getCaseByName(String caseName) {
+    public AtupTestCase getCaseByName(final String caseName) {
         return dao.findByName(caseName);
     }
 
-    public AtupTestCase updateSuite(AtupTestCase testCase) {
-        AtupTestSuite editingTestSuite = suiteDao.findById(testCase.getSuite().getSuiteId());
+    public AtupTestCase updateSuite(final AtupTestCase testCase) {
+        final AtupTestSuite editingTestSuite = suiteDao.findById(testCase.getSuite().getSuiteId());
         testCase.setSuite(editingTestSuite);
         return dao.update(testCase);
     }

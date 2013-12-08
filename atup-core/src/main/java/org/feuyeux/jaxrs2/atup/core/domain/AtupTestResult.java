@@ -22,7 +22,7 @@ import java.util.Date;
 @XmlRootElement
 @NamedQueries({ @NamedQuery(name = "findResultByTestCase", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.testCase= :testCase"),
         @NamedQuery(name = "findResultByStatus", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.resultStatus= :resultStatus"),
-        @NamedQuery(name = "findResultByUser", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.user= :user") })
+        @NamedQuery(name = "findResultByUser", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.user.userId= :userId") })
 public class AtupTestResult implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer resultId;

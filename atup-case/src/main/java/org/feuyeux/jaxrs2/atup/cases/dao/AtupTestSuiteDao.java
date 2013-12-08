@@ -13,17 +13,17 @@ public class AtupTestSuiteDao extends AtupDao<AtupTestSuite> {
         super();
     }
 
-    public List<AtupTestSuite> findByStatus(Integer suiteStatus) {
+    public List<AtupTestSuite> findByStatus(final Integer suiteStatus) {
         return entityManager.createNamedQuery("findBySuiteStatus", AtupTestSuite.class).setParameter("suiteStatus", suiteStatus).getResultList();
     }
 
-    public AtupTestSuite findBySuiteName(String suiteName) {
+    public AtupTestSuite findBySuiteName(final String suiteName) {
         return entityManager.createNamedQuery("findBySuiteName", AtupTestSuite.class).setParameter("suiteName", suiteName).getSingleResult();
     }
 
     @Transactional
-    public AtupTestSuite update(AtupTestSuite entity) {
-        AtupTestSuite updateEntity = findBySuiteName(entity.getSuiteName());
+    public AtupTestSuite update(final AtupTestSuite entity) {
+        final AtupTestSuite updateEntity = findBySuiteName(entity.getSuiteName());
         if (updateEntity != null) {
             entity.setSuiteId(updateEntity.getSuiteId());
             return entityManager.merge(entity);

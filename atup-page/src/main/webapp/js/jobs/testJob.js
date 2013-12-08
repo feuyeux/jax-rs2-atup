@@ -5,7 +5,6 @@ function initial() {
 	rest(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH, GET_METHOD, null, renderDeviceList);
 	var html = "<option value='3'>HIGH</option><option value='2'>MEDIUM</option><option value='1'>LOW</option>";
 	jQuery("#priorityList").empty().append(html);
-	jQuery('#resultDiv').html("Done!");
 }
 function renderDeviceList(data) {
 	var list = data.deviceList;
@@ -28,4 +27,12 @@ function getValue(query, key) {
 	}
 	return null;
 }
-function createJob() {}
+function createJob() {
+	var deviceId = jQuery("#deviceList").val();
+	var caseId = jQuery("#caseId").val();
+	var caseName = jQuery("#caseName").val();
+	var priority = jQuery("#priorityList").val();
+	var postData = JSON.stringify({deviceId : deviceId, caseId : caseId, caseName : caseName, priority : priority});
+	rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, POST_METHOD, postData, null);
+	window.location.href = "runningJobs.html";
+}
