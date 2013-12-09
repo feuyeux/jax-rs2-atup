@@ -22,7 +22,7 @@ import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobListInfo;
 @Singleton
 @Path(AtupApi.TEST_JOB_PATH)
 public class AtupTestJobResource {
-    private final org.apache.logging.log4j.Logger LOGGER = 
+    private final org.apache.logging.log4j.Logger log = 
             org.apache.logging.log4j.LogManager.getLogger(AtupTestJobResource.class.getName());
     private final AtomicInteger JOB_ID = new AtomicInteger();
 
@@ -44,15 +44,15 @@ public class AtupTestJobResource {
         switch (jobInfo.getPriority()) {
             case 3:
                 highJobMap.put(key, jobInfo);
-                LOGGER.info("New High priority Job joint");
+                log.info("New High priority Job joint");
                 break;
             case 2:
                 mediumJobMap.put(key, jobInfo);
-                LOGGER.info("New Medium priority Job joint");
+                log.info("New Medium priority Job joint");
                 break;
             case 1:
                 lowJobMap.put(key, jobInfo);
-                LOGGER.info("New Low priority Job joint");
+                log.info("New Low priority Job joint");
                 break;
             default:
                 break;

@@ -24,7 +24,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations = {"classpath:applicationContext0.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TIAtupUserResource extends JerseyTest {
-    private final Logger LOGGER = LogManager.getLogger(TIAtupUserResource.class.getName());
+    private final Logger log = LogManager.getLogger(TIAtupUserResource.class.getName());
     @Override
     protected Application configure() {
         enable(TestProperties.LOG_TRAFFIC);
@@ -42,7 +42,7 @@ public class TIAtupUserResource extends JerseyTest {
             Assert.assertEquals(user.getUserName(), result.getUserName());
         } else {
             Assert.fail();
-            LOGGER.info(result.getErrorInfo());
+            log.info(result.getErrorInfo());
         }
     }
 
@@ -58,7 +58,7 @@ public class TIAtupUserResource extends JerseyTest {
             Assert.assertEquals(user.getUserName(), result.getUserName());
         } else {
             Assert.fail();
-            LOGGER.info(result.getErrorInfo());
+            log.info(result.getErrorInfo());
         }
 
         if (userName != null) {

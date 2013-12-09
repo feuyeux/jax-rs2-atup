@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Path(AtupApi.TEST_SUITE_PATH)
 public class AtupTestSuiteResource {
-    private final org.apache.logging.log4j.Logger LOGGER = 
+    private final org.apache.logging.log4j.Logger log = 
             org.apache.logging.log4j.LogManager.getLogger(AtupTestSuiteResource.class.getName());
     @Autowired
     private AtupTestSuiteService service;
@@ -37,7 +37,7 @@ public class AtupTestSuiteResource {
         try {
             return service.createSuite(testSuite);
         } catch (final Exception e) {
-            LOGGER.error(e);
+            log.error(e);
             return null;
         }
     }
@@ -49,7 +49,7 @@ public class AtupTestSuiteResource {
         try {
             return service.updateSuite(testSuite);
         } catch (final Exception e) {
-            LOGGER.error(e);
+            log.error(e);
             return null;
         }
     }

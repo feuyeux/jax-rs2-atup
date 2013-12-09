@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 public class AtupDao<T> {
-    private final Logger LOGGER = LogManager.getLogger(AtupDao.class.getName());
+    private final Logger log = LogManager.getLogger(AtupDao.class.getName());
     @PersistenceContext
     protected EntityManager entityManager;
     private Class<T> entityClass;
@@ -36,7 +36,7 @@ public class AtupDao<T> {
         try {
             return entityManager.find(entityClass, id);
         } catch (final Exception e) {
-            LOGGER.error(e);
+            log.error(e);
             return null;
         }
     }

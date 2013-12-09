@@ -23,7 +23,7 @@ import org.apache.logging.log4j.Logger;
 
 @Path(AtupApi.DEVICE_PATH)
 public class AtupDeviceResource {
-    private final Logger LOGGER = LogManager.getLogger(AtupDeviceResource.class.getName());
+    private final Logger log = LogManager.getLogger(AtupDeviceResource.class.getName());
     @Autowired
     private AtupDeviceService service;
 
@@ -39,7 +39,7 @@ public class AtupDeviceResource {
             AtupDevice atupDevice = service.createDevice(deviceInfo);
             return atupDevice;
         } catch (Exception e) {
-            LOGGER.error(e);
+            log.error(e);
             return null;
         }
     }
@@ -56,7 +56,7 @@ public class AtupDeviceResource {
             AtupDevice atupDevice = service.updateDevice(deviceInfo);
             return atupDevice;
         } catch (Exception e) {
-            LOGGER.error(e);
+            log.error(e);
             return null;
         }
     }
