@@ -27,6 +27,11 @@ public class StationDetectService {
         detectTask.scheduleWithFixedDelay(new Runnable() {
             @Override
             public void run() {
+                detecting();
+                //log.debug("test");
+            }
+
+            private void detecting() {
                 deviceList = dao.findAll();
                 for (AtupDevice atupDevice : deviceList) {
                     String detectPath = atupDevice.getDeviceHost() + ":" + SERVICE_PORT + SERVICE_PATH;
@@ -36,5 +41,10 @@ public class StationDetectService {
                 }
             }
         }, 0, 10, TimeUnit.SECONDS);
+    }
+
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+        StationDetectService test = new StationDetectService();
+        test.detect();
     }
 }
