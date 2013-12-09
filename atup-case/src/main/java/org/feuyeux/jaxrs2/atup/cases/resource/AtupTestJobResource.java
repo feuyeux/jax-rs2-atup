@@ -15,7 +15,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobListInfo;
@@ -23,7 +22,8 @@ import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobListInfo;
 @Singleton
 @Path(AtupApi.TEST_JOB_PATH)
 public class AtupTestJobResource {
-    private static final Logger LOGGER = Logger.getLogger(AtupTestJobResource.class);
+    private final org.apache.logging.log4j.Logger LOGGER = 
+            org.apache.logging.log4j.LogManager.getLogger(AtupTestJobResource.class.getName());
     private final AtomicInteger JOB_ID = new AtomicInteger();
 
     public AtupTestJobResource() {
@@ -44,15 +44,15 @@ public class AtupTestJobResource {
         switch (jobInfo.getPriority()) {
             case 3:
                 highJobMap.put(key, jobInfo);
-                AtupTestJobResource.LOGGER.info("New High priority Job joint");
+                LOGGER.info("New High priority Job joint");
                 break;
             case 2:
                 mediumJobMap.put(key, jobInfo);
-                AtupTestJobResource.LOGGER.info("New Medium priority Job joint");
+                LOGGER.info("New Medium priority Job joint");
                 break;
             case 1:
                 lowJobMap.put(key, jobInfo);
-                AtupTestJobResource.LOGGER.info("New Low priority Job joint");
+                LOGGER.info("New Low priority Job joint");
                 break;
             default:
                 break;

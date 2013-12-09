@@ -9,7 +9,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.cases.service.AtupTestSuiteService;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestSuite;
@@ -18,7 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Path(AtupApi.TEST_SUITE_PATH)
 public class AtupTestSuiteResource {
-    private static final Logger LOGGER = Logger.getLogger(AtupTestSuiteResource.class);
+    private final org.apache.logging.log4j.Logger LOGGER = 
+            org.apache.logging.log4j.LogManager.getLogger(AtupTestSuiteResource.class.getName());
     @Autowired
     private AtupTestSuiteService service;
 
@@ -37,7 +37,7 @@ public class AtupTestSuiteResource {
         try {
             return service.createSuite(testSuite);
         } catch (final Exception e) {
-            AtupTestSuiteResource.LOGGER.error(e);
+            LOGGER.error(e);
             return null;
         }
     }
@@ -49,7 +49,7 @@ public class AtupTestSuiteResource {
         try {
             return service.updateSuite(testSuite);
         } catch (final Exception e) {
-            AtupTestSuiteResource.LOGGER.error(e);
+            LOGGER.error(e);
             return null;
         }
     }

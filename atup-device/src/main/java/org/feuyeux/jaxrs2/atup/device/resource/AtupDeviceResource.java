@@ -12,17 +12,18 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
-import org.apache.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import org.feuyeux.jaxrs2.atup.core.info.AtupDeviceListInfo;
 import org.feuyeux.jaxrs2.atup.device.service.AtupDeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Path(AtupApi.DEVICE_PATH)
 public class AtupDeviceResource {
-    private static final Logger LOGGER = Logger.getLogger(AtupDeviceResource.class);
+    private final Logger LOGGER = LogManager.getLogger(AtupDeviceResource.class.getName());
     @Autowired
     private AtupDeviceService service;
 

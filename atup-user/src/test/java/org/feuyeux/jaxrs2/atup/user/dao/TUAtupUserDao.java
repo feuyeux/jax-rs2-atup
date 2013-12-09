@@ -1,5 +1,7 @@
 package org.feuyeux.jaxrs2.atup.user.dao;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import org.feuyeux.jaxrs2.atup.core.fake.CreateUser;
 import org.junit.Assert;
@@ -9,9 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = { "classpath:applicationContext0.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TUAtupUserDao {
+    private final Logger LOGGER = LogManager.getLogger(TUAtupUserDao.class.getName());
+
     @Autowired
     private AtupUserDao dao;
 
@@ -19,6 +23,7 @@ public class TUAtupUserDao {
     public void testCreateUser() {
         AtupUser user = CreateUser.buildUser();
         AtupUser newUser = dao.save(user);
+        LOGGER.info(newUser);
         Assert.assertEquals(user.getUserName(), newUser.getUserName());
     }
 
@@ -46,8 +51,8 @@ public class TUAtupUserDao {
     public void testFindByName() {
         AtupUser user = CreateUser.buildUser();
         AtupUser newUser = dao.save(user);
+        LOGGER.info(newUser);
         AtupUser findUser = dao.findByName(newUser.getUserName());
         Assert.assertEquals(user.getUserName(), findUser.getUserName());
     }
-
 }

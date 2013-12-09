@@ -1,6 +1,13 @@
 package org.feuyeux.jaxrs2.atup.user.resource;
 
-import org.apache.log4j.Logger;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.fake.CreateUser;
 import org.feuyeux.jaxrs2.atup.core.info.AtupErrorCode;
@@ -14,17 +21,10 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext0.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TIAtupUserResource extends JerseyTest {
-    private static final Logger LOG = Logger.getLogger(TIAtupUserResource.class);
-
+    private final Logger LOGGER = LogManager.getLogger(TIAtupUserResource.class.getName());
     @Override
     protected Application configure() {
         enable(TestProperties.LOG_TRAFFIC);
@@ -42,7 +42,7 @@ public class TIAtupUserResource extends JerseyTest {
             Assert.assertEquals(user.getUserName(), result.getUserName());
         } else {
             Assert.fail();
-            LOG.info(result.getErrorInfo());
+            LOGGER.info(result.getErrorInfo());
         }
     }
 
@@ -58,7 +58,7 @@ public class TIAtupUserResource extends JerseyTest {
             Assert.assertEquals(user.getUserName(), result.getUserName());
         } else {
             Assert.fail();
-            LOG.info(result.getErrorInfo());
+            LOGGER.info(result.getErrorInfo());
         }
 
         if (userName != null) {
