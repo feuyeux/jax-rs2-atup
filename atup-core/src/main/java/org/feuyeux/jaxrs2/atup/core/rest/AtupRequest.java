@@ -36,13 +36,17 @@ public class AtupRequest<T> {
         this.clientRegisters = clientRegisters;
     }
 
-    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams,
-                  MediaType requestDataType, Class<T> returnType) {
+    public T rest(String method, String requestUrl, Class<T> returnType) {
+        return rest(method, requestUrl, null, null, null, returnType, null);
+    }
+
+    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams, MediaType requestDataType,
+            Class<T> returnType) {
         return rest(method, requestUrl, headParams, queryParams, requestDataType, returnType, null);
     }
 
-    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams,
-                  MediaType requestDataType, Class<T> returnType, T requestData) {
+    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams, MediaType requestDataType,
+            Class<T> returnType, T requestData) {
         if (clientConfig == null) {
             clientConfig = new ClientConfig();
         }

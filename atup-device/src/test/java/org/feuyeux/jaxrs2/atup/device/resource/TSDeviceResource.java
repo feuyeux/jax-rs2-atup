@@ -1,15 +1,14 @@
 package org.feuyeux.jaxrs2.atup.device.resource;
 
+import javax.ws.rs.core.MediaType;
+
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.rest.AtupRequest;
-import org.feuyeux.jaxrs2.atup.device.dao.TUDeviceDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import javax.ws.rs.core.MediaType;
 
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -13,6 +13,7 @@
 		<module>atup-device</module>
 		<module>atup-case</module>
 		<module>atup-page</module>
+		<module>atup-test-station</module>
 	</modules>
 
 	<properties>
