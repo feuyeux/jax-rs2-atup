@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
 
 @XmlRootElement
@@ -68,5 +68,10 @@ public class AtupTestJobInfo {
 
     public void setPriority(Integer priority) {
         this.priority = priority;
+    }
+
+    @Override
+    public String toString() {
+        return "jobId=" + jobId + ",userId=" + userId + ",deviceId=" + deviceId + ",caseId=" + caseId + ",suiteId=" + suiteId + ",priority=" + priority;
     }
 }

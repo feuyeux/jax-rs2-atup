@@ -1,5 +1,7 @@
 package org.feuyeux.jaxrs2.atup.station.resource;
 
+import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
+
 import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
@@ -16,9 +18,9 @@ public class AtupStationResource {
     }
 
     @GET
-    public String keepALive(@Context HttpServletRequest request) {
+    public Integer keepALive(@Context HttpServletRequest request) {
         //log.info("Request host=" + request.getRemoteHost());
-        log.info("Request host=" + request.getRemoteAddr());        
-        return "OK";
+        log.info("Request host=" + request.getRemoteAddr());
+        return AtupParam.DEVICE_IDLE;
     }
 }

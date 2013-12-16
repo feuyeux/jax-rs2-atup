@@ -26,6 +26,11 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.feuyeux.jaxrs2.atup</groupId>
+            <artifactId>atup-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- servlet -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>

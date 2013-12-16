@@ -1,6 +1,7 @@
 package org.feuyeux.jaxrs2.atup.device.resource;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -17,6 +18,7 @@ import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import org.feuyeux.jaxrs2.atup.core.info.AtupDeviceListInfo;
 import org.feuyeux.jaxrs2.atup.device.service.AtupDeviceService;
+import org.feuyeux.jaxrs2.atup.device.service.StationDetectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -26,6 +28,8 @@ public class AtupDeviceResource {
     private final Logger log = LogManager.getLogger(AtupDeviceResource.class.getName());
     @Autowired
     private AtupDeviceService service;
+    @Autowired
+    private StationDetectService detectService;
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -68,5 +72,11 @@ public class AtupDeviceResource {
         List<AtupDevice> devices = service.getDeviceList(Integer.valueOf(userId));
         AtupDeviceListInfo result = new AtupDeviceListInfo(devices);
         return result;
+    }
+
+    @POST
+    @Path("detect")
+    public void detect() throws ExecutionException, InterruptedException {
+        detectService.detect();
     }
 }

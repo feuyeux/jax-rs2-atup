@@ -3,6 +3,7 @@ package org.feuyeux.jaxrs2.atup.cases.resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Singleton;
@@ -15,24 +16,25 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 
+import org.feuyeux.jaxrs2.atup.cases.service.JobLaunchService;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobListInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Singleton
 @Path(AtupApi.TEST_JOB_PATH)
 public class AtupTestJobResource {
-    private final org.apache.logging.log4j.Logger log = 
+    private final org.apache.logging.log4j.Logger log =
             org.apache.logging.log4j.LogManager.getLogger(AtupTestJobResource.class.getName());
     private final AtomicInteger JOB_ID = new AtomicInteger();
+
+    @Autowired
+    private JobLaunchService jobLaunchService;
 
     public AtupTestJobResource() {
 
     }
-
-    private final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<String, AtupTestJobInfo> mediumJobMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<String, AtupTestJobInfo> lowJobMap = new ConcurrentHashMap<>();
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -41,31 +43,18 @@ public class AtupTestJobResource {
         jobInfo.setUserId(Integer.valueOf(userId));
         jobInfo.setJobId(JOB_ID.getAndIncrement());
         final String key = jobInfo.getUserId() + "-" + jobInfo.getCaseId() + "-" + jobInfo.getDeviceId();
-        switch (jobInfo.getPriority()) {
-            case 3:
-                highJobMap.put(key, jobInfo);
-                log.info("New High priority Job joint");
-                break;
-            case 2:
-                mediumJobMap.put(key, jobInfo);
-                log.info("New Medium priority Job joint");
-                break;
-            case 1:
-                lowJobMap.put(key, jobInfo);
-                log.info("New Low priority Job joint");
-                break;
-            default:
-                break;
-        }
+        jobLaunchService.addJob(jobInfo, key);
     }
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public AtupTestJobListInfo retrieveRunningJobs() {
-        final List<AtupTestJobInfo> jobList = new ArrayList<>();
-        jobList.addAll(highJobMap.values());
-        jobList.addAll(mediumJobMap.values());
-        jobList.addAll(lowJobMap.values());
-        return new AtupTestJobListInfo(jobList);
+        return jobLaunchService.getJobs();
+    }
+
+    @POST
+    public void launchJob() throws ExecutionException, InterruptedException {
+        jobLaunchService.launch();
     }
 }
