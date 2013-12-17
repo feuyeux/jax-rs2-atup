@@ -10,13 +10,13 @@ import java.io.Serializable;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
 @Entity
 @Table(name = "test_suite")
 @XmlRootElement
-@NamedQueries({ @NamedQuery(name = "findBySuiteStatus", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteStatus= :suiteStatus"),
-        @NamedQuery(name = "findBySuiteName", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteName= :suiteName") })
+@NamedQueries({@NamedQuery(name = "findBySuiteStatus", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteStatus= :suiteStatus"),
+        @NamedQuery(name = "findBySuiteName", query = "SELECT testSuite FROM AtupTestSuite testSuite WHERE testSuite.suiteName= :suiteName")})
 public class AtupTestSuite implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer suiteId;
@@ -27,13 +27,13 @@ public class AtupTestSuite implements Serializable {
     public AtupTestSuite() {
     }
 
-    public AtupTestSuite(String suiteName, Integer suiteType, Integer suiteStatus) {
+    public AtupTestSuite(final String suiteName, final Integer suiteType, final Integer suiteStatus) {
         this.suiteName = suiteName;
         this.suiteType = suiteType;
         this.suiteStatus = suiteStatus;
     }
 
-    public AtupTestSuite(Integer suiteId) {
+    public AtupTestSuite(final Integer suiteId) {
         this.suiteId = suiteId;
     }
 
@@ -46,7 +46,7 @@ public class AtupTestSuite implements Serializable {
         return suiteId;
     }
 
-    public void setSuiteId(Integer suiteId) {
+    public void setSuiteId(final Integer suiteId) {
         this.suiteId = suiteId;
     }
 
@@ -56,7 +56,7 @@ public class AtupTestSuite implements Serializable {
         return suiteName;
     }
 
-    public void setSuiteName(String suiteName) {
+    public void setSuiteName(final String suiteName) {
         this.suiteName = suiteName;
     }
 
@@ -66,7 +66,7 @@ public class AtupTestSuite implements Serializable {
         return suiteType;
     }
 
-    public void setSuiteType(Integer suiteType) {
+    public void setSuiteType(final Integer suiteType) {
         this.suiteType = suiteType;
     }
 
@@ -76,7 +76,7 @@ public class AtupTestSuite implements Serializable {
         return suiteStatus;
     }
 
-    public void setSuiteStatus(Integer suiteStatus) {
+    public void setSuiteStatus(final Integer suiteStatus) {
         this.suiteStatus = suiteStatus;
     }
 }

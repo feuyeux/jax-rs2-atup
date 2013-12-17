@@ -15,8 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @Path(AtupApi.TEST_JOB_PATH)
 public class AtupTestJobResource {
-    private final org.apache.logging.log4j.Logger log =
-            org.apache.logging.log4j.LogManager.getLogger(AtupTestJobResource.class.getName());
+    private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(AtupTestJobResource.class.getName());
     private final AtomicInteger JOB_ID = new AtomicInteger();
 
     @Autowired
@@ -43,6 +42,7 @@ public class AtupTestJobResource {
     }
 
     @POST
+    @Path("launch")
     public void launchJob() throws ExecutionException, InterruptedException {
         jobLaunchService.launch();
     }

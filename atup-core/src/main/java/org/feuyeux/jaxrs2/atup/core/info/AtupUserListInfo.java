@@ -10,7 +10,7 @@ public class AtupUserListInfo extends AtupInfo {
     public AtupUserListInfo() {
     }
 
-    public AtupUserListInfo(List<AtupUserInfo> userList) {
+    public AtupUserListInfo(final List<AtupUserInfo> userList) {
         this.userList = userList;
     }
 
@@ -18,7 +18,7 @@ public class AtupUserListInfo extends AtupInfo {
         return userList;
     }
 
-    public void setUserList(List<AtupUserInfo> userList) {
+    public void setUserList(final List<AtupUserInfo> userList) {
         this.userList = userList;
     }
 }

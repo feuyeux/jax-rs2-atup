@@ -15,14 +15,14 @@ import java.util.Date;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
 @Entity
 @Table(name = "test_result")
 @XmlRootElement
-@NamedQueries({ @NamedQuery(name = "findResultByTestCase", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.testCase= :testCase"),
+@NamedQueries({@NamedQuery(name = "findResultByTestCase", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.testCase= :testCase"),
         @NamedQuery(name = "findResultByStatus", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.resultStatus= :resultStatus"),
-        @NamedQuery(name = "findResultByUser", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.user.userId= :userId") })
+        @NamedQuery(name = "findResultByUser", query = "SELECT testResult FROM AtupTestResult testResult WHERE testResult.user.userId= :userId")})
 public class AtupTestResult implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer resultId;
@@ -37,7 +37,8 @@ public class AtupTestResult implements Serializable {
     public AtupTestResult() {
     }
 
-    public AtupTestResult(AtupTestCase testCase, AtupUser user, Integer resultStatus, String resultBody, Date createTime, Date updateTime) {
+    public AtupTestResult(final AtupTestCase testCase, final AtupUser user, final Integer resultStatus, final String resultBody, final Date createTime,
+                          final Date updateTime) {
         this.testCase = testCase;
         this.user = user;
         this.resultStatus = resultStatus;
@@ -55,7 +56,7 @@ public class AtupTestResult implements Serializable {
         return resultId;
     }
 
-    public void setResultId(Integer resultId) {
+    public void setResultId(final Integer resultId) {
         this.resultId = resultId;
     }
 
@@ -66,7 +67,7 @@ public class AtupTestResult implements Serializable {
         return testCase;
     }
 
-    public void setTestCase(AtupTestCase testCase) {
+    public void setTestCase(final AtupTestCase testCase) {
         this.testCase = testCase;
     }
 
@@ -77,7 +78,7 @@ public class AtupTestResult implements Serializable {
         return user;
     }
 
-    public void setUser(AtupUser user) {
+    public void setUser(final AtupUser user) {
         this.user = user;
     }
 
@@ -87,7 +88,7 @@ public class AtupTestResult implements Serializable {
         return resultStatus;
     }
 
-    public void setResultStatus(Integer resultStatus) {
+    public void setResultStatus(final Integer resultStatus) {
         this.resultStatus = resultStatus;
     }
 
@@ -97,7 +98,7 @@ public class AtupTestResult implements Serializable {
         return resultBody;
     }
 
-    public void setResultBody(String resultBody) {
+    public void setResultBody(final String resultBody) {
         this.resultBody = resultBody;
     }
 
@@ -109,7 +110,7 @@ public class AtupTestResult implements Serializable {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(final Date createTime) {
         this.createTime = createTime;
     }
 
@@ -121,7 +122,7 @@ public class AtupTestResult implements Serializable {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(final Date updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -132,7 +133,7 @@ public class AtupTestResult implements Serializable {
         return device;
     }
 
-    public void setDevice(AtupDevice device) {
+    public void setDevice(final AtupDevice device) {
         this.device = device;
     }
 }

@@ -13,9 +13,9 @@ import java.util.List;
 @Service
 public class AtupTestCaseService {
     @Autowired
-    org.feuyeux.jaxrs2.atup.cases.dao.AtupTestCaseDao dao;
+    org.feuyeux.jaxrs2.atup.core.dao.AtupTestCaseDao dao;
     @Autowired
-    org.feuyeux.jaxrs2.atup.cases.dao.AtupTestSuiteDao suiteDao;
+    org.feuyeux.jaxrs2.atup.core.dao.AtupTestSuiteDao suiteDao;
 
     public boolean deleteTestCase(final Integer testCaseId) {
         return dao.remove(testCaseId);

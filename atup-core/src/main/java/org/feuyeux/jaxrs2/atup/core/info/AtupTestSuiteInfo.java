@@ -9,7 +9,7 @@ public class AtupTestSuiteInfo extends AtupInfo {
     private Integer suiteType;
     private Integer suiteStatus;
 
-    public AtupTestSuiteInfo(AtupTestSuite testSuite) {
+    public AtupTestSuiteInfo(final AtupTestSuite testSuite) {
         suiteId = testSuite.getSuiteId();
         suiteName = testSuite.getSuiteName();
         suiteStatus = testSuite.getSuiteStatus();
@@ -23,7 +23,7 @@ public class AtupTestSuiteInfo extends AtupInfo {
         return suiteId;
     }
 
-    public void setSuiteId(Integer suiteId) {
+    public void setSuiteId(final Integer suiteId) {
         this.suiteId = suiteId;
     }
 
@@ -31,7 +31,7 @@ public class AtupTestSuiteInfo extends AtupInfo {
         return suiteName;
     }
 
-    public void setSuiteName(String suiteName) {
+    public void setSuiteName(final String suiteName) {
         this.suiteName = suiteName;
     }
 
@@ -39,7 +39,7 @@ public class AtupTestSuiteInfo extends AtupInfo {
         return suiteType;
     }
 
-    public void setSuiteType(Integer suiteType) {
+    public void setSuiteType(final Integer suiteType) {
         this.suiteType = suiteType;
     }
 
@@ -47,7 +47,7 @@ public class AtupTestSuiteInfo extends AtupInfo {
         return suiteStatus;
     }
 
-    public void setSuiteStatus(Integer suiteStatus) {
+    public void setSuiteStatus(final Integer suiteStatus) {
         this.suiteStatus = suiteStatus;
     }
 }

@@ -27,13 +27,13 @@ public class AtupUserResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public javax.ws.rs.core.Response createUser(AtupUserInfo userInfo) {
+    public javax.ws.rs.core.Response createUser(final AtupUserInfo userInfo) {
         try {
-            AtupUser newUser = service.createUser(userInfo);
-            AtupUserInfo result = new AtupUserInfo(newUser);
+            final AtupUser newUser = service.createUser(userInfo);
+            final AtupUserInfo result = new AtupUserInfo(newUser);
             return Response.ok().entity(result).build();
-        } catch (Exception e) {
-            AtupUserInfo result = new AtupUserInfo(e.getMessage(), AtupErrorCode.PERSIST_ERROR);
+        } catch (final Exception e) {
+            final AtupUserInfo result = new AtupUserInfo(e.getMessage(), AtupErrorCode.PERSIST_ERROR);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
         }
     }
@@ -41,13 +41,13 @@ public class AtupUserResource {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public javax.ws.rs.core.Response updateUser(AtupUserInfo userInfo) {
+    public javax.ws.rs.core.Response updateUser(final AtupUserInfo userInfo) {
         try {
-            AtupUser newUser = service.updateUser(userInfo);
-            AtupUserInfo result = new AtupUserInfo(newUser);
+            final AtupUser newUser = service.updateUser(userInfo);
+            final AtupUserInfo result = new AtupUserInfo(newUser);
             return Response.ok().entity(result).build();
-        } catch (Exception e) {
-            AtupUserInfo result = new AtupUserInfo(e.getMessage(), AtupErrorCode.PERSIST_ERROR);
+        } catch (final Exception e) {
+            final AtupUserInfo result = new AtupUserInfo(e.getMessage(), AtupErrorCode.PERSIST_ERROR);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
         }
     }
@@ -55,26 +55,26 @@ public class AtupUserResource {
     @GET
     @Path("{user}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AtupUserInfo getUser(@PathParam("user") String userName) {
-        AtupUser user = service.getUser(userName);
-        AtupUserInfo result = new AtupUserInfo(user);
+    public AtupUserInfo getUser(@PathParam("user") final String userName) {
+        final AtupUser user = service.getUser(userName);
+        final AtupUserInfo result = new AtupUserInfo(user);
         return result;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public AtupUserListInfo getUsers() {
-        List<AtupUserInfo> users = service.getUserList();
-        AtupUserListInfo result = new AtupUserListInfo(users);
+        final List<AtupUserInfo> users = service.getUserList();
+        final AtupUserListInfo result = new AtupUserListInfo(users);
         return result;
     }
 
     @GET
     @Path("signin")
     @Produces(MediaType.APPLICATION_JSON)
-    public AtupUserInfo getUser(@QueryParam("user") String userName, @QueryParam("password") String password) {
-        AtupUser user = service.getUser(userName);
-        AtupUserInfo result = new AtupUserInfo(user);
+    public AtupUserInfo getUser(@QueryParam("user") final String userName, @QueryParam("password") final String password) {
+        final AtupUser user = service.getUser(userName);
+        final AtupUserInfo result = new AtupUserInfo(user);
         if (result.getPassWord().equals(password)) {
             return result;
         }

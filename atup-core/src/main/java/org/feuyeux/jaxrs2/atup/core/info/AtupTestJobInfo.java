@@ -25,7 +25,7 @@ public class AtupTestJobInfo {
         return jobId;
     }
 
-    public void setJobId(Integer jobId) {
+    public void setJobId(final Integer jobId) {
         this.jobId = jobId;
     }
 
@@ -33,16 +33,15 @@ public class AtupTestJobInfo {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(final Integer userId) {
         this.userId = userId;
     }
-
 
     public Integer getCaseId() {
         return caseId;
     }
 
-    public void setCaseId(Integer caseId) {
+    public void setCaseId(final Integer caseId) {
         this.caseId = caseId;
     }
 
@@ -50,7 +49,7 @@ public class AtupTestJobInfo {
         return priority;
     }
 
-    public void setPriority(Integer priority) {
+    public void setPriority(final Integer priority) {
         this.priority = priority;
     }
 
@@ -58,7 +57,7 @@ public class AtupTestJobInfo {
         return deviceIp;
     }
 
-    public void setDeviceIp(String deviceIp) {
+    public void setDeviceIp(final String deviceIp) {
         this.deviceIp = deviceIp;
     }
 

@@ -1,6 +1,6 @@
 package org.feuyeux.jaxrs2.atup.cases.service;
 
-import org.feuyeux.jaxrs2.atup.cases.dao.AtupTestResultDao;
+import org.feuyeux.jaxrs2.atup.core.dao.AtupTestResultDao;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestResult;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestResultListInfo;
 import org.springframework.beans.factory.annotation.Autowired;

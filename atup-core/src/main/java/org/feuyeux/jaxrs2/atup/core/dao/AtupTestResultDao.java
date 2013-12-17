@@ -1,15 +1,13 @@
-package org.feuyeux.jaxrs2.atup.cases.dao;
+package org.feuyeux.jaxrs2.atup.core.dao;
 
-import java.util.Calendar;
-import java.util.List;
-
-import javax.persistence.TypedQuery;
-
-import org.feuyeux.jaxrs2.atup.core.dao.AtupDao;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestResult;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.TypedQuery;
+import java.util.Calendar;
+import java.util.List;
 
 @Repository
 public class AtupTestResultDao extends AtupDao<AtupTestResult> {

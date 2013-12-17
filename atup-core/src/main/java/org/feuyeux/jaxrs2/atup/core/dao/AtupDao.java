@@ -1,19 +1,18 @@
 package org.feuyeux.jaxrs2.atup.core.dao;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class AtupDao<T> {
     private final Logger log = LogManager.getLogger(AtupDao.class.getName());
@@ -23,10 +22,10 @@ public class AtupDao<T> {
 
     @SuppressWarnings("unchecked")
     public AtupDao() {
-        Type genericSuperclass = getClass().getGenericSuperclass();
+        final Type genericSuperclass = getClass().getGenericSuperclass();
         if (genericSuperclass instanceof ParameterizedType) {
-            ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
-            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+            final ParameterizedType parameterizedType = (ParameterizedType) genericSuperclass;
+            final Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
             this.entityClass = (Class<T>) actualTypeArguments[0];
         }
     }

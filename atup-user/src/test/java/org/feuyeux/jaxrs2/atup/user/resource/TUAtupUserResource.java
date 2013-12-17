@@ -19,8 +19,8 @@ public class TUAtupUserResource {
 
     @Test
     public void testCreateUser() {
-        AtupUserInfo user = CreateUser.buildUserInfo();
-        Response response = restApi.createUser(user);
+        final AtupUserInfo user = CreateUser.buildUserInfo();
+        final Response response = restApi.createUser(user);
         Assert.assertEquals(response.getStatus(), 200);
     }
 }

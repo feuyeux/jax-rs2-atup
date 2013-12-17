@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
 @XmlRootElement
 public class AtupUserInfo extends AtupInfo {
@@ -23,24 +23,24 @@ public class AtupUserInfo extends AtupInfo {
     public AtupUserInfo() {
     }
 
-    public AtupUserInfo(Integer userId) {
+    public AtupUserInfo(final Integer userId) {
         this.userId = userId;
     }
 
-    public AtupUserInfo(Integer userRole, String userName, String passWord) {
+    public AtupUserInfo(final Integer userRole, final String userName, final String passWord) {
         this.userRole = userRole;
         this.userName = userName;
         this.passWord = passWord;
     }
 
-    public AtupUserInfo(AtupUser userDomain) {
-        this.userId = userDomain.getUserId();
-        this.userName = userDomain.getUserName();
-        this.passWord = userDomain.getPassWord();
-        this.userRole = userDomain.getUserRole();
+    public AtupUserInfo(final AtupUser userDomain) {
+        userId = userDomain.getUserId();
+        userName = userDomain.getUserName();
+        passWord = userDomain.getPassWord();
+        userRole = userDomain.getUserRole();
     }
 
-    public AtupUserInfo(String errorInfo, Integer statusCode) {
+    public AtupUserInfo(final String errorInfo, final Integer statusCode) {
         super(errorInfo, statusCode);
     }
 
@@ -49,7 +49,7 @@ public class AtupUserInfo extends AtupInfo {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(final Integer userId) {
         this.userId = userId;
     }
 
@@ -58,7 +58,7 @@ public class AtupUserInfo extends AtupInfo {
         return userRole;
     }
 
-    public void setUserRole(Integer userRole) {
+    public void setUserRole(final Integer userRole) {
         this.userRole = userRole;
     }
 
@@ -67,7 +67,7 @@ public class AtupUserInfo extends AtupInfo {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(final String userName) {
         this.userName = userName;
     }
 
@@ -76,7 +76,7 @@ public class AtupUserInfo extends AtupInfo {
         return passWord;
     }
 
-    public void setPassWord(String passWord) {
+    public void setPassWord(final String passWord) {
         this.passWord = passWord;
     }
 }

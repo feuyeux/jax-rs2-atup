@@ -12,14 +12,12 @@ import java.io.Serializable;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
 @Entity
 @Table(name = "atup_user")
 @XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "findByUserName", query = "SELECT atupUser FROM AtupUser atupUser WHERE atupUser.userName= :userName"),
-})
+@NamedQueries({@NamedQuery(name = "findByUserName", query = "SELECT atupUser FROM AtupUser atupUser WHERE atupUser.userName= :userName"),})
 public class AtupUser implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer userId;
@@ -31,23 +29,23 @@ public class AtupUser implements Serializable {
 
     }
 
-    public AtupUser(Integer userId, Integer userRole, String userName) {
+    public AtupUser(final Integer userId, final Integer userRole, final String userName) {
         this.userId = userId;
         this.userRole = userRole;
         this.userName = userName;
     }
 
-    public AtupUser(Integer userRole, String userName, String passWord) {
+    public AtupUser(final Integer userRole, final String userName, final String passWord) {
         this.userRole = userRole;
         this.userName = userName;
         this.passWord = passWord;
     }
 
-    public AtupUser(AtupUserInfo userInfo) {
-        this.userId = userInfo.getUserId();
-        this.userRole = userInfo.getUserRole();
-        this.userName = userInfo.getUserName();
-        this.passWord = userInfo.getPassWord();
+    public AtupUser(final AtupUserInfo userInfo) {
+        userId = userInfo.getUserId();
+        userRole = userInfo.getUserRole();
+        userName = userInfo.getUserName();
+        passWord = userInfo.getPassWord();
     }
 
     @Id
@@ -59,7 +57,7 @@ public class AtupUser implements Serializable {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(final Integer userId) {
         this.userId = userId;
     }
 
@@ -69,7 +67,7 @@ public class AtupUser implements Serializable {
         return userRole;
     }
 
-    public void setUserRole(Integer userRole) {
+    public void setUserRole(final Integer userRole) {
         this.userRole = userRole;
     }
 
@@ -79,7 +77,7 @@ public class AtupUser implements Serializable {
         return userName;
     }
 
-    public void setUserName(String userName) {
+    public void setUserName(final String userName) {
         this.userName = userName;
     }
 
@@ -89,7 +87,7 @@ public class AtupUser implements Serializable {
         return passWord;
     }
 
-    public void setPassWord(String passWord) {
+    public void setPassWord(final String passWord) {
         this.passWord = passWord;
     }
 }

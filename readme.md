@@ -28,4 +28,8 @@ http://localhost:8008/atup-user/rest-api/application.wadl
 
 #### Unit Test ####
 > mvn clean install -PTI
+> 
+> curl -X POST http://localhost:8080/atup-device/rest-api/devices/detect
+> 
+> curl -X POST http://localhost:8080/atup-case/rest-api/testjobs/launch
 

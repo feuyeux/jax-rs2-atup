@@ -12,9 +12,9 @@ import java.util.Set;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
-public class AtupRequest<T> {
+public class AtupRequest<S, T> {
     public static final String GET = "GET";
     public static final String DELETE = "DELETE";
     public static final String PUT = "PUT";
@@ -28,52 +28,52 @@ public class AtupRequest<T> {
     public AtupRequest() {
     }
 
-    public AtupRequest(ClientConfig clientConfig) {
+    public AtupRequest(final ClientConfig clientConfig) {
         this.clientConfig = clientConfig;
     }
 
-    public void setClientRegisters(Set<Class<?>> clientRegisters) {
+    public void setClientRegisters(final Set<Class<?>> clientRegisters) {
         this.clientRegisters = clientRegisters;
     }
 
-    public T rest(String method, String requestUrl, Class<T> returnType) {
-        return rest(method, requestUrl, null, null, null, returnType, null);
+    public T rest(final String method, final String requestUrl, final Class<T> returnType) {
+        return rest(method, requestUrl, null, null, null, null, returnType);
     }
 
-    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams, MediaType requestDataType,
-            Class<T> returnType) {
-        return rest(method, requestUrl, headParams, queryParams, requestDataType, returnType, null);
+    public T rest(final String method, final String requestUrl, final Set<AtupRequestParam> headParams, final Set<AtupRequestParam> queryParams,
+                  final MediaType requestDataType, final Class<T> returnType) {
+        return rest(method, requestUrl, headParams, queryParams, requestDataType, null, returnType);
     }
 
-    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams, MediaType requestDataType,
-            Class<T> returnType, T requestData) {
+    public T rest(final String method, final String requestUrl, final Set<AtupRequestParam> headParams, final Set<AtupRequestParam> queryParams,
+                  final MediaType requestDataType, final S requestData, final Class<T> returnType) {
         if (clientConfig == null) {
             clientConfig = new ClientConfig();
         }
-        Client client = ClientBuilder.newClient(clientConfig);
+        final Client client = ClientBuilder.newClient(clientConfig);
 
         if (!CollectionUtils.isEmpty(clientRegisters)) {
-            for (Class<?> clazz : clientRegisters) {
+            for (final Class<?> clazz : clientRegisters) {
                 client.register(clazz);
             }
         }
 
         WebTarget webTarget = client.target(requestUrl);
         if (!CollectionUtils.isEmpty(queryParams)) {
-            for (AtupRequestParam atupRequestParam : queryParams) {
+            for (final AtupRequestParam atupRequestParam : queryParams) {
                 webTarget = webTarget.queryParam(atupRequestParam.getKey(), atupRequestParam.getValue());
             }
         }
 
-        Invocation.Builder invocationBuilder = webTarget.request(requestDataType);
+        final Invocation.Builder invocationBuilder = webTarget.request(requestDataType);
         if (!CollectionUtils.isEmpty(headParams)) {
-            for (AtupRequestParam atupRequestParam : headParams) {
+            for (final AtupRequestParam atupRequestParam : headParams) {
                 invocationBuilder.header(atupRequestParam.getKey(), atupRequestParam.getValue());
             }
         }
 
         javax.ws.rs.core.Response response;
-        Entity<T> entity;
+        Entity<S> entity;
         switch (method) {
             case GET:
                 response = invocationBuilder.get();

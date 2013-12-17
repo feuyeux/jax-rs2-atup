@@ -35,7 +35,8 @@ public class AtupTestCase implements Serializable {
     public AtupTestCase() {
     }
 
-    public AtupTestCase(String caseName, AtupTestSuite suite, String caseBody, Date createTime, Date updateTime, Integer caseStatus) {
+    public AtupTestCase(final String caseName, final AtupTestSuite suite, final String caseBody, final Date createTime, final Date updateTime,
+                        final Integer caseStatus) {
         this.caseName = caseName;
         this.suite = suite;
         this.caseBody = caseBody;
@@ -53,7 +54,7 @@ public class AtupTestCase implements Serializable {
         return caseId;
     }
 
-    public void setCaseId(Integer caseId) {
+    public void setCaseId(final Integer caseId) {
         this.caseId = caseId;
     }
 
@@ -63,7 +64,7 @@ public class AtupTestCase implements Serializable {
         return caseName;
     }
 
-    public void setCaseName(String caseName) {
+    public void setCaseName(final String caseName) {
         this.caseName = caseName;
     }
 
@@ -74,7 +75,7 @@ public class AtupTestCase implements Serializable {
         return suite;
     }
 
-    public void setSuite(AtupTestSuite suite) {
+    public void setSuite(final AtupTestSuite suite) {
         this.suite = suite;
     }
 
@@ -84,7 +85,7 @@ public class AtupTestCase implements Serializable {
         return caseBody;
     }
 
-    public void setCaseBody(String caseBody) {
+    public void setCaseBody(final String caseBody) {
         this.caseBody = caseBody;
     }
 
@@ -96,7 +97,7 @@ public class AtupTestCase implements Serializable {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(final Date createTime) {
         this.createTime = createTime;
     }
 
@@ -108,7 +109,7 @@ public class AtupTestCase implements Serializable {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(final Date updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -118,7 +119,7 @@ public class AtupTestCase implements Serializable {
         return caseStatus;
     }
 
-    public void setCaseStatus(Integer caseStatus) {
+    public void setCaseStatus(final Integer caseStatus) {
         this.caseStatus = caseStatus;
     }
 

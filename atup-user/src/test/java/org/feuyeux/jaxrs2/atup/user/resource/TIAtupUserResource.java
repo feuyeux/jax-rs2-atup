@@ -1,11 +1,5 @@
 package org.feuyeux.jaxrs2.atup.user.resource;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
@@ -21,10 +15,17 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 @ContextConfiguration(locations = {"classpath:applicationContext0.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TIAtupUserResource extends JerseyTest {
     private final Logger log = LogManager.getLogger(TIAtupUserResource.class.getName());
+
     @Override
     protected Application configure() {
         enable(TestProperties.LOG_TRAFFIC);
@@ -34,10 +35,10 @@ public class TIAtupUserResource extends JerseyTest {
 
     @Test
     public void testCreateUser() {
-        AtupUserInfo user = CreateUser.buildUserInfo();
-        Entity<AtupUserInfo> e = Entity.entity(user, MediaType.APPLICATION_JSON_TYPE);
-        Response response = target().path(AtupApi.USER_PATH).request().post(e);
-        AtupUserInfo result = response.readEntity(AtupUserInfo.class);
+        final AtupUserInfo user = CreateUser.buildUserInfo();
+        final Entity<AtupUserInfo> e = Entity.entity(user, MediaType.APPLICATION_JSON_TYPE);
+        final Response response = target().path(AtupApi.USER_PATH).request().post(e);
+        final AtupUserInfo result = response.readEntity(AtupUserInfo.class);
         if (result.getStatusCode() == AtupErrorCode.NONE) {
             Assert.assertEquals(user.getUserName(), result.getUserName());
         } else {
@@ -48,11 +49,11 @@ public class TIAtupUserResource extends JerseyTest {
 
     public void testGetUser() {
         String userName = null;
-        AtupUserInfo user = CreateUser.buildUserInfo();
-        Entity<AtupUserInfo> userEntity = Entity.entity(user, MediaType.APPLICATION_JSON_TYPE);
-        Invocation.Builder invocationBuilder = target().path(AtupApi.USER_PATH).request();
-        Response response = invocationBuilder.post(userEntity);
-        AtupUserInfo result = response.readEntity(AtupUserInfo.class);
+        final AtupUserInfo user = CreateUser.buildUserInfo();
+        final Entity<AtupUserInfo> userEntity = Entity.entity(user, MediaType.APPLICATION_JSON_TYPE);
+        final Invocation.Builder invocationBuilder = target().path(AtupApi.USER_PATH).request();
+        final Response response = invocationBuilder.post(userEntity);
+        final AtupUserInfo result = response.readEntity(AtupUserInfo.class);
         if (result.getStatusCode() == AtupErrorCode.NONE) {
             userName = result.getUserName();
             Assert.assertEquals(user.getUserName(), result.getUserName());
@@ -62,7 +63,7 @@ public class TIAtupUserResource extends JerseyTest {
         }
 
         if (userName != null) {
-            AtupUserInfo atupUserInfo = target().path(AtupApi.USER_PATH).path(userName).request().get(AtupUserInfo.class);
+            final AtupUserInfo atupUserInfo = target().path(AtupApi.USER_PATH).path(userName).request().get(AtupUserInfo.class);
             Assert.assertEquals(userName, atupUserInfo.getUserName());
         }
     }

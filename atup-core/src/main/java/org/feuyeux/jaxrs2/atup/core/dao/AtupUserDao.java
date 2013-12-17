@@ -1,6 +1,5 @@
-package org.feuyeux.jaxrs2.atup.user.dao;
+package org.feuyeux.jaxrs2.atup.core.dao;
 
-import org.feuyeux.jaxrs2.atup.core.dao.AtupDao;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,13 +10,13 @@ public class AtupUserDao extends AtupDao<AtupUser> {
         super();
     }
 
-    public AtupUser findByName(String userName) {
+    public AtupUser findByName(final String userName) {
         return entityManager.createNamedQuery("findByUserName", AtupUser.class).setParameter("userName", userName).getSingleResult();
     }
 
     @Transactional
-    public AtupUser update(AtupUser entity) {
-        AtupUser updateEntity = findByName(entity.getUserName());
+    public AtupUser update(final AtupUser entity) {
+        final AtupUser updateEntity = findByName(entity.getUserName());
         if (updateEntity != null) {
             entity.setUserId(updateEntity.getUserId());
             return entityManager.merge(entity);

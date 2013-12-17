@@ -11,11 +11,11 @@ public class AtupTestResultListInfo extends AtupInfo {
     public AtupTestResultListInfo() {
     }
 
-    public AtupTestResultListInfo(List<AtupTestResult> resultList) {
+    public AtupTestResultListInfo(final List<AtupTestResult> resultList) {
         this.resultList = resultList;
     }
 
-    public AtupTestResultListInfo(String errorInfo, Integer statusCode) {
+    public AtupTestResultListInfo(final String errorInfo, final Integer statusCode) {
         super(errorInfo, statusCode);
     }
 
@@ -23,7 +23,7 @@ public class AtupTestResultListInfo extends AtupInfo {
         return resultList;
     }
 
-    public void setResultList(List<AtupTestResult> resultList) {
+    public void setResultList(final List<AtupTestResult> resultList) {
         this.resultList = resultList;
     }
 }

@@ -5,10 +5,12 @@ import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
 
 import javax.inject.Singleton;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
 
 @Singleton
 @Path("station")
@@ -28,6 +30,7 @@ public class AtupStationResource {
     }
 
     @POST
+    @Consumes(MediaType.APPLICATION_JSON)
     public Integer test(@Context HttpServletRequest request, AtupTestCase testCase) throws InterruptedException {
         status = AtupParam.DEVICE_RUNNING;
         //log.info("Request host=" + request.getRemoteHost());

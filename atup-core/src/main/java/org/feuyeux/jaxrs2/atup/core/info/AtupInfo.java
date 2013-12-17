@@ -9,7 +9,7 @@ import java.io.Serializable;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
 @XmlRootElement
 public abstract class AtupInfo implements Serializable {
@@ -20,7 +20,7 @@ public abstract class AtupInfo implements Serializable {
     public AtupInfo() {
     }
 
-    public AtupInfo(String errorInfo, Integer statusCode) {
+    public AtupInfo(final String errorInfo, final Integer statusCode) {
         this.errorInfo = errorInfo;
         this.statusCode = statusCode;
     }
@@ -30,7 +30,7 @@ public abstract class AtupInfo implements Serializable {
         return errorInfo;
     }
 
-    public void setErrorInfo(String errorInfo) {
+    public void setErrorInfo(final String errorInfo) {
         this.errorInfo = errorInfo;
     }
 
@@ -39,7 +39,7 @@ public abstract class AtupInfo implements Serializable {
         return statusCode;
     }
 
-    public void setStatusCode(Integer statusCode) {
+    public void setStatusCode(final Integer statusCode) {
         this.statusCode = statusCode;
     }
 }

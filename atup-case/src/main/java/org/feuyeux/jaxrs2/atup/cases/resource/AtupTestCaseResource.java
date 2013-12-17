@@ -1,15 +1,5 @@
 package org.feuyeux.jaxrs2.atup.cases.resource;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
 import org.feuyeux.jaxrs2.atup.cases.service.AtupTestCaseService;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
@@ -18,10 +8,12 @@ import org.feuyeux.jaxrs2.atup.core.info.AtupErrorInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestCaseListInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+
 @Path(AtupApi.TEST_CASE_PATH)
 public class AtupTestCaseResource {
-    private final org.apache.logging.log4j.Logger log = 
-            org.apache.logging.log4j.LogManager.getLogger(AtupTestCaseResource.class.getName());
+    private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(AtupTestCaseResource.class.getName());
     @Autowired
     AtupTestCaseService service;
 

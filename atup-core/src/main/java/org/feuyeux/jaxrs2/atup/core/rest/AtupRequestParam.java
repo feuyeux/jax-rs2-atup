@@ -4,7 +4,7 @@ public class AtupRequestParam {
     private String key;
     private Object value;
 
-    public AtupRequestParam(String key, Object value) {
+    public AtupRequestParam(final String key, final Object value) {
         super();
         this.key = key;
         this.value = value;
@@ -14,7 +14,7 @@ public class AtupRequestParam {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(final String key) {
         this.key = key;
     }
 
@@ -22,7 +22,7 @@ public class AtupRequestParam {
         return value;
     }
 
-    public void setValue(Object value) {
+    public void setValue(final Object value) {
         this.value = value;
     }
 

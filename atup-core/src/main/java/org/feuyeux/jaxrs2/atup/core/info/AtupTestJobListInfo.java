@@ -9,7 +9,7 @@ public class AtupTestJobListInfo extends AtupInfo {
     public AtupTestJobListInfo() {
     }
 
-    public AtupTestJobListInfo(List<AtupTestJobInfo> jobList) {
+    public AtupTestJobListInfo(final List<AtupTestJobInfo> jobList) {
         this.jobList = jobList;
     }
 
@@ -17,7 +17,7 @@ public class AtupTestJobListInfo extends AtupInfo {
         return jobList;
     }
 
-    public void setJobList(List<AtupTestJobInfo> jobList) {
+    public void setJobList(final List<AtupTestJobInfo> jobList) {
         this.jobList = jobList;
     }
 }

@@ -10,7 +10,7 @@ public class AtupTestSuiteListInfo extends AtupInfo {
     public AtupTestSuiteListInfo() {
     }
 
-    public AtupTestSuiteListInfo(String errorInfo, Integer statusCode) {
+    public AtupTestSuiteListInfo(final String errorInfo, final Integer statusCode) {
         super(errorInfo, statusCode);
     }
 
@@ -18,7 +18,7 @@ public class AtupTestSuiteListInfo extends AtupInfo {
         return suiteList;
     }
 
-    public void setSuiteList(List<AtupTestSuiteInfo> suiteList) {
+    public void setSuiteList(final List<AtupTestSuiteInfo> suiteList) {
         this.suiteList = suiteList;
     }
 }

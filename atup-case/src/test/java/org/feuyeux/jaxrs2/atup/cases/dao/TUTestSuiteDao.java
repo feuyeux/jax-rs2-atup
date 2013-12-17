@@ -1,8 +1,7 @@
 package org.feuyeux.jaxrs2.atup.cases.dao;
 
-import java.util.List;
-
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
+import org.feuyeux.jaxrs2.atup.core.dao.AtupTestSuiteDao;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestSuite;
 import org.feuyeux.jaxrs2.atup.core.fake.CreatTestSuite;
 import org.junit.Assert;
@@ -12,10 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+import java.util.List;
+
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TUTestSuiteDao {
     @Autowired
+
     AtupTestSuiteDao dao;
 
     @Test

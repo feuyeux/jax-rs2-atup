@@ -9,14 +9,14 @@ public class AtupTestCaseListInfo extends AtupInfo {
     private static final long serialVersionUID = 1L;
     private List<AtupTestCase> testCaseList;
 
-    public AtupTestCaseListInfo(List<AtupTestCase> testCaseList) {
+    public AtupTestCaseListInfo(final List<AtupTestCase> testCaseList) {
         this.testCaseList = testCaseList;
     }
 
     public AtupTestCaseListInfo() {
     }
 
-    public AtupTestCaseListInfo(String errorInfo, Integer statusCode) {
+    public AtupTestCaseListInfo(final String errorInfo, final Integer statusCode) {
         super(errorInfo, statusCode);
     }
 
@@ -25,7 +25,7 @@ public class AtupTestCaseListInfo extends AtupInfo {
         return testCaseList;
     }
 
-    public void setTestCaseList(List<AtupTestCase> testCaseList) {
+    public void setTestCaseList(final List<AtupTestCase> testCaseList) {
         this.testCaseList = testCaseList;
     }
 }

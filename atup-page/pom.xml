@@ -4,7 +4,7 @@
     <parent>
         <artifactId>atup</artifactId>
         <groupId>org.feuyeux.jaxrs2.atup</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.2-SNAPSHOT</version>
     </parent>
 
     <artifactId>atup-page</artifactId>

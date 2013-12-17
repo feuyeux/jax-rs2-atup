@@ -19,10 +19,8 @@ import java.util.Date;
 @Entity
 @Table(name = "atup_device")
 @XmlRootElement
-@NamedQueries({
-        @NamedQuery(name = "findByDeviceIp", query = "SELECT atupDevice FROM AtupDevice atupDevice WHERE atupDevice.deviceHost= :deviceHost"),
-        @NamedQuery(name = "findDevicesByUser", query = "SELECT atupDevice FROM AtupDevice atupDevice WHERE atupDevice.user.userId= :userId")
-})
+@NamedQueries({@NamedQuery(name = "findByDeviceIp", query = "SELECT atupDevice FROM AtupDevice atupDevice WHERE atupDevice.deviceHost= :deviceHost"),
+        @NamedQuery(name = "findDevicesByUser", query = "SELECT atupDevice FROM AtupDevice atupDevice WHERE atupDevice.user.userId= :userId")})
 public class AtupDevice implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer deviceId;
@@ -37,7 +35,8 @@ public class AtupDevice implements Serializable {
     public AtupDevice() {
     }
 
-    public AtupDevice(Integer deviceId, AtupUser user, String deviceHost, String deviceName, Integer deviceStatus, Integer deviceType) {
+    public AtupDevice(final Integer deviceId, final AtupUser user, final String deviceHost, final String deviceName, final Integer deviceStatus,
+                      final Integer deviceType) {
         super();
         this.deviceId = deviceId;
         this.user = user;
@@ -47,7 +46,8 @@ public class AtupDevice implements Serializable {
         this.deviceType = deviceType;
     }
 
-    public AtupDevice(AtupUser user, String deviceHost, String deviceName, Integer deviceStatus, Integer deviceType, Date createTime, Date updateTime) {
+    public AtupDevice(final AtupUser user, final String deviceHost, final String deviceName, final Integer deviceStatus, final Integer deviceType,
+                      final Date createTime, final Date updateTime) {
         this.user = user;
         this.deviceHost = deviceHost;
         this.deviceName = deviceName;
@@ -57,16 +57,16 @@ public class AtupDevice implements Serializable {
         this.updateTime = updateTime;
     }
 
-//    public AtupDevice(AtupDeviceInfo deviceInfo) {
-//        deviceId = deviceInfo.getDeviceId();
-//        deviceHost = deviceInfo.getDeviceHost();
-//        deviceName = deviceInfo.getDeviceName();
-//        deviceStatus = deviceInfo.getDeviceStatus();
-//        deviceType = deviceInfo.getDeviceType();
-//        createTime = deviceInfo.getCreateTime();
-//        updateTime = deviceInfo.getUpdateTime();
-//        user = new AtupUser(deviceInfo.getUserInfo());
-//    }
+    //    public AtupDevice(AtupDeviceInfo deviceInfo) {
+    //        deviceId = deviceInfo.getDeviceId();
+    //        deviceHost = deviceInfo.getDeviceHost();
+    //        deviceName = deviceInfo.getDeviceName();
+    //        deviceStatus = deviceInfo.getDeviceStatus();
+    //        deviceType = deviceInfo.getDeviceType();
+    //        createTime = deviceInfo.getCreateTime();
+    //        updateTime = deviceInfo.getUpdateTime();
+    //        user = new AtupUser(deviceInfo.getUserInfo());
+    //    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "EMP_SEQ")
@@ -77,7 +77,7 @@ public class AtupDevice implements Serializable {
         return deviceId;
     }
 
-    public void setDeviceId(Integer deviceId) {
+    public void setDeviceId(final Integer deviceId) {
         this.deviceId = deviceId;
     }
 
@@ -88,7 +88,7 @@ public class AtupDevice implements Serializable {
         return user;
     }
 
-    public void setUser(AtupUser user) {
+    public void setUser(final AtupUser user) {
         this.user = user;
     }
 
@@ -98,7 +98,7 @@ public class AtupDevice implements Serializable {
         return deviceHost;
     }
 
-    public void setDeviceHost(String deviceHost) {
+    public void setDeviceHost(final String deviceHost) {
         this.deviceHost = deviceHost;
     }
 
@@ -108,7 +108,7 @@ public class AtupDevice implements Serializable {
         return deviceName;
     }
 
-    public void setDeviceName(String deviceName) {
+    public void setDeviceName(final String deviceName) {
         this.deviceName = deviceName;
     }
 
@@ -118,7 +118,7 @@ public class AtupDevice implements Serializable {
         return deviceStatus;
     }
 
-    public void setDeviceStatus(Integer deviceStatus) {
+    public void setDeviceStatus(final Integer deviceStatus) {
         this.deviceStatus = deviceStatus;
     }
 
@@ -128,7 +128,7 @@ public class AtupDevice implements Serializable {
         return deviceType;
     }
 
-    public void setDeviceType(Integer deviceType) {
+    public void setDeviceType(final Integer deviceType) {
         this.deviceType = deviceType;
     }
 
@@ -140,7 +140,7 @@ public class AtupDevice implements Serializable {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(final Date createTime) {
         this.createTime = createTime;
     }
 
@@ -152,7 +152,7 @@ public class AtupDevice implements Serializable {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(final Date updateTime) {
         this.updateTime = updateTime;
     }
 

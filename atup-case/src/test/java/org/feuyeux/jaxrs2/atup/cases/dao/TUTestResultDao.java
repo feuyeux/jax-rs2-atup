@@ -1,8 +1,7 @@
 package org.feuyeux.jaxrs2.atup.cases.dao;
 
-import java.util.List;
-
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
+import org.feuyeux.jaxrs2.atup.core.dao.AtupTestResultDao;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestResult;
 import org.feuyeux.jaxrs2.atup.core.fake.CreateTestCase;
 import org.feuyeux.jaxrs2.atup.core.fake.CreateTestResult;
@@ -14,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration(locations = { "classpath:applicationContext.xml" })
+import java.util.List;
+
+@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TUTestResultDao {
     @Autowired
@@ -47,6 +48,10 @@ public class TUTestResultDao {
     @Test
     public void testFindByStatus() {
         final List<AtupTestResult> caseList = dao.findByStatus(AtupParam.RESULT_OK);
+        checkResult(caseList);
+    }
+
+    private void checkResult(final List<AtupTestResult> caseList) {
         if (!caseList.isEmpty()) {
             Assert.assertEquals(AtupParam.RESULT_OK, caseList.get(0).getResultStatus());
         }
@@ -55,16 +60,12 @@ public class TUTestResultDao {
     @Test
     public void testFindByTestCase() {
         final List<AtupTestResult> caseList = dao.findByTestCase(CreateTestCase.buildTestCase());
-        if (!caseList.isEmpty()) {
-            Assert.assertEquals(AtupParam.RESULT_OK, caseList.get(0).getResultStatus());
-        }
+        checkResult(caseList);
     }
 
     @Test
     public void testFindByUser() {
         final List<AtupTestResult> caseList = dao.findByUser(CreateUser.buildUser().getUserId(), 0, 100);
-        if (!caseList.isEmpty()) {
-            Assert.assertEquals(AtupParam.RESULT_OK, caseList.get(0).getResultStatus());
-        }
+        checkResult(caseList);
     }
 }

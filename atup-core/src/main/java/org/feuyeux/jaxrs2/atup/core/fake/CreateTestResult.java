@@ -11,13 +11,13 @@ public class CreateTestResult {
     public static final String CASE_RESULT_BODY = "Test case body";
 
     public static AtupTestResult buildTestResult() {
-        AtupTestCase testCase = CreateTestCase.buildTestCase();
-        AtupUser user = CreateUser.buildUser();
-        Integer resultStatus = AtupParam.RESULT_OK;
-        String resultBody = CASE_RESULT_BODY;
-        Date createTime = new Date();
-        Date updateTime = new Date();
-        AtupTestResult testResult = new AtupTestResult(testCase, user, resultStatus, resultBody, createTime, updateTime);
+        final AtupTestCase testCase = CreateTestCase.buildTestCase();
+        final AtupUser user = CreateUser.buildUser();
+        final Integer resultStatus = AtupParam.RESULT_OK;
+        final String resultBody = CreateTestResult.CASE_RESULT_BODY;
+        final Date createTime = new Date();
+        final Date updateTime = new Date();
+        final AtupTestResult testResult = new AtupTestResult(testCase, user, resultStatus, resultBody, createTime, updateTime);
         return testResult;
     }
 }

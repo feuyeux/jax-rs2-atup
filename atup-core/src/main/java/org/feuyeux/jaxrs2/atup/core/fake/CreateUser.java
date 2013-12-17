@@ -9,15 +9,15 @@ public class CreateUser {
     public static final String TEST_NAME1 = "mars";
 
     public static AtupUserInfo buildUserInfo() {
-        AtupUser user = buildUser();
-        AtupUserInfo userInfo = new AtupUserInfo(user);
+        final AtupUser user = buildUser();
+        final AtupUserInfo userInfo = new AtupUserInfo(user);
         return userInfo;
     }
 
     public static AtupUser buildUser() {
-        Integer userRole = 1;
-        String userName = TEST_NAME + System.nanoTime();
-        String passWord = "han";
+        final Integer userRole = 1;
+        final String userName = CreateUser.TEST_NAME + System.nanoTime();
+        final String passWord = "han";
         return new AtupUser(userRole, userName, passWord);
     }
 }

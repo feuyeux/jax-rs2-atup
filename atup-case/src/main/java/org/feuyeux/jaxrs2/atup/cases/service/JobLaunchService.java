@@ -1,9 +1,11 @@
 package org.feuyeux.jaxrs2.atup.cases.service;
 
-import org.feuyeux.jaxrs2.atup.cases.dao.AtupTestCaseDao;
-import org.feuyeux.jaxrs2.atup.cases.dao.AtupTestResultDao;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
+import org.feuyeux.jaxrs2.atup.core.dao.AtupDeviceDao;
+import org.feuyeux.jaxrs2.atup.core.dao.AtupTestCaseDao;
+import org.feuyeux.jaxrs2.atup.core.dao.AtupTestResultDao;
+import org.feuyeux.jaxrs2.atup.core.dao.AtupUserDao;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestResult;
@@ -11,20 +13,16 @@ import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobListInfo;
 import org.feuyeux.jaxrs2.atup.core.rest.AtupRequest;
-import org.feuyeux.jaxrs2.atup.device.dao.AtupDeviceDao;
-import org.feuyeux.jaxrs2.atup.user.dao.AtupUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.ws.rs.core.MediaType;
+import java.util.*;
 import java.util.concurrent.*;
 
-@Service()
+@Service
 public class JobLaunchService {
-    private final org.apache.logging.log4j.Logger log =
-            org.apache.logging.log4j.LogManager.getLogger(JobLaunchService.class.getName());
+    private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(JobLaunchService.class.getName());
     private final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, AtupTestJobInfo> mediumJobMap = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, AtupTestJobInfo> lowJobMap = new ConcurrentHashMap<>();
@@ -44,7 +42,7 @@ public class JobLaunchService {
         launchTask = new ScheduledThreadPoolExecutor(1);
     }
 
-    public void addJob(AtupTestJobInfo jobInfo, String key) {
+    public void addJob(final AtupTestJobInfo jobInfo, final String key) {
         switch (jobInfo.getPriority()) {
             case 3:
                 highJobMap.put(key, jobInfo);
@@ -81,33 +79,38 @@ public class JobLaunchService {
             @Override
             public void run() {
                 try {
-                    testing();
-                } catch (Exception e) {
+                    testing(highJobMap);
+                    testing(mediumJobMap);
+                    testing(lowJobMap);
+                } catch (final Exception e) {
                     log.error(e);
                 }
                 //log.debug("test");
             }
 
-            private void testing() {
-                List<AtupTestJobInfo> jobList = getJobList();
-                for (AtupTestJobInfo jobInfo : jobList) {
+            private void testing(final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap) {
+                final Iterator<Map.Entry<String, AtupTestJobInfo>> highIterator = highJobMap.entrySet().iterator();
+                while (highIterator.hasNext()) {
                     try {
-                        String deviceIp = jobInfo.getDeviceIp();
-                        AtupDevice testDevice = deviceDao.findByIp(deviceIp);
-                        Integer deviceStatus = testDevice.getDeviceStatus();
+                        final Map.Entry<String, AtupTestJobInfo> currentJobKV = highIterator.next();
+                        final AtupTestJobInfo jobInfo = currentJobKV.getValue();
+                        final String deviceIp = jobInfo.getDeviceIp();
+                        final AtupDevice testDevice = deviceDao.findByIp(deviceIp);
+                        final Integer deviceStatus = testDevice.getDeviceStatus();
                         log.info("Device[" + deviceIp + "] status = " + deviceStatus);
                         if (deviceStatus.equals(AtupParam.DEVICE_IDLE)) {
-                            String launchTestPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
-                            AtupRequest<Integer> request = new AtupRequest<>();
-                            Integer resultStatus = request.rest(AtupRequest.POST, launchTestPath, Integer.class);
-
-                            AtupTestCase testCase = testCaseDao.findById(jobInfo.getCaseId());
-                            AtupUser user = userDao.findById(jobInfo.getUserId());
-                            Date createTime = new Date();
-                            AtupTestResult testResult = new AtupTestResult(testCase, user, resultStatus, "", createTime, createTime);
+                            final String launchPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
+                            final AtupTestCase testCase = testCaseDao.findById(jobInfo.getCaseId());
+                            final AtupRequest<AtupTestCase, Integer> request = new AtupRequest<>();
+                            final Integer status = request.rest(AtupRequest.POST, launchPath, null, null, MediaType.APPLICATION_JSON_TYPE, testCase,
+                                    Integer.class);
+                            final AtupUser user = userDao.findById(jobInfo.getUserId());
+                            final Date createTime = new Date();
+                            final AtupTestResult testResult = new AtupTestResult(testCase, user, status, "", createTime, createTime);
                             resultDao.save(testResult);
+                            highJobMap.remove(currentJobKV.getKey());
                         }
-                    } catch (Exception e) {
+                    } catch (final Exception e) {
                         log.error(e);
                     }
                 }

@@ -5,10 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class JaxbDateSerializer extends XmlAdapter<String, Date> {
-    private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
 
     @Override
-    public String marshal(Date date) throws Exception {
+    public String marshal(final Date date) throws Exception {
         if (date == null) {
             return "";
         } else {
@@ -17,7 +17,7 @@ public class JaxbDateSerializer extends XmlAdapter<String, Date> {
     }
 
     @Override
-    public Date unmarshal(String date) throws Exception {
+    public Date unmarshal(final String date) throws Exception {
         if (date == null || date.isEmpty()) {
             return null;
         } else {

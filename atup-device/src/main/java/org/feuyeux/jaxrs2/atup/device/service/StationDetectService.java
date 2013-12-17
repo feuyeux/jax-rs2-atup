@@ -2,9 +2,9 @@ package org.feuyeux.jaxrs2.atup.device.service;
 
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
+import org.feuyeux.jaxrs2.atup.core.dao.AtupDeviceDao;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.rest.AtupRequest;
-import org.feuyeux.jaxrs2.atup.device.dao.AtupDeviceDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class StationDetectService {
             public void run() {
                 try {
                     detecting();
-                } catch (Exception e) {
+                } catch (final Exception e) {
                     log.error(e);
                 }
                 //log.debug("test");
@@ -36,17 +36,17 @@ public class StationDetectService {
 
             private void detecting() {
                 deviceList = dao.findAll();
-                for (AtupDevice atupDevice : deviceList) {
-                    String detectPath = AtupApi.PROTOCOL + atupDevice.getDeviceHost() + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
-                    AtupRequest<Integer> request = new AtupRequest<>();
+                for (final AtupDevice atupDevice : deviceList) {
+                    final String detectPath = AtupApi.PROTOCOL + atupDevice.getDeviceHost() + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
+                    final AtupRequest<String, Integer> request = new AtupRequest<>();
                     try {
-                        Integer result = request.rest(AtupRequest.GET, detectPath, Integer.class);
+                        final Integer result = request.rest(AtupRequest.GET, detectPath, Integer.class);
                         log.debug("detecting " + atupDevice.getDeviceHost() + " :" + result);
                         if (!atupDevice.getDeviceStatus().equals(result)) {
                             atupDevice.setDeviceStatus(result);
                             dao.update(atupDevice);
                         }
-                    } catch (Exception e) {
+                    } catch (final Exception e) {
                         log.error(e);
                         atupDevice.setDeviceStatus(AtupParam.DEVICE_ERROR);
                         dao.update(atupDevice);
@@ -56,8 +56,8 @@ public class StationDetectService {
         }, 0, 10, TimeUnit.SECONDS);
     }
 
-    public static void main(String[] args) throws InterruptedException, ExecutionException {
-        StationDetectService test = new StationDetectService();
+    public static void main(final String[] args) throws InterruptedException, ExecutionException {
+        final StationDetectService test = new StationDetectService();
         test.detect();
     }
 }
