@@ -125,6 +125,6 @@ public class AtupTestCase implements Serializable {
 
     @Override
     public String toString() {
-        return "caseId=" + caseId + "caseName=" + caseName + "suite=" + suite.getSuiteName() + "caseBody=" + caseBody + "caseStatus=" + caseStatus;
+        return "caseId=" + caseId + "caseName=" + caseName + "suite=" + suite + "caseBody=" + caseBody + "caseStatus=" + caseStatus;
     }
 }

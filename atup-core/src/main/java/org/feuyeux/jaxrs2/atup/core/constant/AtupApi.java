@@ -10,4 +10,6 @@ public interface AtupApi {
     String TEST_RESULT_PATH = "testresults";
     String USER_PATH = "users";
     String DEVICE_PATH = "devices";
+    String TEST_STATION_CONTEXT = "atup-test-station";
+    String TEST_STATION_PATH = "station";
 }

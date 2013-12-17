@@ -1,5 +1,6 @@
 package org.feuyeux.jaxrs2.atup.station.resource;
 
+import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
 
@@ -13,7 +14,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 @Singleton
-@Path("station")
+@Path(AtupApi.TEST_STATION_PATH)
 public class AtupStationResource {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(AtupStationResource.class.getName());
     private Integer status = AtupParam.DEVICE_IDLE;
@@ -25,7 +26,11 @@ public class AtupStationResource {
     @GET
     public Integer keepALive(@Context HttpServletRequest request) {
         //log.info("Request host=" + request.getRemoteHost());
-        log.info("keep-a-live :: Request host =" + request.getRemoteAddr());
+        try {
+            log.info("keep-a-live :: Request host =" + request.getRemoteAddr());
+        } catch (Exception e) {
+
+        }
         return status;
     }
 
@@ -33,10 +38,14 @@ public class AtupStationResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public Integer test(@Context HttpServletRequest request, AtupTestCase testCase) throws InterruptedException {
         status = AtupParam.DEVICE_RUNNING;
-        //log.info("Request host=" + request.getRemoteHost());
-        log.info("testing :: Request host =" + request.getRemoteAddr());
-        log.info("testing :: testCase =" + testCase);
-        Thread.sleep(30000);
+        try {
+            log.info("testing :: Request host =" + request.getRemoteAddr());
+            log.info("testing :: testCase =" + testCase);
+        } catch (Exception e) {
+
+        }
+        int workingTime = 3000;
+        Thread.sleep(workingTime);
         status = AtupParam.DEVICE_IDLE;
         return AtupParam.RESULT_OK;
     }

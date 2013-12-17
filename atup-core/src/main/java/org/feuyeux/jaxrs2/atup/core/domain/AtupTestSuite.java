@@ -79,4 +79,9 @@ public class AtupTestSuite implements Serializable {
     public void setSuiteStatus(final Integer suiteStatus) {
         this.suiteStatus = suiteStatus;
     }
+
+    @Override
+    public String toString() {
+        return suiteId + "::" + this.suiteName + "::" + this.suiteType + "::" + this.suiteStatus;
+    }
 }

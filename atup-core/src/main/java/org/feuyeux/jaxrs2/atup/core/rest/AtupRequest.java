@@ -65,7 +65,7 @@ public class AtupRequest<S, T> {
             }
         }
 
-        final Invocation.Builder invocationBuilder = webTarget.request(requestDataType);
+        final Invocation.Builder invocationBuilder = webTarget.request();
         if (!CollectionUtils.isEmpty(headParams)) {
             for (final AtupRequestParam atupRequestParam : headParams) {
                 invocationBuilder.header(atupRequestParam.getKey(), atupRequestParam.getValue());

@@ -26,7 +26,11 @@ public class JobLaunchService {
     private final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, AtupTestJobInfo> mediumJobMap = new ConcurrentHashMap<>();
     private final ConcurrentHashMap<String, AtupTestJobInfo> lowJobMap = new ConcurrentHashMap<>();
-
+    private static final String IPADDRESS_PATTERN =
+            "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+                    "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+                    "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+                    "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
     final ScheduledExecutorService launchTask;
 
     @Autowired
@@ -95,20 +99,20 @@ public class JobLaunchService {
                         final Map.Entry<String, AtupTestJobInfo> currentJobKV = highIterator.next();
                         final AtupTestJobInfo jobInfo = currentJobKV.getValue();
                         final String deviceIp = jobInfo.getDeviceIp();
-                        final AtupDevice testDevice = deviceDao.findByIp(deviceIp);
-                        final Integer deviceStatus = testDevice.getDeviceStatus();
-                        log.info("Device[" + deviceIp + "] status = " + deviceStatus);
-                        if (deviceStatus.equals(AtupParam.DEVICE_IDLE)) {
-                            final String launchPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
-                            final AtupTestCase testCase = testCaseDao.findById(jobInfo.getCaseId());
-                            final AtupRequest<AtupTestCase, Integer> request = new AtupRequest<>();
-                            final Integer status = request.rest(AtupRequest.POST, launchPath, null, null, MediaType.APPLICATION_JSON_TYPE, testCase,
-                                    Integer.class);
-                            final AtupUser user = userDao.findById(jobInfo.getUserId());
-                            final Date createTime = new Date();
-                            final AtupTestResult testResult = new AtupTestResult(testCase, user, status, "", createTime, createTime);
-                            resultDao.save(testResult);
-                            highJobMap.remove(currentJobKV.getKey());
+                        if (deviceIp != null && deviceIp.matches(IPADDRESS_PATTERN)) {
+                            final AtupDevice testDevice = deviceDao.findByIp(deviceIp);
+                            final Integer deviceStatus = testDevice.getDeviceStatus();
+                            log.info("Device[" + deviceIp + "] status = " + deviceStatus);
+                            if (deviceStatus.equals(AtupParam.DEVICE_IDLE)) {
+                                final String launchPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
+                                final AtupTestCase testCase = testCaseDao.findById(jobInfo.getCaseId());
+                                final Integer status = restPost(launchPath, testCase);
+                                final AtupUser user = userDao.findById(jobInfo.getUserId());
+                                final Date createTime = new Date();
+                                final AtupTestResult testResult = new AtupTestResult(testCase, user, status, "", createTime, createTime);
+                                resultDao.save(testResult);
+                                highJobMap.remove(currentJobKV.getKey());
+                            }
                         }
                     } catch (final Exception e) {
                         log.error(e);
@@ -116,5 +120,10 @@ public class JobLaunchService {
                 }
             }
         }, 0, 10, TimeUnit.SECONDS);
+    }
+
+    private Integer restPost(String launchPath, AtupTestCase testCase) {
+        final AtupRequest<AtupTestCase, Integer> request = new AtupRequest<>();
+        return request.rest(AtupRequest.POST, launchPath, null, null, MediaType.APPLICATION_JSON_TYPE, testCase, Integer.class);
     }
 }
