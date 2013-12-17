@@ -12,9 +12,9 @@ import java.util.Set;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
-public class AtupRequest<T> {
+public class AtupRequest<S, T> {
     public static final String GET = "GET";
     public static final String DELETE = "DELETE";
     public static final String PUT = "PUT";
@@ -37,16 +37,16 @@ public class AtupRequest<T> {
     }
 
     public T rest(String method, String requestUrl, Class<T> returnType) {
-        return rest(method, requestUrl, null, null, null, returnType, null);
+        return rest(method, requestUrl, null, null, null, null, returnType);
     }
 
     public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams, MediaType requestDataType,
-            Class<T> returnType) {
-        return rest(method, requestUrl, headParams, queryParams, requestDataType, returnType, null);
+                  Class<T> returnType) {
+        return rest(method, requestUrl, headParams, queryParams, requestDataType, null, returnType);
     }
 
-    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams, MediaType requestDataType,
-            Class<T> returnType, T requestData) {
+    public T rest(String method, String requestUrl, Set<AtupRequestParam> headParams, Set<AtupRequestParam> queryParams, MediaType requestDataType, S requestData,
+                  Class<T> returnType) {
         if (clientConfig == null) {
             clientConfig = new ClientConfig();
         }
@@ -73,7 +73,7 @@ public class AtupRequest<T> {
         }
 
         javax.ws.rs.core.Response response;
-        Entity<T> entity;
+        Entity<S> entity;
         switch (method) {
             case GET:
                 response = invocationBuilder.get();

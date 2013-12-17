@@ -16,12 +16,11 @@ import org.feuyeux.jaxrs2.atup.user.dao.AtupUserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.ws.rs.core.MediaType;
+import java.util.*;
 import java.util.concurrent.*;
 
-@Service()
+@Service
 public class JobLaunchService {
     private final org.apache.logging.log4j.Logger log =
             org.apache.logging.log4j.LogManager.getLogger(JobLaunchService.class.getName());
@@ -81,31 +80,35 @@ public class JobLaunchService {
             @Override
             public void run() {
                 try {
-                    testing();
+                    testing(highJobMap);
+                    testing(mediumJobMap);
+                    testing(lowJobMap);
                 } catch (Exception e) {
                     log.error(e);
                 }
                 //log.debug("test");
             }
 
-            private void testing() {
-                List<AtupTestJobInfo> jobList = getJobList();
-                for (AtupTestJobInfo jobInfo : jobList) {
+            private void testing(ConcurrentHashMap<String, AtupTestJobInfo> highJobMap) {
+                Iterator<Map.Entry<String, AtupTestJobInfo>> highIterator = highJobMap.entrySet().iterator();
+                while (highIterator.hasNext()) {
                     try {
+                        Map.Entry<String, AtupTestJobInfo> currentJobKV = highIterator.next();
+                        AtupTestJobInfo jobInfo = currentJobKV.getValue();
                         String deviceIp = jobInfo.getDeviceIp();
                         AtupDevice testDevice = deviceDao.findByIp(deviceIp);
                         Integer deviceStatus = testDevice.getDeviceStatus();
                         log.info("Device[" + deviceIp + "] status = " + deviceStatus);
                         if (deviceStatus.equals(AtupParam.DEVICE_IDLE)) {
-                            String launchTestPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
-                            AtupRequest<Integer> request = new AtupRequest<>();
-                            Integer resultStatus = request.rest(AtupRequest.POST, launchTestPath, Integer.class);
-
+                            String launchPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
                             AtupTestCase testCase = testCaseDao.findById(jobInfo.getCaseId());
+                            AtupRequest<AtupTestCase, Integer> request = new AtupRequest<>();
+                            Integer status = request.rest(AtupRequest.POST, launchPath, null, null, MediaType.APPLICATION_JSON_TYPE, testCase, Integer.class);
                             AtupUser user = userDao.findById(jobInfo.getUserId());
                             Date createTime = new Date();
-                            AtupTestResult testResult = new AtupTestResult(testCase, user, resultStatus, "", createTime, createTime);
+                            AtupTestResult testResult = new AtupTestResult(testCase, user, status, "", createTime, createTime);
                             resultDao.save(testResult);
+                            highJobMap.remove(currentJobKV.getKey());
                         }
                     } catch (Exception e) {
                         log.error(e);

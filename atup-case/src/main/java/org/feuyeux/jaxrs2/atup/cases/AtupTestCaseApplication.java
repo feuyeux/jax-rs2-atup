@@ -1,12 +1,19 @@
 package org.feuyeux.jaxrs2.atup.cases;
 
-import javax.ws.rs.ApplicationPath;
-
+import org.feuyeux.jaxrs2.atup.cases.resource.AtupTestCaseResource;
+import org.feuyeux.jaxrs2.atup.cases.resource.AtupTestJobResource;
+import org.feuyeux.jaxrs2.atup.cases.resource.AtupTestResultResource;
+import org.feuyeux.jaxrs2.atup.cases.resource.AtupTestSuiteResource;
 import org.glassfish.jersey.server.ResourceConfig;
+
+import javax.ws.rs.ApplicationPath;
 
 @ApplicationPath("/rest-api/*")
 public class AtupTestCaseApplication extends ResourceConfig {
     public AtupTestCaseApplication() {
-        packages("org.feuyeux.jaxrs2.atup.cases.resource");
+        register(AtupTestSuiteResource.class);
+        register(AtupTestCaseResource.class);
+        register(AtupTestResultResource.class);
+        register(AtupTestJobResource.class);
     }
 }

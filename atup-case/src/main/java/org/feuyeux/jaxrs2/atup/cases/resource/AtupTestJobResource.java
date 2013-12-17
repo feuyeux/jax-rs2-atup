@@ -43,6 +43,7 @@ public class AtupTestJobResource {
     }
 
     @POST
+    @Path("launch")
     public void launchJob() throws ExecutionException, InterruptedException {
         jobLaunchService.launch();
     }

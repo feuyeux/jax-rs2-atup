@@ -1,18 +1,7 @@
 package org.feuyeux.jaxrs2.atup.device.resource;
 
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
@@ -20,8 +9,13 @@ import org.feuyeux.jaxrs2.atup.core.info.AtupDeviceListInfo;
 import org.feuyeux.jaxrs2.atup.device.service.AtupDeviceService;
 import org.feuyeux.jaxrs2.atup.device.service.StationDetectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Path(AtupApi.DEVICE_PATH)
 public class AtupDeviceResource {
@@ -36,10 +30,7 @@ public class AtupDeviceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public AtupDevice createDevice(@Context final HttpHeaders headers, AtupDevice deviceInfo) {
         try {
-            String userId = headers.getRequestHeader("Atup-User").get(0);
-            AtupUser currentUser = new AtupUser();
-            currentUser.setUserId(Integer.valueOf(userId));
-            deviceInfo.setUser(currentUser);
+            fillUser(headers, deviceInfo);
             AtupDevice atupDevice = service.createDevice(deviceInfo);
             return atupDevice;
         } catch (Exception e) {
@@ -53,16 +44,20 @@ public class AtupDeviceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public AtupDevice updateDevice(@Context final HttpHeaders headers, AtupDevice deviceInfo) {
         try {
-            String userId = headers.getRequestHeader("Atup-User").get(0);
-            AtupUser currentUser = new AtupUser();
-            currentUser.setUserId(Integer.valueOf(userId));
-            deviceInfo.setUser(currentUser);
+            fillUser(headers, deviceInfo);
             AtupDevice atupDevice = service.updateDevice(deviceInfo);
             return atupDevice;
         } catch (Exception e) {
             log.error(e);
             return null;
         }
+    }
+
+    private void fillUser(HttpHeaders headers, AtupDevice deviceInfo) {
+        String userId = headers.getRequestHeader("Atup-User").get(0);
+        AtupUser currentUser = new AtupUser();
+        currentUser.setUserId(Integer.valueOf(userId));
+        deviceInfo.setUser(currentUser);
     }
 
     @GET

@@ -1,64 +1,63 @@
 function initial() {
-	checkSignIn();
-	rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, null, renderSuiteList0);
-	jQuery("#caseName").change(function() {
-		rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, null, renderSuiteList);
-		var caseName = jQuery("#caseName").val();
-		rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/" + caseName, GET_METHOD, null, fresh4Update);
-	});
-	jQuery('#resultDiv').html("Done!");
+    checkSignIn();
+    rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, null, renderSuiteList0);
+    jQuery("#caseName").change(function () {
+        rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, null, renderSuiteList);
+        var caseName = jQuery("#caseName").val();
+        rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/" + caseName, GET_METHOD, null, fresh4Update);
+    });
+    jQuery('#resultDiv').html("Done!");
+}
+function renderSuites(data) {
+    var list = data.suiteList;
+    var html = "";
+    jQuery.each(list, function (i, suite) {
+        html += "<option value=\"";
+        html += suite.suiteId + "\">";
+        html += suite.suiteName + "</option>";
+    });
+    return html;
 }
 function renderSuiteList0(data) {
-	var list = data.suiteList;
-	var html = "";
-	jQuery.each(list, function(i, suite) {
-		html += "<option value=\"";
-		html += suite.suiteId + "\">";
-		html += suite.suiteName + "</option>";
-	});
-	jQuery("#suiteList0").empty().append(html);
-}
-function createCase() {
-	var suiteId = jQuery("#suiteList0").val();
-	var caseName = jQuery("#caseName0").val();
-	var caseBody = jQuery("#caseBody0").val();
-	var postData = JSON.stringify({caseName : caseName, caseBody : caseBody, caseStatus : 1, suite : {suiteId : suiteId}});
-	rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, POST_METHOD, postData, renderEdit);
-}
-function updateCase() {
-	var suiteId = jQuery("#suiteList").val();
-	var caseName = jQuery("#caseName").val();
-	var caseBody = jQuery("#caseBody").val();
-	var caseStatus = jQuery("#caseStatus").val();
-	var putData = JSON.stringify({caseName : caseName, caseBody : caseBody, caseStatus : caseStatus, suite : {suiteId : suiteId}});
-	rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, PUT_METHOD, putData, renderEdit);
-}
-function renderEdit(data) {
-	jQuery('#resultDiv').html("DONE! id=" + data.caseId);
-	jQuery('#resultDiv').append(" name=" + data.caseName);
-	jQuery('#resultDiv').append(" status=" + data.caseStatus);
-	jQuery('#resultDiv').append(" type=" + data.caseBody);
-	jQuery('#resultDiv').append(" suite=" + data.suite.suiteId + "," + data.suite.suiteName);
+    var html = renderSuites(data);
+    jQuery("#suiteList0").empty().append(html);
 }
 function renderSuiteList(data) {
-	var list = data.suiteList;
-	var html = "";
-	jQuery.each(list, function(i, suite) {
-		html += "<option value=\"";
-		html += suite.suiteId + "\">";
-		html += suite.suiteName + "</option>";
-	});
-	jQuery("#suiteList").empty().append(html);
+    var html = renderSuites(data);
+    jQuery("#suiteList").empty().append(html);
 }
+function createCase() {
+    var suiteId = jQuery("#suiteList0").val();
+    var caseName = jQuery("#caseName0").val();
+    var caseBody = jQuery("#caseBody0").val();
+    var postData = JSON.stringify({caseName: caseName, caseBody: caseBody, caseStatus: 1, suite: {suiteId: suiteId}});
+    rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, POST_METHOD, postData, renderEdit);
+}
+function updateCase() {
+    var suiteId = jQuery("#suiteList").val();
+    var caseName = jQuery("#caseName").val();
+    var caseBody = jQuery("#caseBody").val();
+    var caseStatus = jQuery("#caseStatus").val();
+    var putData = JSON.stringify({caseName: caseName, caseBody: caseBody, caseStatus: caseStatus, suite: {suiteId: suiteId}});
+    rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, PUT_METHOD, putData, renderEdit);
+}
+function renderEdit(data) {
+    jQuery('#resultDiv').html("DONE! id=" + data.caseId);
+    jQuery('#resultDiv').append(" name=" + data.caseName);
+    jQuery('#resultDiv').append(" status=" + data.caseStatus);
+    jQuery('#resultDiv').append(" type=" + data.caseBody);
+    jQuery('#resultDiv').append(" suite=" + data.suite.suiteId + "," + data.suite.suiteName);
+}
+
 function fresh4Update(data) {
-	if(data){
-		jQuery('#suiteList').val(data.suite.suiteId);
-		jQuery("#caseName").val(data.caseName);
-		jQuery("#caseStatus").val(data.caseStatus);
-		jQuery("#caseBody").val(data.caseBody);
-	}else{
-		jQuery("#caseName").val(data.caseName);
-		jQuery("#caseStatus").val("");
-		jQuery("#caseBody").val("");
-	}
+    if (data) {
+        jQuery('#suiteList').val(data.suite.suiteId);
+        jQuery("#caseName").val(data.caseName);
+        jQuery("#caseStatus").val(data.caseStatus);
+        jQuery("#caseBody").val(data.caseBody);
+    } else {
+        jQuery("#caseName").val(data.caseName);
+        jQuery("#caseStatus").val("");
+        jQuery("#caseBody").val("");
+    }
 }
