@@ -14,9 +14,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class AtupTestJobInfo {
     private Integer jobId;
     private Integer userId;
-    private Integer deviceId;
+    private String deviceIp;
     private Integer caseId;
-    private Integer suiteId;
     private Integer priority;
 
     public AtupTestJobInfo() {
@@ -38,13 +37,6 @@ public class AtupTestJobInfo {
         this.userId = userId;
     }
 
-    public Integer getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(Integer deviceId) {
-        this.deviceId = deviceId;
-    }
 
     public Integer getCaseId() {
         return caseId;
@@ -52,14 +44,6 @@ public class AtupTestJobInfo {
 
     public void setCaseId(Integer caseId) {
         this.caseId = caseId;
-    }
-
-    public Integer getSuiteId() {
-        return suiteId;
-    }
-
-    public void setSuiteId(Integer suiteId) {
-        this.suiteId = suiteId;
     }
 
     public Integer getPriority() {
@@ -70,8 +54,16 @@ public class AtupTestJobInfo {
         this.priority = priority;
     }
 
+    public String getDeviceIp() {
+        return deviceIp;
+    }
+
+    public void setDeviceIp(String deviceIp) {
+        this.deviceIp = deviceIp;
+    }
+
     @Override
     public String toString() {
-        return "jobId=" + jobId + ",userId=" + userId + ",deviceId=" + deviceId + ",caseId=" + caseId + ",suiteId=" + suiteId + ",priority=" + priority;
+        return "jobId=" + jobId + ",userId=" + userId + ",deviceIp=" + deviceIp + ",caseId=" + caseId + ",priority=" + priority;
     }
 }

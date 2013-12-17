@@ -1,6 +1,5 @@
 package org.feuyeux.jaxrs2.atup.core.domain;
 
-import org.feuyeux.jaxrs2.atup.core.info.AtupTestCaseInfo;
 import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
 
 import javax.persistence.*;
@@ -16,13 +15,13 @@ import java.util.Date;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
 @Entity
 @Table(name = "test_case")
 @XmlRootElement
-@NamedQueries({ @NamedQuery(name = "findByStatus", query = "SELECT testCase FROM AtupTestCase testCase WHERE testCase.caseStatus= :caseStatus"),
-        @NamedQuery(name = "findByName", query = "SELECT testCase FROM AtupTestCase testCase WHERE testCase.caseName= :caseName") })
+@NamedQueries({@NamedQuery(name = "findByStatus", query = "SELECT testCase FROM AtupTestCase testCase WHERE testCase.caseStatus= :caseStatus"),
+        @NamedQuery(name = "findByName", query = "SELECT testCase FROM AtupTestCase testCase WHERE testCase.caseName= :caseName")})
 public class AtupTestCase implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer caseId;
@@ -43,13 +42,6 @@ public class AtupTestCase implements Serializable {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.caseStatus = caseStatus;
-    }
-
-    public AtupTestCase(AtupTestCaseInfo testCaseInfo) {
-        this.caseName = testCaseInfo.getCaseName();
-        this.suite = testCaseInfo.getSuite();
-        this.caseBody = testCaseInfo.getCaseBody();
-        this.caseStatus = testCaseInfo.getCaseStatus();
     }
 
     @Id
@@ -128,5 +120,10 @@ public class AtupTestCase implements Serializable {
 
     public void setCaseStatus(Integer caseStatus) {
         this.caseStatus = caseStatus;
+    }
+
+    @Override
+    public String toString() {
+        return "caseId=" + caseId + "caseName=" + caseName + "suite=" + suite.getSuiteName() + "caseBody=" + caseBody + "caseStatus=" + caseStatus;
     }
 }

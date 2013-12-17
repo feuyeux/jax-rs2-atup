@@ -1,28 +1,18 @@
 package org.feuyeux.jaxrs2.atup.cases.resource;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import javax.inject.Singleton;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.MediaType;
-
 import org.feuyeux.jaxrs2.atup.cases.service.JobLaunchService;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobListInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Singleton
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Path(AtupApi.TEST_JOB_PATH)
 public class AtupTestJobResource {
     private final org.apache.logging.log4j.Logger log =
@@ -42,10 +32,9 @@ public class AtupTestJobResource {
         final String userId = headers.getRequestHeader("Atup-User").get(0);
         jobInfo.setUserId(Integer.valueOf(userId));
         jobInfo.setJobId(JOB_ID.getAndIncrement());
-        final String key = jobInfo.getUserId() + "-" + jobInfo.getCaseId() + "-" + jobInfo.getDeviceId();
+        final String key = jobInfo.getUserId() + "-" + jobInfo.getCaseId() + "-" + jobInfo.getDeviceIp();
         jobLaunchService.addJob(jobInfo, key);
     }
-
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

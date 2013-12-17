@@ -1,16 +1,14 @@
 package org.feuyeux.jaxrs2.atup.cases.service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestSuite;
-import org.feuyeux.jaxrs2.atup.core.info.AtupTestCaseInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestCaseListInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class AtupTestCaseService {
@@ -23,13 +21,11 @@ public class AtupTestCaseService {
         return dao.remove(testCaseId);
     }
 
-    public AtupTestCase createTestCase(final AtupTestCaseInfo testCaseInfo) {
-        final AtupTestCase testCase = new AtupTestCase(testCaseInfo);
+    public AtupTestCase createTestCase(final AtupTestCase testCase) {
         return dao.save(testCase);
     }
 
-    public AtupTestCase updateTestCase(final AtupTestCaseInfo testCaseInfo) {
-        final AtupTestCase testCase = new AtupTestCase(testCaseInfo);
+    public AtupTestCase updateTestCase(final AtupTestCase testCase) {
         return dao.update(testCase);
     }
 
@@ -37,12 +33,7 @@ public class AtupTestCaseService {
         AtupTestCaseListInfo result = null;
         final List<AtupTestCase> list = dao.findAll(start, size);
         if (list != null && list.size() > 0) {
-            final List<AtupTestCaseInfo> caseInfoList = new ArrayList<>(list.size());
-            for (final AtupTestCase testCase : list) {
-                final AtupTestCaseInfo caseInfo = new AtupTestCaseInfo(testCase);
-                caseInfoList.add(caseInfo);
-            }
-            result = new AtupTestCaseListInfo(caseInfoList);
+            result = new AtupTestCaseListInfo(list);
         } else {
             result = new AtupTestCaseListInfo();
         }

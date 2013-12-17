@@ -7,28 +7,36 @@
     <script src="../js/atupRest.js"></script>
     <script src="../js/users/user.js"></script>
     <script type="text/javascript">
-    jQuery(document).ready(function(){
-    	checkSignIn();
-    });
+        jQuery(document).ready(function () {
+            checkSignIn();
+        });
     </script>
 </head>
 <body>
 <div id="topDiv"></div>
 
 <h5>Update User</h5>
-<div style="margin-top: 20px;"/>
+
+<div style="margin-top: 20px;"></div>
 <h5>Create User</h5>
-<div><span style='width:100px;display:inline-block;'>User Name:</span>
-    <input type="text" id="userName0" name="userName0" value=""/></div>
-<div><span style='width:100px;display:inline-block;'>Password:</span>
-    <input type="password" id="password0" name="password0" value=""/></div>
+
+<div>
+    <label for="userName0" style="width:100px;">User Name:</label>
+    <input type="text" id="userName0" name="userName0" value=""/>
+</div>
+<div>
+    <label for="password0" style="width:100px;">Password:</label>
+    <input type="password" id="password0" name="password0" value=""/>
+</div>
 <div>
     <input id="createButton" type="button" value="Create" onclick="createUser();"/>
 </div>
-<div style="margin-top: 20px;"/>
-<div><span style='width:100px;display:inline-block;'>User Name:</span>
-    <input type="text" id="userName" name="userName" value=""/></div>
-<div><span style='width:100px;display:inline-block;'>Password:</span>
+<div style="margin-top: 20px;"></div>
+<div><label for="userName" style="width:100px;">User Name:</label>
+    <input type="text" id="userName" name="userName" value=""/>
+</div>
+<div>
+    <label for="password" style="width:100px;">Password:</label>
     <input type="password" id="password" name="password" value=""/></div>
 <div><span style='width:100px;display:inline-block;'>Confirm PW:</span>
     <input type="text" id="role" name="role" value=""/></div>
@@ -36,5 +44,6 @@
     <input id="createButton" type="button" value="Update" onclick="updateUser();"/>
 </div>
 <div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
+<a href="http://localhost:8080/atup-page/index.html">Index</a>
 </body>
 </html>

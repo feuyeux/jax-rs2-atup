@@ -1,6 +1,9 @@
 package org.feuyeux.jaxrs2.atup.core.constant;
 
 public interface AtupApi {
+    String PROTOCOL = "http://";
+    String SERVICE_PORT = "8080";
+    String SERVICE_PATH = "/atup-test-station/rest-api/station";
     String TEST_SUITE_PATH = "testsuites";
     String TEST_CASE_PATH = "testcases";
     String TEST_JOB_PATH = "testjobs";
