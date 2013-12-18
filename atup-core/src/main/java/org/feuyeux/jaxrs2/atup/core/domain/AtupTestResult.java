@@ -37,10 +37,11 @@ public class AtupTestResult implements Serializable {
     public AtupTestResult() {
     }
 
-    public AtupTestResult(final AtupTestCase testCase, final AtupUser user, final Integer resultStatus, final String resultBody, final Date createTime,
+    public AtupTestResult(final AtupTestCase testCase, final AtupUser user, final AtupDevice device, final Integer resultStatus, final String resultBody, final Date createTime,
                           final Date updateTime) {
         this.testCase = testCase;
         this.user = user;
+        this.device = device;
         this.resultStatus = resultStatus;
         this.resultBody = resultBody;
         this.createTime = createTime;

@@ -15,6 +15,7 @@ function renderDeviceList(data) {
         html += device.deviceName + "</option>";
     });
     jQuery("#deviceList").empty().append(html);
+    jQuery('#resultDiv').html("DONE");
 }
 function getValue(query, key) {
     var vars = query.split("&");
@@ -32,8 +33,9 @@ function createJob() {
     var caseName = jQuery("#caseName").val();
     var priority = jQuery("#priorityList").val();
     var postData = JSON.stringify({deviceIp: deviceIp, caseId: caseId, caseName: caseName, priority: priority});
-    rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, POST_METHOD, postData, afterCreate);
+    rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, POST_METHOD, postData, afterCreate());
 }
+
 function afterCreate() {
     var resultDiv = jQuery('#resultDiv');
     resultDiv.html(resultDiv.val() + " :: DONE.");

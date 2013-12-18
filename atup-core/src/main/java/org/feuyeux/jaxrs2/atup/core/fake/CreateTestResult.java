@@ -17,7 +17,7 @@ public class CreateTestResult {
         final String resultBody = CreateTestResult.CASE_RESULT_BODY;
         final Date createTime = new Date();
         final Date updateTime = new Date();
-        final AtupTestResult testResult = new AtupTestResult(testCase, user, resultStatus, resultBody, createTime, updateTime);
+        final AtupTestResult testResult = new AtupTestResult(testCase, user, null, resultStatus, resultBody, createTime, updateTime);
         return testResult;
     }
 }

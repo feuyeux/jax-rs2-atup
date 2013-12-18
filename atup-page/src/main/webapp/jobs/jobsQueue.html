@@ -7,9 +7,9 @@
     <script src="../js/atupRest.js"></script>
     <script src="../js/jobs/testJob.js"></script>
     <script type="text/javascript">
-    jQuery(document).ready(function(){
-    	initial();
-    });
+        jQuery(document).ready(function () {
+            initial();
+        });
     </script>
 </head>
 <body>
@@ -17,8 +17,11 @@
 
 <div style="margin-top: 20px;"/>
 <h5>Schedule A Test Job</h5>
-<div><span style='width:150px;display:inline-block;'>Case Id:</span><input type="text" id="caseId" name="caseId" readonly="readonly"/></div> 
-<div><span style='width:150px;display:inline-block;'>Case Name:</span><input type="text" id="caseName" name="caseName" readonly="readonly"/></div> 
+
+<div><span style='width:150px;display:inline-block;'>Case Id:</span><input type="text" id="caseId" name="caseId"
+                                                                           readonly="readonly"/></div>
+<div><span style='width:150px;display:inline-block;'>Case Name:</span><input type="text" id="caseName" name="caseName"
+                                                                             readonly="readonly"/></div>
 <div><span style='width:150px;display:inline-block;'>Device to run:</span><select id="deviceList"></select></div>
 <div><span style='width:150px;display:inline-block;'>Priority:</span><select id="priorityList"></select></div>
 <div>
@@ -26,6 +29,7 @@
 </div>
 
 <div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
+<a href="http://localhost:8080/atup-page/jobs/runningJobs.html">Job List</a>
 <a href="http://localhost:8080/atup-page/index.html">Index</a>
 </body>
 </html>

@@ -2,6 +2,7 @@ package org.feuyeux.jaxrs2.atup.station.resource;
 
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
+import org.feuyeux.jaxrs2.atup.core.constant.AtupVariable;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestCase;
 
 import javax.inject.Singleton;
@@ -44,8 +45,7 @@ public class AtupStationResource {
         } catch (Exception e) {
 
         }
-        int workingTime = 3000;
-        Thread.sleep(workingTime);
+        Thread.sleep(AtupVariable.TESTING_TIMEOUT);
         status = AtupParam.DEVICE_IDLE;
         return AtupParam.RESULT_OK;
     }
