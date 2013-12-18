@@ -9,7 +9,7 @@
 
     <artifactId>atup-user</artifactId>
     <packaging>war</packaging>
-    <name>ATUP User Management</name>
+    <name>ATUP User</name>
 
     <build>
         <finalName>atup-user</finalName>
