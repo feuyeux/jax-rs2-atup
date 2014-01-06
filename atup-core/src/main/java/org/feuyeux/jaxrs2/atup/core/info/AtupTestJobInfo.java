@@ -65,4 +65,26 @@ public class AtupTestJobInfo {
     public String toString() {
         return "jobId=" + jobId + ",userId=" + userId + ",deviceIp=" + deviceIp + ",caseId=" + caseId + ",priority=" + priority;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj == this) {
+            return true;
+        }
+
+        if (obj.getClass().equals(AtupTestJobInfo.class)) {
+            AtupTestJobInfo other = (AtupTestJobInfo) obj;
+            return other.jobId.equals(this.jobId) && other.userId.equals(this.userId);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return jobId.hashCode() + userId.hashCode();
+    }
 }

@@ -1,0 +1,1 @@
+INSERT INTO `test_suite` VALUES (1,'Performance Test',1,2),(2,'GUI Test',1,1),(3,'Unit Test',1,1),(4,'Integration Test',1,1),(5,'System Test',1,1);

@@ -1,0 +1,4 @@
+Test Suite Type:
+NORMAL_SUITE = 1;
+PERFORMANCE_SUITE = 2;
+EDGE_SUITE = 3;

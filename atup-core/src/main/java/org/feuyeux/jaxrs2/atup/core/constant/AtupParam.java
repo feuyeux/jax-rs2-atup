@@ -12,17 +12,19 @@ public interface AtupParam {
     Integer RESULT_ERROR = 1;
     Integer RESULT_UNKOWN = 2;
 
-    Integer USER_ADMIN = 0;
-    Integer USER_READONLY = 1;
-
     Integer NORMAL_CASE = 0;
     Integer DISABLED_CASE = 1;
 
-    Integer NORMAL_SUITE = 0;
-    Integer PERFORMANCE_SUITE = 1;
-    Integer EDGE_SUITE = 2;
+    Integer NORMAL_SUITE = 1;
+    Integer PERFORMANCE_SUITE = 2;
+    Integer EDGE_SUITE = 3;
 
     Integer HIGH = 3;
     Integer MEDIUM = 2;
     Integer LOW = 1;
+
+    Integer USER_ADMIN = 1;
+    Integer USER_JOB_KILLER = 2;
+    Integer USER_DEVICE_MANAGER = 3;
+    Integer USER_USER = 4;
 }

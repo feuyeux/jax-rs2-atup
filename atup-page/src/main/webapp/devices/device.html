@@ -6,11 +6,17 @@
     <script src="../js/atupConstant.js"></script>
     <script src="../js/atupRest.js"></script>
     <script src="../js/devices/device.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            checkSignIn();
+        });
+    </script>
 </head>
 <body>
 <div id="topDiv"></div>
 <div style="margin-top: 20px;"/>
 <h5>Create Device</h5>
+
 <div><span style='width:130px;display:inline-block;'>Device IP:</span>
     <input type="text" id="deviceIp0" name="deviceIp0" value=""/></div>
 <div><span style='width:130px;display:inline-block;'>Device Name:</span>
@@ -22,6 +28,7 @@
 </div>
 <div style="margin-top: 20px;"/>
 <h5>Update Device</h5>
+
 <div><span style='width:130px;display:inline-block;'>Device IP:</span>
     <input type="text" id="deviceIp" name="deviceIp" value=""/></div>
 <div><span style='width:130px;display:inline-block;'>Device Name:</span>

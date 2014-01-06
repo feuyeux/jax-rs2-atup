@@ -1,5 +1,6 @@
 package org.feuyeux.jaxrs2.atup.core.domain;
 
+import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 import org.feuyeux.jaxrs2.atup.core.info.AtupUserInfo;
 
 import javax.persistence.*;
@@ -17,13 +18,16 @@ import java.io.Serializable;
 @Entity
 @Table(name = "atup_user")
 @XmlRootElement
-@NamedQueries({@NamedQuery(name = "findByUserName", query = "SELECT atupUser FROM AtupUser atupUser WHERE atupUser.userName= :userName"),})
+@NamedQueries({
+        @NamedQuery(name = "findByUserName", query = "SELECT atupUser FROM AtupUser atupUser WHERE atupUser.userName= :userName and atupUser.status=0")
+})
 public class AtupUser implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer userId;
-    private Integer userRole;
     private String userName;
     private String passWord;
+    private Integer userRole = AtupParam.USER_USER;
+    private Integer status = 0;
 
     public AtupUser() {
 
@@ -46,6 +50,7 @@ public class AtupUser implements Serializable {
         userRole = userInfo.getUserRole();
         userName = userInfo.getUserName();
         passWord = userInfo.getPassWord();
+        status = userInfo.getStatus();
     }
 
     @Id
@@ -89,5 +94,15 @@ public class AtupUser implements Serializable {
 
     public void setPassWord(final String passWord) {
         this.passWord = passWord;
+    }
+
+    @Column(name = "user_status")
+    @XmlAttribute
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Sign In</title>
+    <title>Sign In</title>
+    <meta content="text/html;charset=utf-8">
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
-	<script src="webjars/jquery/2.0.3/jquery.js"></script>
-	<script src="js/atupConstant.js"></script>
-	<script src="js/atupRest.js"></script>
-	<script src="js/users/user.js"></script>
+    <script src="webjars/jquery/2.0.3/jquery.js"></script>
+    <script src="js/atupConstant.js"></script>
+    <script src="js/atupRest.js"></script>
+    <script src="js/users/user.js"></script>
 </head>
 <body>
-	<div ><span style='width:100px;display:inline-block;'>User Name:</span>
-	<input type="text" id="userName" name="userName" value=""/></div>
-	<div> <span style='width:100px;display:inline-block;'>Password:</span>
-	<input type="password" id="password" name="password" value=""/></div>	
-	<div>
-	    <input id="signInButton" type="button" value="Sign In" onclick="signIn();"/>
-	</div>
-	<a href="http://localhost:8080/atup-page/signUp.html">Sign Up</a><br/>
+<div><span style='width:100px;display:inline-block;'>User Name:</span>
+    <input type="text" id="userName" name="userName" value=""/></div>
+<div><span style='width:100px;display:inline-block;'>Password:</span>
+    <input type="password" id="password" name="password" value=""/></div>
+<div>
+    <input id="signInButton" type="button" value="Sign In" onclick="signIn();"/>
+</div>
+<div id="resultDiv"></div>
+<a href="http://localhost:8080/atup-page/signUp.html">Sign Up</a><br/>
 </body>
 </html>

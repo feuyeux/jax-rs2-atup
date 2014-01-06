@@ -25,3 +25,8 @@ var DELETE_METHOD = 'DELETE';
 var SPAN_BEGIN = "<span style='width:100px;display:inline-block;'>";
 var SPAN_BEGIN1 = "<span style='width:150px;display:inline-block;'>";
 var SPAN_BEGIN2 = "<span style='width:200px;display:inline-block;'>";
+
+var ROLE_ADMIN = 1;
+var ROLE_JOB_KILLER = 2;
+var ROLE_DEVICE_MANAGER = 3;
+var ROLE_USER = 4;

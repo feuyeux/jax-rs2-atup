@@ -17,5 +17,4 @@ function renderGetAll(data) {
             jQuery("#casesDiv").append(line);
         });
     }
-    jQuery('#resultDiv').html("DONE.");
 }

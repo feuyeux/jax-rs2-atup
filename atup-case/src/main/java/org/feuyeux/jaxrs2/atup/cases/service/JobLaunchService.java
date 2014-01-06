@@ -65,6 +65,12 @@ public class JobLaunchService {
         return null;
     }
 
+    public void removeJob(final Integer jobId) {
+        remove(highJobMap, jobId);
+        remove(mediumJobMap, jobId);
+        remove(lowJobMap, jobId);
+    }
+
     boolean contains(String key) {
         if (highJobMap.get(key) != null) {
             return true;
@@ -143,5 +149,16 @@ public class JobLaunchService {
     private Integer restPost(String launchPath, AtupTestCase testCase) {
         final AtupRequest<AtupTestCase, Integer> request = new AtupRequest<>();
         return request.rest(AtupRequest.POST, launchPath, null, null, MediaType.APPLICATION_JSON_TYPE, testCase, Integer.class);
+    }
+
+    private void remove(final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap, Integer jobId) {
+        final Iterator<Map.Entry<String, AtupTestJobInfo>> highIterator = highJobMap.entrySet().iterator();
+        while (highIterator.hasNext()) {
+            final Map.Entry<String, AtupTestJobInfo> currentJobKV = highIterator.next();
+            if (currentJobKV.getValue().getJobId().equals(jobId)) {
+                highJobMap.remove(currentJobKV.getKey());
+                break;
+            }
+        }
     }
 }

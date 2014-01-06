@@ -6,3 +6,5 @@
 2013-12-17 23:43:35,095 DEBUG o.f.j.a.s.r.TIAtupStationResource [main] 0 
 2013-12-17 23:47:51,948 DEBUG o.f.j.a.s.r.TIAtupStationResource [main] null 
 2013-12-17 23:52:53,777 DEBUG o.f.j.a.s.r.TIAtupStationResource [main] 0 
+2014-01-06 16:10:03,878 INFO o.f.j.a.u.d.TUAtupUserDao [main] org.feuyeux.jaxrs2.atup.core.domain.AtupUser@40001e8b 
+2014-01-06 16:10:04,086 INFO o.f.j.a.u.d.TUAtupUserDao [main] org.feuyeux.jaxrs2.atup.core.domain.AtupUser@385eb0bb 

@@ -20,7 +20,12 @@ Context.xml:
 #### atup-core ####
 #### atup-user ####
 REST WADL:
-http://localhost:8008/atup-user/rest-api/application.wadl
+[http://localhost:8080/atup-user/rest-api/application.wadl](http://localhost:8080/atup-user/rest-api/application.wadl)
+
+- atupAdmin jaxman
+- atupJobKiller jaxman
+- atupDeviceKeeper jaxman
+- xer xer
 #### atup-case ####
 #### atup-device ####
 #### atup-page  ####

@@ -16,11 +16,32 @@ public class AtupUserDao extends AtupDao<AtupUser> {
 
     @Transactional
     public AtupUser update(final AtupUser entity) {
-        final AtupUser updateEntity = findByName(entity.getUserName());
-        if (updateEntity != null) {
-            entity.setUserId(updateEntity.getUserId());
-            return entityManager.merge(entity);
-        } else {
+        final AtupUser updateEntity;
+        try {
+            if (entity.getUserId() != null) {
+                updateEntity = findById(entity.getUserId());
+            } else {
+                updateEntity = findByName(entity.getUserName());
+            }
+
+            if (updateEntity != null) {
+                if (entity.getStatus() != null) {
+                    updateEntity.setStatus(entity.getStatus());
+                }
+                if (entity.getUserName() != null) {
+                    updateEntity.setUserName(entity.getUserName());
+                }
+                if (entity.getPassWord() != null) {
+                    updateEntity.setPassWord(entity.getPassWord());
+                }
+                if (entity.getUserRole() != null) {
+                    updateEntity.setUserRole(entity.getUserRole());
+                }
+                return entityManager.merge(updateEntity);
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
             return null;
         }
     }

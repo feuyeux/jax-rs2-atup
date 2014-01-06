@@ -19,6 +19,7 @@ public class AtupUserInfo extends AtupInfo {
     private Integer userRole;
     private String userName;
     private String passWord;
+    private Integer status;
 
     public AtupUserInfo() {
     }
@@ -38,6 +39,7 @@ public class AtupUserInfo extends AtupInfo {
         userName = userDomain.getUserName();
         passWord = userDomain.getPassWord();
         userRole = userDomain.getUserRole();
+        status = userDomain.getStatus();
     }
 
     public AtupUserInfo(final String errorInfo, final Integer statusCode) {
@@ -78,5 +80,13 @@ public class AtupUserInfo extends AtupInfo {
 
     public void setPassWord(final String passWord) {
         this.passWord = passWord;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

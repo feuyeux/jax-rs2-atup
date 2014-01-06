@@ -1,4 +1,5 @@
 function initial() {
+    checkSignIn();
     var query = window.location.search.substring(1);
     jQuery("#caseId").val(getValue(query, "caseId"));
     jQuery("#caseName").val(getValue(query, "caseName"));
@@ -15,7 +16,6 @@ function renderDeviceList(data) {
         html += device.deviceName + "</option>";
     });
     jQuery("#deviceList").empty().append(html);
-    jQuery('#resultDiv').html("DONE");
 }
 function getValue(query, key) {
     var vars = query.split("&");

@@ -21,7 +21,7 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@ContextConfiguration(locations = {"classpath:applicationContext0.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml.bk"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TIAtupUserResource extends JerseyTest {
     private final Logger log = LogManager.getLogger(TIAtupUserResource.class.getName());

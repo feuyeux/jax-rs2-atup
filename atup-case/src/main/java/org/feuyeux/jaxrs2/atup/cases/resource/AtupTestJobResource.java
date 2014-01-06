@@ -42,6 +42,13 @@ public class AtupTestJobResource {
         return jobLaunchService.addJob(key, jobInfo);
     }
 
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void removeJob(final AtupTestJobInfo jobInfo) {
+        jobLaunchService.removeJob(jobInfo.getJobId());
+    }
+
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public AtupTestJobListInfo retrieveRunningJobs() {

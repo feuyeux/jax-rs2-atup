@@ -6,15 +6,50 @@ function loadJobs() {
 function renderGetAll(data) {
     var list = data.jobList;
     if (list == null || list.length == 0) {
-        jQuery("#jobsDiv").html("No job for the current user.");
+        jQuery("#jobsDiv").html("No job is arranging.");
     } else {
-        jQuery("#jobsDiv").html(
-            "<div align='left'>" + SPAN_BEGIN + "Job Id</span>" + SPAN_BEGIN + "Case Id</span>" + SPAN_BEGIN + "Device Ip</span>" + SPAN_BEGIN + "User Id</span>"
-                + SPAN_BEGIN2 + "Job Priority</span></div>");
-        jQuery.each(list, function (i, jobInfo) {
-            var line = "<div align='left'>" + SPAN_BEGIN + jobInfo.jobId + "</span>" + SPAN_BEGIN + jobInfo.caseId + "</span>" + SPAN_BEGIN
-                + jobInfo.deviceIp + "</span>" + SPAN_BEGIN + jobInfo.userId + "</span>" + SPAN_BEGIN + jobInfo.priority + "</span>" + "</span></div>";
-            jQuery("#jobsDiv").append(line);
-        });
+        var userRole = storage.getItem("userRole");
+        if (ROLE_JOB_KILLER == userRole) {
+            jQuery("#jobsDiv").html(
+                "<div align='left'>" + SPAN_BEGIN
+                    + "Job Id</span>" + SPAN_BEGIN
+                    + "Case Id</span>" + SPAN_BEGIN
+                    + "Device Ip</span>" + SPAN_BEGIN
+                    + "User Id</span>" + SPAN_BEGIN2
+                    + "Job Priority</span>" + SPAN_BEGIN
+                    + "Manage</span></div>");
+            jQuery.each(list, function (i, jobInfo) {
+                var line = "<div align='left'>" + SPAN_BEGIN
+                    + jobInfo.jobId + "</span>" + SPAN_BEGIN
+                    + jobInfo.caseId + "</span>" + SPAN_BEGIN
+                    + jobInfo.deviceIp + "</span>" + SPAN_BEGIN
+                    + jobInfo.userId + "</span>" + SPAN_BEGIN
+                    + jobInfo.priority + "</span>" + SPAN_BEGIN
+                    + "<input type='button' value='REMOVE' onclick='removeJob(" + jobInfo.jobId + ");'/></span></div>";
+                jQuery("#jobsDiv").append(line);
+            });
+        } else {
+            jQuery("#jobsDiv").html(
+                "<div align='left'>" + SPAN_BEGIN
+                    + "Job Id</span>" + SPAN_BEGIN
+                    + "Case Id</span>" + SPAN_BEGIN
+                    + "Device Ip</span>" + SPAN_BEGIN
+                    + "User Id</span>" + SPAN_BEGIN2
+                    + "Job Priority</span></div>");
+            jQuery.each(list, function (i, jobInfo) {
+                var line = "<div align='left'>" + SPAN_BEGIN
+                    + jobInfo.jobId + "</span>" + SPAN_BEGIN
+                    + jobInfo.caseId + "</span>" + SPAN_BEGIN
+                    + jobInfo.deviceIp + "</span>" + SPAN_BEGIN
+                    + jobInfo.userId + "</span>" + SPAN_BEGIN
+                    + jobInfo.priority + "</span></div>";
+                jQuery("#jobsDiv").append(line);
+            });
+        }
     }
+}
+
+function removeJob(jobId) {
+    var jobInfo = JSON.stringify({jobId: jobId});
+    rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, DELETE_METHOD, jobInfo, loadJobs());
 }

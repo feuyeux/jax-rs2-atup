@@ -6,7 +6,6 @@ function initial() {
         var caseName = jQuery("#caseName").val();
         rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/" + caseName, GET_METHOD, null, fresh4Update);
     });
-    jQuery('#resultDiv').html("Done!");
 }
 function renderSuites(data) {
     var list = data.suiteList;
@@ -42,7 +41,7 @@ function updateCase() {
     rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, PUT_METHOD, putData, renderEdit);
 }
 function renderEdit(data) {
-    jQuery('#resultDiv').html("DONE! id=" + data.caseId);
+    jQuery('#resultDiv').html("id=" + data.caseId);
     jQuery('#resultDiv').append(" name=" + data.caseName);
     jQuery('#resultDiv').append(" status=" + data.caseStatus);
     jQuery('#resultDiv').append(" type=" + data.caseBody);

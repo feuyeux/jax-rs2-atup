@@ -2,15 +2,22 @@
 <html>
 <head>
     <title>Test Suite Page</title>
+    <meta content="text/html;charset=utf-8">
     <script src="../webjars/jquery/2.0.3/jquery.js"></script>
     <script src="../js/atupConstant.js"></script>
     <script src="../js/atupRest.js"></script>
     <script src="../js/cases/testSuite.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            checkSignIn();
+        });
+    </script>
 </head>
 <body>
 <div id="topDiv"></div>
 <div style="margin-top: 20px;"/>
-<h5>Create  Test Suite</h5>
+<h5>Create Test Suite</h5>
+
 <div><span style='width:130px;display:inline-block;'>Test Suite Name:</span>
     <input type="text" id="suiteName0" name="suiteName0" value=""/></div>
 <div>
@@ -19,11 +26,12 @@
 
 <div style="margin-top: 20px;"/>
 <h5>Update Test Suite</h5>
-<div><span style='width:130px;display:inline-block;'>Test Suite Name:</span>
+
+<div><span style='width:150px;display:inline-block;'>Test Suite Name:</span>
     <input type="text" id="suiteName" name="suiteName" value=""/></div>
-<div><span style='width:130px;display:inline-block;'>Test Suite Status:</span>
+<div><span style='width:150px;display:inline-block;'>Test Suite Status:</span>
     <input type="text" id="suiteStatus" name="suiteStatus" value=""/></div>
-<div><span style='width:130px;display:inline-block;'>Test Suite Type:</span>
+<div><span style='width:150px;display:inline-block;'>Test Suite Type:</span>
     <input type="text" id="suiteType" name="suiteType" value=""/></div>
 <div>
     <input id="updateButton" type="button" value="Update" onclick="updateSuite();"/>

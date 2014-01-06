@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration(locations = {"classpath:applicationContext0.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext.xml.bk"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TUAtupUserDao {
     private final Logger log = LogManager.getLogger(TUAtupUserDao.class.getName());

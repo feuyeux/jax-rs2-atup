@@ -17,6 +17,7 @@ import java.util.List;
 @Path(AtupApi.USER_PATH)
 @Component
 public class AtupUserResource {
+    private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(AtupUserResource.class.getName());
     @Autowired
     AtupUserService service;
 
@@ -73,9 +74,15 @@ public class AtupUserResource {
     @Path("signin")
     @Produces(MediaType.APPLICATION_JSON)
     public AtupUserInfo getUser(@QueryParam("user") final String userName, @QueryParam("password") final String password) {
-        final AtupUser user = service.getUser(userName);
-        final AtupUserInfo result = new AtupUserInfo(user);
-        if (result.getPassWord().equals(password)) {
+        try {
+            final AtupUser user = service.getUser(userName.trim());
+            final AtupUserInfo result = new AtupUserInfo(user);
+            if (result.getPassWord().equals(password)) {
+                return result;
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            final AtupUserInfo result = new AtupUserInfo("Not found this user, please try again.", AtupErrorCode.PERSIST_ERROR);
             return result;
         }
         return null;
