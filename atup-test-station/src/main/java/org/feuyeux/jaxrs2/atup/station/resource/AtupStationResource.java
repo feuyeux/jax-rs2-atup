@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 @Singleton
 @Path(AtupApi.TEST_STATION_PATH)
-public class AtupStationResource {
+class AtupStationResource {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(AtupStationResource.class.getName());
     private Integer status = AtupParam.DEVICE_IDLE;
 
@@ -30,7 +30,7 @@ public class AtupStationResource {
         try {
             log.info("keep-a-live :: Request host =" + request.getRemoteAddr());
         } catch (Exception e) {
-
+            log.error(e.getMessage());
         }
         return status;
     }
@@ -43,7 +43,7 @@ public class AtupStationResource {
             log.info("testing :: Request host =" + request.getRemoteAddr());
             log.info("testing :: testCase =" + testCase);
         } catch (Exception e) {
-
+            log.error(e.getMessage());
         }
         Thread.sleep(AtupVariable.TESTING_TIMEOUT);
         status = AtupParam.DEVICE_IDLE;

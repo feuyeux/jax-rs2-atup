@@ -4,10 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
 
-/**
- * Created by hanl on 12/18/13.
- */
-public class ConcurrentTaskTest {
+class ConcurrentTaskTest {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         List<TestRunner> tasks = new ArrayList<>();
         ConcurrentHashMap<String, String> map = new ConcurrentHashMap<>();
@@ -29,10 +26,10 @@ public class ConcurrentTaskTest {
 }
 
 class TestRunner implements Callable<String> {
-    private String name;
-    private ConcurrentHashMap<String, String> map;
+    private final String name;
+    private final ConcurrentHashMap<String, String> map;
 
-    SimpleDateFormat f = new SimpleDateFormat("HH:mm:ss SSS");
+    private final SimpleDateFormat f = new SimpleDateFormat("HH:mm:ss SSS");
 
     TestRunner(String name, ConcurrentHashMap<String, String> map) {
         this.name = name;
@@ -48,7 +45,7 @@ class TestRunner implements Callable<String> {
             String value = map.remove(kv.getKey());
             if (value != null) {
                 r.append(" get ").append(value);
-                r.append(" at " + f.format(new Date())).append("; ");
+                r.append(" at ").append(f.format(new Date())).append("; ");
             }
         }
         return r.toString();

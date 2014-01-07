@@ -14,13 +14,13 @@ import java.io.Serializable;
 @XmlRootElement
 public abstract class AtupInfo implements Serializable {
     private static final long serialVersionUID = 1L;
-    protected String errorInfo;
-    protected Integer statusCode = AtupErrorCode.NONE;
+    private String errorInfo;
+    private Integer statusCode = AtupErrorCode.NONE;
 
-    public AtupInfo() {
+    AtupInfo() {
     }
 
-    public AtupInfo(final String errorInfo, final Integer statusCode) {
+    AtupInfo(final String errorInfo, final Integer statusCode) {
         this.errorInfo = errorInfo;
         this.statusCode = statusCode;
     }

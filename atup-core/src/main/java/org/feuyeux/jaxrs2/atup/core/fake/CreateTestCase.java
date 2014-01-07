@@ -9,7 +9,7 @@ import java.util.Date;
 public class CreateTestCase {
 
     public static final String CASE_NAME = "Test case name";
-    public static final String CASE_BODY = "Test case body";
+    private static final String CASE_BODY = "Test case body";
 
     public static AtupTestCase buildTestCase() {
         final String caseName = CreateTestCase.CASE_NAME;
@@ -18,7 +18,6 @@ public class CreateTestCase {
         final Date createTime = new Date();
         final Date updateTime = new Date();
         final Integer caseStatus = AtupParam.NORMAL_CASE;
-        final AtupTestCase testCase = new AtupTestCase(caseName, suite, caseBody, createTime, updateTime, caseStatus);
-        return testCase;
+        return new AtupTestCase(caseName, suite, caseBody, createTime, updateTime, caseStatus);
     }
 }

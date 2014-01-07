@@ -18,7 +18,7 @@ public class AtupTestJobInfo {
     private Integer caseId;
     private Integer priority;
 
-    public AtupTestJobInfo() {
+    private AtupTestJobInfo() {
     }
 
     public Integer getJobId() {

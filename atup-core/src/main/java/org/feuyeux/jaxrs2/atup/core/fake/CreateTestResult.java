@@ -8,7 +8,7 @@ import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import java.util.Date;
 
 public class CreateTestResult {
-    public static final String CASE_RESULT_BODY = "Test case body";
+    private static final String CASE_RESULT_BODY = "Test case body";
 
     public static AtupTestResult buildTestResult() {
         final AtupTestCase testCase = CreateTestCase.buildTestCase();
@@ -17,7 +17,6 @@ public class CreateTestResult {
         final String resultBody = CreateTestResult.CASE_RESULT_BODY;
         final Date createTime = new Date();
         final Date updateTime = new Date();
-        final AtupTestResult testResult = new AtupTestResult(testCase, user, null, resultStatus, resultBody, createTime, updateTime);
-        return testResult;
+        return new AtupTestResult(testCase, user, null, resultStatus, resultBody, createTime, updateTime);
     }
 }

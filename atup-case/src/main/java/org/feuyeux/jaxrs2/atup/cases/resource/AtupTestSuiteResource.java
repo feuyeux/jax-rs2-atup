@@ -5,10 +5,11 @@ import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupTestSuite;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestSuiteListInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-
+@Component
 @Path(AtupApi.TEST_SUITE_PATH)
 public class AtupTestSuiteResource {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(AtupTestSuiteResource.class.getName());
@@ -19,8 +20,7 @@ public class AtupTestSuiteResource {
     @Path("suites")
     @Produces(MediaType.APPLICATION_JSON)
     public AtupTestSuiteListInfo getCases(@QueryParam("start") final Integer start, @QueryParam("size") final Integer size) {
-        final AtupTestSuiteListInfo result = service.getSuites(start, size);
-        return result;
+        return service.getSuites(start, size);
     }
 
     @POST

@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 @ContextConfiguration(locations = {"classpath:applicationContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TSDeviceResource {
-    public static final String BASE_URI = "http://localhost:8080/atup-device/restapi/";
+    private static final String BASE_URI = "http://localhost:8080/atup-device/restapi/";
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(TSDeviceResource.class.getName());
 
     @Test

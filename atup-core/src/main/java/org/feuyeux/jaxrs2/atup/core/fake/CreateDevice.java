@@ -6,7 +6,7 @@ import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 
 import java.util.Date;
 
-public class CreateDevice {
+class CreateDevice {
     public static AtupDevice buildAtupDevice() {
         final AtupUser user = CreateUser.buildUser();
         final String deviceHost = "10.12.13.14";
@@ -15,7 +15,6 @@ public class CreateDevice {
         final Integer deviceType = AtupParam.DEVICE_QUALITY;
         final Date createTime = new Date();
         final Date updateTime = new Date();
-        final AtupDevice device = new AtupDevice(user, deviceHost, deviceName, deviceStatus, deviceType, createTime, updateTime);
-        return device;
+        return new AtupDevice(user, deviceHost, deviceName, deviceStatus, deviceType, createTime, updateTime);
     }
 }

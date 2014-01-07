@@ -9,7 +9,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 import javax.ws.rs.ApplicationPath;
 
 @ApplicationPath("/rest-api/*")
-public class AtupTestCaseApplication extends ResourceConfig {
+class AtupTestCaseApplication extends ResourceConfig {
     public AtupTestCaseApplication() {
         register(AtupTestSuiteResource.class);
         register(AtupTestCaseResource.class);

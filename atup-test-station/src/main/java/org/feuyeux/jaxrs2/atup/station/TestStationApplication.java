@@ -1,10 +1,11 @@
 package org.feuyeux.jaxrs2.atup.station;
 
-import javax.ws.rs.ApplicationPath;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import javax.ws.rs.ApplicationPath;
+
 @ApplicationPath("/rest-api/*")
-public class TestStationApplication extends ResourceConfig {
+class TestStationApplication extends ResourceConfig {
     public TestStationApplication() {
         packages("org.feuyeux.jaxrs2.atup.station.resource");
     }

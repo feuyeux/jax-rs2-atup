@@ -30,7 +30,7 @@ public class AtupTestCaseService {
     }
 
     public AtupTestCaseListInfo getCases(final Integer start, final Integer size) {
-        AtupTestCaseListInfo result = null;
+        AtupTestCaseListInfo result;
         final List<AtupTestCase> list = dao.findAll(start, size);
         if (list != null && list.size() > 0) {
             result = new AtupTestCaseListInfo(list);

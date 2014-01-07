@@ -5,12 +5,9 @@ import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 
 import java.util.concurrent.Callable;
 
-/**
- * Created by hanl on 12/18/13.
- */
 public class LaunchTestRunner implements Callable<java.lang.String> {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(LaunchTestRunner.class.getName());
-    private JobLaunchService service;
+    private final JobLaunchService service;
 
     public LaunchTestRunner(JobLaunchService service) {
         this.service = service;

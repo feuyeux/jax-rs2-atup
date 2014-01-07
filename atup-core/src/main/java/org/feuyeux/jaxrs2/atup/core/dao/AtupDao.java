@@ -17,7 +17,7 @@ import java.util.List;
 public class AtupDao<T> {
     private final Logger log = LogManager.getLogger(AtupDao.class.getName());
     @PersistenceContext
-    protected EntityManager entityManager;
+    EntityManager entityManager;
     private Class<T> entityClass;
 
     @SuppressWarnings("unchecked")

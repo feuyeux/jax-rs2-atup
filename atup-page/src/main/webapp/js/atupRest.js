@@ -89,7 +89,7 @@ function checkSignIn() {
 }
 function getValue(query, key) {
     var vars = query.split("&");
-    for (i = 0; i < vars.length; i++) {
+    for (var i = 0; i < vars.length; i++) {
         var parts = vars[i].split("=");
         if (parts[0] == key) {
             return parts[1];

@@ -68,7 +68,4 @@ public class TIAtupUserResource extends JerseyTest {
         }
     }
 
-    public void testGetUsers() {
-
-    }
 }

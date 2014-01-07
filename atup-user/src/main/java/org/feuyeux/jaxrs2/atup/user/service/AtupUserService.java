@@ -26,8 +26,8 @@ public class AtupUserService {
     public List<AtupUserInfo> getUserList() {
         final List<AtupUser> list = dao.findAll();
         final List<AtupUserInfo> result = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            result.add(new AtupUserInfo(list.get(i)));
+        for (AtupUser aList : list) {
+            result.add(new AtupUserInfo(aList));
         }
         return result;
     }

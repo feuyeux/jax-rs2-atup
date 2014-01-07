@@ -7,10 +7,11 @@ import org.feuyeux.jaxrs2.atup.core.info.AtupErrorCode;
 import org.feuyeux.jaxrs2.atup.core.info.AtupErrorInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestCaseListInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-
+@Component
 @Path(AtupApi.TEST_CASE_PATH)
 public class AtupTestCaseResource {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(AtupTestCaseResource.class.getName());
@@ -28,8 +29,7 @@ public class AtupTestCaseResource {
         if (start == null || size == null) {
             return new AtupTestCaseListInfo(AtupErrorInfo.INVALID_PARAM, AtupErrorCode.INVALID_PARAM);
         }
-        final AtupTestCaseListInfo result = service.getCases(start, size);
-        return result;
+        return service.getCases(start, size);
     }
 
     @POST
@@ -49,8 +49,7 @@ public class AtupTestCaseResource {
     @Produces(MediaType.APPLICATION_JSON)
     public AtupTestCase getCases(@PathParam("caseName") final String caseName) {
         try {
-            final AtupTestCase existingTestCase = service.getCaseByName(caseName);
-            return existingTestCase;
+            return service.getCaseByName(caseName);
         } catch (final Exception e) {
             return null;
         }

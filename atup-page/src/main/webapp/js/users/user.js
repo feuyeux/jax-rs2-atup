@@ -5,7 +5,7 @@ function createUser() {
     var hashPassword = md5(password);
     var postData = JSON.stringify({userName: userName, passWord: hashPassword, userRole: 4});
     rest(HOST + ATUP_USER_BASE_URI + USER_PATH, POST_METHOD, postData, renderCreate);
-};
+}
 /*PUT*/
 function updateUser() {
     var userName = jQuery.trim(jQuery("#userName").val());

@@ -16,8 +16,8 @@ import java.util.Set;
  */
 public class AtupRequest<S, T> {
     public static final String GET = "GET";
-    public static final String DELETE = "DELETE";
-    public static final String PUT = "PUT";
+    private static final String DELETE = "DELETE";
+    private static final String PUT = "PUT";
     public static final String POST = "POST";
     private ClientConfig clientConfig;
     private Set<Class<?>> clientRegisters;

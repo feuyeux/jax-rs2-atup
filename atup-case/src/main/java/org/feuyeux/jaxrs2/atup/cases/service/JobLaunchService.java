@@ -17,10 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.MediaType;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 @Service
 public class JobLaunchService {
@@ -31,7 +32,7 @@ public class JobLaunchService {
     private static final String SEG = "([01]?\\d\\d?|2[0-4]\\d|25[0-5])";
     private static final String IP_PATTERN = "^" + SEG + "\\." + SEG + "\\." + SEG + "\\." + SEG + "$";
 
-    final ScheduledExecutorService launchTask;
+    //private final ScheduledExecutorService launchTask;
 
     @Autowired
     AtupDeviceDao deviceDao;
@@ -43,7 +44,7 @@ public class JobLaunchService {
     AtupUserDao userDao;
 
     public JobLaunchService() {
-        launchTask = new ScheduledThreadPoolExecutor(1);
+        //launchTask = new ScheduledThreadPoolExecutor(1);
     }
 
     public AtupTestJobInfo addJob(final String key, final AtupTestJobInfo jobInfo) {
@@ -72,16 +73,7 @@ public class JobLaunchService {
     }
 
     boolean contains(String key) {
-        if (highJobMap.get(key) != null) {
-            return true;
-        }
-        if (mediumJobMap.get(key) != null) {
-            return true;
-        }
-        if (lowJobMap.get(key) != null) {
-            return true;
-        }
-        return false;
+        return highJobMap.get(key) != null || mediumJobMap.get(key) != null || lowJobMap.get(key) != null;
     }
 
     public AtupTestJobListInfo getJobs() {
@@ -117,9 +109,7 @@ public class JobLaunchService {
     }
 
     private void launch(final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap) {
-        final Iterator<Map.Entry<String, AtupTestJobInfo>> highIterator = highJobMap.entrySet().iterator();
-        while (highIterator.hasNext()) {
-            final Map.Entry<String, AtupTestJobInfo> currentJobKV = highIterator.next();
+        for (Map.Entry<String, AtupTestJobInfo> currentJobKV : highJobMap.entrySet()) {
             try {
                 final AtupTestJobInfo jobInfo = highJobMap.remove(currentJobKV.getKey());
                 if (jobInfo != null) {
@@ -152,9 +142,7 @@ public class JobLaunchService {
     }
 
     private void remove(final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap, Integer jobId) {
-        final Iterator<Map.Entry<String, AtupTestJobInfo>> highIterator = highJobMap.entrySet().iterator();
-        while (highIterator.hasNext()) {
-            final Map.Entry<String, AtupTestJobInfo> currentJobKV = highIterator.next();
+        for (Map.Entry<String, AtupTestJobInfo> currentJobKV : highJobMap.entrySet()) {
             if (currentJobKV.getValue().getJobId().equals(jobId)) {
                 highJobMap.remove(currentJobKV.getKey());
                 break;

@@ -17,7 +17,7 @@ public class AtupTestSuiteService {
     AtupTestSuiteDao dao;
 
     public AtupTestSuiteListInfo getSuites(final Integer start, final Integer size) {
-        AtupTestSuiteListInfo result = null;
+        AtupTestSuiteListInfo result;
         final List<AtupTestSuite> list = dao.findAll(start, size);
         if (list != null && list.size() > 0) {
             final List<AtupTestSuiteInfo> suiteInfoList = new ArrayList<>(list.size());

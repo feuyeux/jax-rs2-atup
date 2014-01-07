@@ -58,16 +58,14 @@ public class AtupUserResource {
     @Produces(MediaType.APPLICATION_JSON)
     public AtupUserInfo getUser(@PathParam("user") final String userName) {
         final AtupUser user = service.getUser(userName);
-        final AtupUserInfo result = new AtupUserInfo(user);
-        return result;
+        return new AtupUserInfo(user);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public AtupUserListInfo getUsers() {
         final List<AtupUserInfo> users = service.getUserList();
-        final AtupUserListInfo result = new AtupUserListInfo(users);
-        return result;
+        return new AtupUserListInfo(users);
     }
 
     @GET
@@ -82,8 +80,7 @@ public class AtupUserResource {
             }
         } catch (Exception e) {
             log.error(e.getMessage());
-            final AtupUserInfo result = new AtupUserInfo("Not found this user, please try again.", AtupErrorCode.PERSIST_ERROR);
-            return result;
+            return new AtupUserInfo("Not found this user, please try again.", AtupErrorCode.PERSIST_ERROR);
         }
         return null;
     }

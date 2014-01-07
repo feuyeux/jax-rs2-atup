@@ -9,6 +9,7 @@ import org.feuyeux.jaxrs2.atup.core.info.AtupDeviceListInfo;
 import org.feuyeux.jaxrs2.atup.device.service.AtupDeviceService;
 import org.feuyeux.jaxrs2.atup.device.service.StationDetectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -17,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+@Component
 @Path(AtupApi.DEVICE_PATH)
 public class AtupDeviceResource {
     private final Logger log = LogManager.getLogger(AtupDeviceResource.class.getName());
@@ -31,8 +33,7 @@ public class AtupDeviceResource {
     public AtupDevice createDevice(@Context final HttpHeaders headers, final AtupDevice deviceInfo) {
         try {
             fillUser(headers, deviceInfo);
-            final AtupDevice atupDevice = service.createDevice(deviceInfo);
-            return atupDevice;
+            return service.createDevice(deviceInfo);
         } catch (final Exception e) {
             log.error(e);
             return null;
@@ -47,8 +48,7 @@ public class AtupDeviceResource {
             if (deviceInfo.getUser() == null) {
                 fillUser(headers, deviceInfo);
             }
-            final AtupDevice atupDevice = service.updateDevice(deviceInfo);
-            return atupDevice;
+            return service.updateDevice(deviceInfo);
         } catch (final Exception e) {
             log.error(e);
             return null;
@@ -67,8 +67,7 @@ public class AtupDeviceResource {
     public AtupDeviceListInfo getDevicesByUser(@Context final HttpHeaders headers) {
         final String userId = headers.getRequestHeader("Atup-User").get(0);
         final List<AtupDevice> devices = service.getDeviceList(Integer.valueOf(userId));
-        final AtupDeviceListInfo result = new AtupDeviceListInfo(devices);
-        return result;
+        return new AtupDeviceListInfo(devices);
     }
 
     @GET
@@ -76,8 +75,7 @@ public class AtupDeviceResource {
     @Produces(MediaType.APPLICATION_JSON)
     public AtupDeviceListInfo getDevices() {
         final List<AtupDevice> devices = service.getDeviceList();
-        final AtupDeviceListInfo result = new AtupDeviceListInfo(devices);
-        return result;
+        return new AtupDeviceListInfo(devices);
     }
 
     @POST

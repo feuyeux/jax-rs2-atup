@@ -5,13 +5,12 @@ import org.feuyeux.jaxrs2.atup.core.info.AtupUserInfo;
 
 public class CreateUser {
 
-    public static final String TEST_NAME = "eric";
+    private static final String TEST_NAME = "eric";
     public static final String TEST_NAME1 = "mars";
 
     public static AtupUserInfo buildUserInfo() {
         final AtupUser user = buildUser();
-        final AtupUserInfo userInfo = new AtupUserInfo(user);
-        return userInfo;
+        return new AtupUserInfo(user);
     }
 
     public static AtupUser buildUser() {

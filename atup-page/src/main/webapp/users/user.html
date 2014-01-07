@@ -2,6 +2,12 @@
 <html>
 <head>
     <title>User Page</title>
+    <style>
+        .atupFormLavel{
+            display: inline-block;
+            width:120px;;
+        }
+    </style>
     <script src="../webjars/jquery/2.0.3/jquery.js"></script>
     <script src="../js/atupRest.js"></script>
     <script src="../js/users/user.js"></script>
@@ -20,25 +26,23 @@
 <h5>Create User</h5>
 
 <div>
-    <label for="userName0" style="width:100px;">User Name:</label>
+    <label for="userName0" class="atupFormLavel">User Name:</label>
     <input type="text" id="userName0" name="userName0" value=""/>
 </div>
 <div>
-    <label for="password0" style="width:100px;">Password:</label>
+    <label for="password0" class="atupFormLavel">Password:</label>
     <input type="password" id="password0" name="password0" value=""/>
 </div>
 <div>
-    <input id="createButton" type="button" value="Create" onclick="createUser();"/>
+    <input id="createButton0" type="button" value="Create" onclick="createUser();"/>
 </div>
 <div style="margin-top: 20px;"></div>
-<div><label for="userName" style="width:100px;">User Name:</label>
-    <input type="text" id="userName" name="userName" value=""/>
+<div><label for="userName" class="atupFormLavel">User Name:</label><input type="text" id="userName" name="userName" value=""/>
 </div>
 <div>
-    <label for="password" style="width:100px;">Password:</label>
-    <input type="password" id="password" name="password" value=""/></div>
-<div><span style='width:100px;display:inline-block;'>Confirm PW:</span>
-    <input type="text" id="role" name="role" value=""/></div>
+    <label for="password" class="atupFormLavel">Password:</label><input type="password" id="password" name="password" value=""/></div>
+<div>
+    <label for="role" class="atupFormLavel">Confirm PW:</label><input type="text" id="role" name="role" value=""/></div>
 <div>
     <input id="createButton" type="button" value="Update" onclick="updateUser();"/>
 </div>

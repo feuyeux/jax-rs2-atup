@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -20,9 +19,9 @@ public class StationDetectService {
     private List<AtupDevice> deviceList;
     @Autowired
     AtupDeviceDao dao;
-    ScheduledExecutorService detectTask = new ScheduledThreadPoolExecutor(1);
+    private final ScheduledExecutorService detectTask = new ScheduledThreadPoolExecutor(1);
 
-    public void detect() throws InterruptedException, ExecutionException {
+    public void detect() {
         detectTask.scheduleWithFixedDelay(new Runnable() {
             @Override
             public void run() {
@@ -56,7 +55,7 @@ public class StationDetectService {
         }, 0, 10, TimeUnit.SECONDS);
     }
 
-    public static void main(final String[] args) throws InterruptedException, ExecutionException {
+    public static void main(final String[] args) {
         final StationDetectService test = new StationDetectService();
         test.detect();
     }

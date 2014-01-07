@@ -1,6 +1,6 @@
 package org.feuyeux.jaxrs2.atup.core.rest;
 
-public class AtupRequestParam {
+class AtupRequestParam {
     private String key;
     private Object value;
 
