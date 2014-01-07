@@ -36,6 +36,8 @@
         <maven-eclipse-plugin.version>2.9</maven-eclipse-plugin.version>
         <maven-failsafe-plugin.version>2.16</maven-failsafe-plugin.version>
         <jetty-maven-plugin.version>9.1.0.RC0</jetty-maven-plugin.version>
+
+        <main.basedir>${project.basedir}</main.basedir>
     </properties>
 
     <build>

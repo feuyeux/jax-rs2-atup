@@ -2,13 +2,9 @@
 <html>
 <head>
     <title>User Page</title>
-    <style>
-        .atupFormLavel{
-            display: inline-block;
-            width:120px;;
-        }
-    </style>
+    <meta content="text/html;charset=utf-8">
     <script src="../webjars/jquery/2.0.3/jquery.js"></script>
+    <script src="../js/atupCommon.js"></script>
     <script src="../js/atupRest.js"></script>
     <script src="../js/users/user.js"></script>
     <script type="text/javascript">
@@ -18,6 +14,12 @@
     </script>
 </head>
 <body>
+<style>
+    .atupFormLavel{
+        display: inline-block;
+        width:120px;;
+    }
+</style>
 <div id="topDiv"></div>
 
 <h5>Update User</h5>
@@ -47,6 +49,6 @@
     <input id="createButton" type="button" value="Update" onclick="updateUser();"/>
 </div>
 <div id="resultDiv" style="border: 1px solid green; margin-top: 30px;"></div>
-<a href="http://localhost:8080/atup-page/index.html">Index</a>
+<a href="../index.html">Index</a>
 </body>
 </html>

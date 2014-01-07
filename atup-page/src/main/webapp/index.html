@@ -6,12 +6,12 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
     <script src="webjars/jquery/2.0.3/jquery.js"></script>
+    <script src="js/atupCommon.js"></script>
     <script src="js/atupRest.js"></script>
     <script src="js/index.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
-            checkSignIn();
-            loadLinkByRole();
+            load();
         });
     </script>
 </head>
@@ -21,19 +21,20 @@
 <div id="userDiv"></div>
 <div><h5>Devices</h5></div>
 <div id="deviceDiv">
-    <a href="http://localhost:8080/atup-page/devices/devices.html">Device List</a><br/>
+    <a href="devices/devices.html">Device List</a><br/>
 </div>
 <div><h5>Test Cases</h5></div>
 <div>
-    <a href="http://localhost:8080/atup-page/cases/testCases.html">Case List</a><br/> <a
-        href="http://localhost:8080/atup-page/cases/testCase.html">Manage
+    <a href="cases/testCases.html">Case List</a><br/> <a
+        href="cases/testCase.html">Manage
     Case</a><br/>
 </div>
 <div><h5>Test Jobs/Results</h5></div>
 <div>
-    <a href="http://localhost:8080/atup-page/jobs/runningJobs.html">Job List</a><br/>
-    <a href="http://localhost:8080/atup-page/cases/testResults.html">Result List</a><br/>
+    <a href="jobs/runningJobs.html">Job List</a><br/>
+    <a href="cases/testResults.html">Result List</a><br/>
 </div>
 <div id="resultDiv"></div>
+<div id="buildDiv"></div>
 </body>
 </html>
