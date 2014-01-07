@@ -2,13 +2,13 @@
 <html>
 <head>
     <title>Device Page</title>
+    <meta content="text/html;charset=utf-8">
     <script src="../webjars/jquery/2.0.3/jquery.js"></script>
-    <script src="../js/atupConstant.js"></script>
     <script src="../js/atupRest.js"></script>
     <script src="../js/devices/device.js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function () {
-            checkSignIn();
+            initial();
         });
     </script>
 </head>
@@ -37,6 +37,7 @@
     <input type="text" id="deviceType" name="deviceType" value=""/></div>
 <div><span style='width:130px;display:inline-block;'>Device Status:</span>
     <input type="text" id="deviceStatus" name="deviceStatus" value=""/></div>
+<div><span style='width:130px;display:inline-block;'>User:</span><select id="userList"></select></div>
 <div>
     <input id="updateButton" type="button" value="Update" onclick="updateDevice();"/>
 </div>

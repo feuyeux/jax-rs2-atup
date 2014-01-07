@@ -44,7 +44,9 @@ public class AtupDeviceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public AtupDevice updateDevice(@Context final HttpHeaders headers, final AtupDevice deviceInfo) {
         try {
-            fillUser(headers, deviceInfo);
+            if (deviceInfo.getUser() == null) {
+                fillUser(headers, deviceInfo);
+            }
             final AtupDevice atupDevice = service.updateDevice(deviceInfo);
             return atupDevice;
         } catch (final Exception e) {
@@ -65,6 +67,15 @@ public class AtupDeviceResource {
     public AtupDeviceListInfo getDevicesByUser(@Context final HttpHeaders headers) {
         final String userId = headers.getRequestHeader("Atup-User").get(0);
         final List<AtupDevice> devices = service.getDeviceList(Integer.valueOf(userId));
+        final AtupDeviceListInfo result = new AtupDeviceListInfo(devices);
+        return result;
+    }
+
+    @GET
+    @Path("all")
+    @Produces(MediaType.APPLICATION_JSON)
+    public AtupDeviceListInfo getDevices() {
+        final List<AtupDevice> devices = service.getDeviceList();
         final AtupDeviceListInfo result = new AtupDeviceListInfo(devices);
         return result;
     }

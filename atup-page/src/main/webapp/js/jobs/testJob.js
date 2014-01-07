@@ -17,23 +17,18 @@ function renderDeviceList(data) {
     });
     jQuery("#deviceList").empty().append(html);
 }
-function getValue(query, key) {
-    var vars = query.split("&");
-    for (i = 0; i < vars.length; i++) {
-        var parts = vars[i].split("=");
-        if (parts[0] == key) {
-            return parts[1];
-        }
-    }
-    return null;
-}
+
 function createJob() {
     var deviceIp = jQuery("#deviceList").val();
     var caseId = jQuery("#caseId").val();
     var caseName = jQuery("#caseName").val();
     var priority = jQuery("#priorityList").val();
-    var postData = JSON.stringify({deviceIp: deviceIp, caseId: caseId, caseName: caseName, priority: priority});
-    rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, POST_METHOD, postData, afterCreate());
+    if (deviceIp && caseId && caseName && priority) {
+        var postData = JSON.stringify({deviceIp: deviceIp, caseId: caseId, caseName: caseName, priority: priority});
+        rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, POST_METHOD, postData, afterCreate());
+    } else {
+        jQuery('#resultDiv').html("Required parameter is missing, check the input parameters");
+    }
 }
 
 function afterCreate() {

@@ -30,4 +30,8 @@ public class AtupDeviceService {
     public List<AtupDevice> getDeviceList(final Integer userId) {
         return dao.findDevicesByUser(userId);
     }
+
+    public List<AtupDevice> getDeviceList() {
+        return dao.findAll();
+    }
 }
