@@ -1,6 +1,7 @@
 package org.feuyeux.jaxrs2.atup.core.rest;
 
 import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
 import org.springframework.util.CollectionUtils;
 
 import javax.ws.rs.client.*;
@@ -21,9 +22,6 @@ public class AtupRequest<S, T> {
     public static final String POST = "POST";
     private ClientConfig clientConfig;
     private Set<Class<?>> clientRegisters;
-
-    //security
-    //timeout
 
     public AtupRequest() {
     }
@@ -91,6 +89,30 @@ public class AtupRequest<S, T> {
                 return response.readEntity(returnType);
             default:
                 return null;
+        }
+    }
+
+    //security
+    public void proxy(String proxyUri, String proxyUserName, String proxyPassword) {
+        if (this.clientConfig == null) {
+            this.clientConfig = new ClientConfig();
+        }
+        this.clientConfig.property(ClientProperties.PROXY_URI, proxyUri);
+        this.clientConfig.property(ClientProperties.PROXY_USERNAME, proxyUserName);
+        this.clientConfig.property(ClientProperties.PROXY_PASSWORD, proxyPassword);
+
+    }
+
+    //timeout
+    public void timeout(long connectTimeout, long readTimeout) {
+        if (this.clientConfig == null) {
+            this.clientConfig = new ClientConfig();
+        }
+        if (connectTimeout > 0) {
+            this.clientConfig.property(ClientProperties.CONNECT_TIMEOUT, connectTimeout);
+        }
+        if (readTimeout > 0) {
+            this.clientConfig.property(ClientProperties.READ_TIMEOUT, readTimeout);
         }
     }
 }

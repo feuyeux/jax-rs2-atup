@@ -5,7 +5,7 @@
 ![atup-topology.png](atup-topology.png)
 
 ### build ###
-> mvn clean install -PCI
+> mvn clean install -DskipTests -PCI
 
 ### Unit Test ###
 > mvn clean install -PTI
@@ -147,7 +147,9 @@ Context.xml:
                 </plugins>
 
 ###Modules###
+
 #### atup-core ####
+
 #### atup-user ####
 REST WADL:
 [http://localhost:8080/atup-user/rest-api/application.wadl](http://localhost:8080/atup-user/rest-api/application.wadl)
@@ -156,6 +158,9 @@ REST WADL:
 - atupJobKiller jaxman
 - atupDeviceKeeper jaxman
 - xer xer
+
 #### atup-case ####
+
 #### atup-device ####
+
 #### atup-page  ####
