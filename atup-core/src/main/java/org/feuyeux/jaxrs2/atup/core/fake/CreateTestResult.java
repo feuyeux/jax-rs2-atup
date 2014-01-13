@@ -13,7 +13,7 @@ public class CreateTestResult {
     public static AtupTestResult buildTestResult() {
         final AtupTestCase testCase = CreateTestCase.buildTestCase();
         final AtupUser user = CreateUser.buildUser();
-        final Integer resultStatus = AtupParam.RESULT_OK;
+        final Integer resultStatus = AtupParam.RESULT_SUCCESS;
         final String resultBody = CreateTestResult.CASE_RESULT_BODY;
         final Date createTime = new Date();
         final Date updateTime = new Date();

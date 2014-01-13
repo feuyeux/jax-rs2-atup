@@ -4,7 +4,7 @@
     <parent>
         <artifactId>atup</artifactId>
         <groupId>org.feuyeux.jaxrs2.atup</groupId>
-        <version>0.0.2-SNAPSHOT</version>
+        <version>0.0.3-SNAPSHOT</version>
     </parent>
 
     <artifactId>atup-page</artifactId>
@@ -98,7 +98,8 @@
                                 <configuration>
                                     <target>
                                         <copy file="src/main/webapp/js/atupCommon_staging.js"
-                                              tofile="${project.build.directory}/${project.artifactId}-${project.version}/js/atupCommon.js" overwrite="true" />
+                                              tofile="${project.build.directory}/${project.artifactId}-${project.version}/js/atupCommon.js"
+                                              overwrite="true"/>
                                     </target>
                                 </configuration>
                                 <goals>

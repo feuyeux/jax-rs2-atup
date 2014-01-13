@@ -1,6 +1,7 @@
 package org.feuyeux.jaxrs2.atup.core.info;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 /**
  * ATUP Test Job Info
@@ -11,12 +12,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @XmlRootElement
-public class AtupTestJobInfo {
+public class AtupTestJobInfo implements Comparable<AtupTestJobInfo> {
     private Integer jobId;
     private Integer userId;
     private String deviceIp;
     private Integer caseId;
     private Integer priority;
+    private Date generatedTime;
 
     private AtupTestJobInfo() {
     }
@@ -61,6 +63,14 @@ public class AtupTestJobInfo {
         this.deviceIp = deviceIp;
     }
 
+    public Date getGeneratedTime() {
+        return generatedTime;
+    }
+
+    public void setGeneratedTime(Date generatedTime) {
+        this.generatedTime = generatedTime;
+    }
+
     @Override
     public String toString() {
         return "jobId=" + jobId + ",userId=" + userId + ",deviceIp=" + deviceIp + ",caseId=" + caseId + ",priority=" + priority;
@@ -86,5 +96,15 @@ public class AtupTestJobInfo {
     @Override
     public int hashCode() {
         return jobId.hashCode() + userId.hashCode();
+    }
+
+    @Override
+    public int compareTo(AtupTestJobInfo other) {
+        int result = this.priority.compareTo(other.priority);
+        if (result == 0) {
+            return this.generatedTime.compareTo(other.generatedTime);
+        } else {
+            return result;
+        }
     }
 }
