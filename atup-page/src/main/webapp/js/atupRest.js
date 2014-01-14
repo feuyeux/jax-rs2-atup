@@ -37,7 +37,8 @@ function rest(restUrl, httpMethod, entity, contentType, dataType, callback) {
     var resultLine = jQuery('#resultDiv');
     resultLine.html(LOADING);
     var userId = storage.getItem("userId");
-    var request = jQuery.ajax({type: httpMethod, url: restUrl, headers: {'Atup-User': userId}, data: entity, contentType: contentType, dataType: dataType,
+    var userRole = storage.getItem("userRole");
+    var request = jQuery.ajax({type: httpMethod, url: restUrl, headers: {'Atup-User': userId,'Atup-UserRole': userRole}, data: entity, contentType: contentType, dataType: dataType,
         crossDomain: true});
     request.done(function (data) {
         try {

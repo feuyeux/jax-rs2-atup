@@ -13,4 +13,5 @@ public interface AtupApi {
     String TEST_STATION_CONTEXT = "atup-test-station";
     String TEST_STATION_PATH = "station";
     String ATUP_USER_HEAD="Atup-User";
+    String ATUP_USER_ROLE_HEAD = "Atup-UserRole";
 }

@@ -31,13 +31,15 @@ public class AtupUserResource {
     public javax.ws.rs.core.Response createUser(@Context final HttpHeaders headers, final AtupUserInfo userInfo) {
         final MultivaluedMap<String, String> headerMap = headers.getRequestHeaders();
         List<String> userIdInfo = headerMap.get(AtupApi.ATUP_USER_HEAD);
+        List<String> userRoleInfo = headerMap.get(AtupApi.ATUP_USER_ROLE_HEAD);
         if (userIdInfo == null) {
             final AtupUserInfo result = new AtupUserInfo("No user info found.", AtupErrorCode.UNAUTHORIZED_ERROR);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
         } else {
             Integer userId = Integer.valueOf(userIdInfo.get(0));
+            Integer userRole = Integer.valueOf(userRoleInfo.get(0));
             final AtupUser user = service.getUser(userId);
-            if (user.getUserRole().equals(AtupParam.USER_ADMIN)) {
+            if (user.getUserRole().equals(AtupParam.USER_ADMIN) && userRole.equals(AtupParam.USER_ADMIN)) {
                 return createUser(userInfo);
             } else {
                 final AtupUserInfo result = new AtupUserInfo("No permission for this request.", AtupErrorCode.FORBIDDEN_ERROR);
