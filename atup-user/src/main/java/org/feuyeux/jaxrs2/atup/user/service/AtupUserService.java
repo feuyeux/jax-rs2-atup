@@ -19,6 +19,10 @@ public class AtupUserService {
         return dao.save(user);
     }
 
+    public AtupUser getUser(Integer id) {
+        return dao.findById(id);
+    }
+
     public AtupUser getUser(final String userName) {
         return dao.findByName(userName);
     }

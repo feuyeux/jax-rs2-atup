@@ -32,9 +32,9 @@ public class TUTestResultDao {
     public void testUpdateTestCase() {
         final AtupTestResult entity = CreateTestResult.buildTestResult();
         final AtupTestResult savedEntity = dao.save(entity);
-        savedEntity.setResultStatus(AtupParam.RESULT_ERROR);
+        savedEntity.setResultStatus(AtupParam.RESULT_FAILED);
         final AtupTestResult updatedEntity = dao.update(savedEntity);
-        Assert.assertEquals(AtupParam.RESULT_ERROR, updatedEntity.getResultStatus());
+        Assert.assertEquals(AtupParam.RESULT_FAILED, updatedEntity.getResultStatus());
     }
 
     @Test
@@ -47,13 +47,13 @@ public class TUTestResultDao {
 
     @Test
     public void testFindByStatus() {
-        final List<AtupTestResult> caseList = dao.findByStatus(AtupParam.RESULT_OK);
+        final List<AtupTestResult> caseList = dao.findByStatus(AtupParam.RESULT_SUCCESS);
         checkResult(caseList);
     }
 
     private void checkResult(final List<AtupTestResult> caseList) {
         if (!caseList.isEmpty()) {
-            Assert.assertEquals(AtupParam.RESULT_OK, caseList.get(0).getResultStatus());
+            Assert.assertEquals(AtupParam.RESULT_SUCCESS, caseList.get(0).getResultStatus());
         }
     }
 

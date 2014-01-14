@@ -47,6 +47,6 @@ class AtupStationResource {
         }
         Thread.sleep(AtupVariable.TESTING_TIMEOUT);
         status = AtupParam.DEVICE_IDLE;
-        return AtupParam.RESULT_OK;
+        return AtupParam.RESULT_SUCCESS;
     }
 }

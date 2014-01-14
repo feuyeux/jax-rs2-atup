@@ -3,9 +3,9 @@ function loadDevices() {
     jQuery("#devicesDiv").html("Loading...");
     var userRole = storage.getItem("userRole");
     if (ROLE_DEVICE_MANAGER == userRole) {
-        rest(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH + "/all", GET_METHOD, renderGetAll);
+        restGet(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH + "/all", GET_METHOD, renderGetAll);
     } else {
-        rest(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH, GET_METHOD, renderGetAll);
+        restGet(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH, GET_METHOD, renderGetAll);
     }
 }
 function renderGetAll(data) {

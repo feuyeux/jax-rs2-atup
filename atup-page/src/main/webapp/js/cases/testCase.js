@@ -1,10 +1,10 @@
 function initial() {
     checkSignIn();
-    rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, renderSuiteList0);
+    restGet(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, renderSuiteList0);
     jQuery("#caseName").change(function () {
-        rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, renderSuiteList);
+        restGet(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, renderSuiteList);
         var caseName = jQuery("#caseName").val();
-        rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/" + caseName, GET_METHOD, fresh4Update);
+        restGet(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/" + caseName, GET_METHOD, fresh4Update);
     });
 }
 function renderSuites(data) {
@@ -30,7 +30,7 @@ function createCase() {
     var caseName = jQuery("#caseName0").val();
     var caseBody = jQuery("#caseBody0").val();
     var postData = JSON.stringify({caseName: caseName, caseBody: caseBody, caseStatus: 1, suite: {suiteId: suiteId}});
-    rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, POST_METHOD, postData, renderEdit);
+    restSet(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, POST_METHOD, postData, renderEdit);
 }
 function updateCase() {
     var suiteId = jQuery("#suiteList").val();
@@ -38,7 +38,7 @@ function updateCase() {
     var caseBody = jQuery("#caseBody").val();
     var caseStatus = jQuery("#caseStatus").val();
     var putData = JSON.stringify({caseName: caseName, caseBody: caseBody, caseStatus: caseStatus, suite: {suiteId: suiteId}});
-    rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, PUT_METHOD, putData, renderEdit);
+    restSet(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, PUT_METHOD, putData, renderEdit);
 }
 function renderEdit(data) {
     jQuery('#resultDiv').html("id=" + data.caseId);

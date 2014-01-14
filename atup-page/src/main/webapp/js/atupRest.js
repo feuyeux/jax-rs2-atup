@@ -27,11 +27,11 @@ var ROLE_USER = 4;
 
 var normal_status = 9200;
 var LOADING = "Loading...";
-function rest(restUrl, httpMethod, callback) {
-    rest0(restUrl, httpMethod, "", "application/json", "json", callback)
+function restGet(restUrl, httpMethod, callback) {
+    rest(restUrl, httpMethod, "", "application/json", "json", callback);
 }
-function rest(restUrl, httpMethod, entity, callback) {
-    rest0(restUrl, httpMethod, entity, "application/json", "json", callback)
+function restSet(restUrl, httpMethod, entity, callback) {
+    rest(restUrl, httpMethod, entity, "application/json", "json", callback);
 }
 function rest(restUrl, httpMethod, entity, contentType, dataType, callback) {
     var resultLine = jQuery('#resultDiv');

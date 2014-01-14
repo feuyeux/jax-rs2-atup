@@ -1,7 +1,7 @@
 function loadJobs() {
     checkSignIn();
     jQuery("#jobsDiv").html("Loading...");
-    rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, GET_METHOD, renderGetAll);
+    restGet(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, GET_METHOD, renderGetAll);
 }
 function renderGetAll(data) {
     var list = data.jobList;
@@ -51,5 +51,5 @@ function renderGetAll(data) {
 
 function removeJob(jobId) {
     var jobInfo = JSON.stringify({jobId: jobId});
-    rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, DELETE_METHOD, jobInfo, loadJobs());
+    restSet(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, DELETE_METHOD, jobInfo, loadJobs());
 }

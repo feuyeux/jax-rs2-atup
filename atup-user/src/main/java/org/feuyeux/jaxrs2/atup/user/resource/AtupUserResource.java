@@ -1,6 +1,7 @@
 package org.feuyeux.jaxrs2.atup.user.resource;
 
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
+import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupUser;
 import org.feuyeux.jaxrs2.atup.core.info.AtupErrorCode;
 import org.feuyeux.jaxrs2.atup.core.info.AtupUserInfo;
@@ -10,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.util.List;
 
 @Path(AtupApi.USER_PATH)
@@ -28,7 +28,25 @@ public class AtupUserResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public javax.ws.rs.core.Response createUser(final AtupUserInfo userInfo) {
+    public javax.ws.rs.core.Response createUser(@Context final HttpHeaders headers, final AtupUserInfo userInfo) {
+        final MultivaluedMap<String, String> headerMap = headers.getRequestHeaders();
+        List<String> userIdInfo = headerMap.get(AtupApi.ATUP_USER_HEAD);
+        if (userIdInfo == null) {
+            final AtupUserInfo result = new AtupUserInfo("No user info found.", AtupErrorCode.UNAUTHORIZED_ERROR);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
+        } else {
+            Integer userId = Integer.valueOf(userIdInfo.get(0));
+            final AtupUser user = service.getUser(userId);
+            if (user.getUserRole().equals(AtupParam.USER_ADMIN)) {
+                return createUser(userInfo);
+            } else {
+                final AtupUserInfo result = new AtupUserInfo("No permission for this request.", AtupErrorCode.FORBIDDEN_ERROR);
+                return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
+            }
+        }
+    }
+
+    private Response createUser(AtupUserInfo userInfo) {
         try {
             final AtupUser newUser = service.createUser(userInfo);
             final AtupUserInfo result = new AtupUserInfo(newUser);
