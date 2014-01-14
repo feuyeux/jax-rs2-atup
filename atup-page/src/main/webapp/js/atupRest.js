@@ -25,16 +25,16 @@ var ROLE_JOB_KILLER = 2;
 var ROLE_DEVICE_MANAGER = 3;
 var ROLE_USER = 4;
 
-function rest(restUrl, httpMethod, param, callback) {
-    rest0(restUrl, httpMethod, param, "application/json", "json", callback)
+function rest(restUrl, httpMethod, entity, callback) {
+    rest0(restUrl, httpMethod, entity, "application/json", "json", callback)
 }
 var normal_status = 9200;
 var LOADING = "Loading...";
-function rest0(restUrl, httpMethod, param, contenttype, datatype, callback) {
+function rest0(restUrl, httpMethod, entity, contentType, dataType, callback) {
     var resultLine = jQuery('#resultDiv');
     resultLine.html(LOADING);
     var userId = storage.getItem("userId");
-    var request = jQuery.ajax({type: httpMethod, url: restUrl, headers: {'Atup-User': userId}, data: param, contentType: contenttype, dataType: datatype,
+    var request = jQuery.ajax({type: httpMethod, url: restUrl, headers: {'Atup-User': userId}, data: entity, contentType: contentType, dataType: dataType,
         crossDomain: true});
     request.done(function (data) {
         try {
@@ -54,7 +54,6 @@ function rest0(restUrl, httpMethod, param, contenttype, datatype, callback) {
         resultLine.html(errorThrown + " status=" + textStatus.status + " text=" + textStatus.statusText);
     });
     resultLine.append(" DONE!");
-
 }
 function getInfoByQuery() {
     var url = jQuery("#queryUrl").val();

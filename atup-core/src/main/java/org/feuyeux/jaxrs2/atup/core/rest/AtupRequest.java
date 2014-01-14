@@ -15,7 +15,7 @@ import java.util.Set;
  * @since 1.0
  * 09/09/2013
  */
-public class AtupRequest<S, T> {
+public class AtupRequest<R, E> {
     public static final String GET = "GET";
     private static final String DELETE = "DELETE";
     private static final String PUT = "PUT";
@@ -34,17 +34,17 @@ public class AtupRequest<S, T> {
         this.clientRegisters = clientRegisters;
     }
 
-    public T rest(final String method, final String requestUrl, final Class<T> returnType) {
+    public E rest(final String method, final String requestUrl, final Class<E> returnType) {
         return rest(method, requestUrl, null, null, null, null, returnType);
     }
 
-    public T rest(final String method, final String requestUrl, final Set<AtupRequestParam> headParams, final Set<AtupRequestParam> queryParams,
-                  final MediaType requestDataType, final Class<T> returnType) {
+    public E rest(final String method, final String requestUrl, final Set<AtupRequestParam> headParams, final Set<AtupRequestParam> queryParams,
+                  final MediaType requestDataType, final Class<E> returnType) {
         return rest(method, requestUrl, headParams, queryParams, requestDataType, null, returnType);
     }
 
-    public T rest(final String method, final String requestUrl, final Set<AtupRequestParam> headParams, final Set<AtupRequestParam> queryParams,
-                  final MediaType requestDataType, final S requestData, final Class<T> returnType) {
+    public E rest(final String method, final String requestUrl, final Set<AtupRequestParam> headParams, final Set<AtupRequestParam> queryParams,
+                  final MediaType requestDataType, final R requestData, final Class<E> returnType) {
         if (clientConfig == null) {
             clientConfig = new ClientConfig();
         }
@@ -70,25 +70,29 @@ public class AtupRequest<S, T> {
             }
         }
 
-        javax.ws.rs.core.Response response;
-        Entity<S> entity;
+        javax.ws.rs.core.Response response = null;
+        Entity<R> entity;
         switch (method) {
             case GET:
                 response = invocationBuilder.get();
-                return response.readEntity(returnType);
+                break;
             case DELETE:
                 response = invocationBuilder.delete();
-                return response.readEntity(returnType);
+                break;
             case PUT:
                 entity = Entity.entity(requestData, requestDataType);
                 response = invocationBuilder.put(entity);
-                return response.readEntity(returnType);
+                break;
             case POST:
                 entity = Entity.entity(requestData, requestDataType);
                 response = invocationBuilder.post(entity);
-                return response.readEntity(returnType);
-            default:
-                return null;
+                break;
+        }
+        if (response != null) {
+            return response.readEntity(returnType);
+        } else {
+            client.close();
+            return null;
         }
     }
 
@@ -100,7 +104,6 @@ public class AtupRequest<S, T> {
         this.clientConfig.property(ClientProperties.PROXY_URI, proxyUri);
         this.clientConfig.property(ClientProperties.PROXY_USERNAME, proxyUserName);
         this.clientConfig.property(ClientProperties.PROXY_PASSWORD, proxyPassword);
-
     }
 
     //timeout
