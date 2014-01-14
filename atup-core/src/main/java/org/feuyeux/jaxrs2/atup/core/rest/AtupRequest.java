@@ -43,6 +43,10 @@ public class AtupRequest<R, E> {
         return rest(method, requestUrl, headParams, queryParams, requestDataType, null, returnType);
     }
 
+    public E rest(final String method, final String requestUrl, final MediaType requestDataType, final R requestData, final Class<E> returnType) {
+        return rest(method, requestUrl, null, null, requestDataType, requestData, returnType);
+    }
+
     public E rest(final String method, final String requestUrl, final Set<AtupRequestParam> headParams, final Set<AtupRequestParam> queryParams,
                   final MediaType requestDataType, final R requestData, final Class<E> returnType) {
         if (clientConfig == null) {

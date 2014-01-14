@@ -1,7 +1,6 @@
 package org.feuyeux.jaxrs2.atup.cases.runner;
 
 import org.feuyeux.jaxrs2.atup.cases.service.JobLaunchService;
-import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 
 import java.util.concurrent.Callable;
 
@@ -16,9 +15,7 @@ public class LaunchTestRunner implements Callable<java.lang.String> {
     @Override
     public String call() throws Exception {
         try {
-            service.launch(AtupParam.HIGH);
-            service.launch(AtupParam.MEDIUM);
-            service.launch(AtupParam.LOW);
+            service.launch();
             return "DONE";
         } catch (final Exception e) {
             log.error(e);

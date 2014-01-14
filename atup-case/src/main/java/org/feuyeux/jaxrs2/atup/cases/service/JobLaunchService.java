@@ -17,18 +17,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.PriorityQueue;
 
 @Service
 public class JobLaunchService {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(JobLaunchService.class.getName());
-    private final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<String, AtupTestJobInfo> mediumJobMap = new ConcurrentHashMap<>();
-    private final ConcurrentHashMap<String, AtupTestJobInfo> lowJobMap = new ConcurrentHashMap<>();
+    private final PriorityQueue<AtupTestJobInfo> jobQueue;
     private static final String SEG = "([01]?\\d\\d?|2[0-4]\\d|25[0-5])";
     private static final String IP_PATTERN = "^" + SEG + "\\." + SEG + "\\." + SEG + "\\." + SEG + "$";
 
@@ -45,48 +41,29 @@ public class JobLaunchService {
 
     public JobLaunchService() {
         //launchTask = new ScheduledThreadPoolExecutor(1);
+        jobQueue = new PriorityQueue<>();
     }
 
-    public AtupTestJobInfo addJob(final String key, final AtupTestJobInfo jobInfo) {
-        if (contains(key))
+    public synchronized AtupTestJobInfo addJob(final AtupTestJobInfo jobInfo) {
+        if (jobQueue.equals(jobInfo))
             return null;
-        switch (jobInfo.getPriority()) {
-            case 3:
-                log.info("New High priority Job joint: " + jobInfo);
-                return highJobMap.put(key, jobInfo);
-
-            case 2:
-                log.info("New Medium priority Job joint: " + jobInfo);
-                return mediumJobMap.put(key, jobInfo);
-
-            case 1:
-                log.info("New Low priority Job joint: " + jobInfo);
-                return lowJobMap.put(key, jobInfo);
+        if (jobQueue.add(jobInfo)) {
+            return jobInfo;
+        } else {
+            return null;
         }
-        return null;
     }
 
-    public void removeJob(final Integer jobId) {
-        remove(highJobMap, jobId);
-        remove(mediumJobMap, jobId);
-        remove(lowJobMap, jobId);
-    }
-
-    boolean contains(String key) {
-        return highJobMap.get(key) != null || mediumJobMap.get(key) != null || lowJobMap.get(key) != null;
+    public synchronized void removeJob(final AtupTestJobInfo jobInfo) {
+        jobQueue.remove(jobInfo);
     }
 
     public AtupTestJobListInfo getJobs() {
-        final List<AtupTestJobInfo> jobList = getJobList();
-        return new AtupTestJobListInfo(jobList);
-    }
-
-    private List<AtupTestJobInfo> getJobList() {
-        final List<AtupTestJobInfo> jobList = new ArrayList<>();
-        jobList.addAll(highJobMap.values());
-        jobList.addAll(mediumJobMap.values());
-        jobList.addAll(lowJobMap.values());
-        return jobList;
+        AtupTestJobInfo[] jobs = jobQueue.toArray(new AtupTestJobInfo[]{});
+        if (jobs.length > 0) {
+            Arrays.sort(jobs);
+        }
+        return new AtupTestJobListInfo(jobs);
     }
 
 //    public void launch() throws InterruptedException, ExecutionException {
@@ -94,59 +71,30 @@ public class JobLaunchService {
 //        }, 0, 10, TimeUnit.SECONDS);
 //    }
 
-    public void launch(Integer level) {
-        switch (level) {
-            case 3:
-                launch(highJobMap);
-                break;
-            case 2:
-                launch(mediumJobMap);
-                break;
-            case 1:
-                launch(lowJobMap);
-                break;
-        }
-    }
-
-    private void launch(final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap) {
-        for (Map.Entry<String, AtupTestJobInfo> currentJobKV : highJobMap.entrySet()) {
-            try {
-                final AtupTestJobInfo jobInfo = highJobMap.remove(currentJobKV.getKey());
-                if (jobInfo != null) {
-                    final String deviceIp = jobInfo.getDeviceIp();
-                    if (deviceIp != null && deviceIp.matches(IP_PATTERN)) {
-                        final AtupDevice testDevice = deviceDao.findByIp(deviceIp);
-                        final Integer deviceStatus = testDevice.getDeviceStatus();
-                        log.info("Device[" + deviceIp + "] status = " + deviceStatus);
-                        if (deviceStatus.equals(AtupParam.DEVICE_IDLE)) {
-                            final String launchPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
-                            final AtupTestCase testCase = testCaseDao.findById(jobInfo.getCaseId());
-                            final Integer status = restPost(launchPath, testCase);
-                            final AtupUser user = userDao.findById(jobInfo.getUserId());
-                            final Date createTime = new Date();
-                            final AtupTestResult testResult = new AtupTestResult(testCase, user, testDevice, status, "", createTime, createTime);
-                            resultDao.save(testResult);
-                        }
-                    }
+    public void launch() {
+        final AtupTestJobInfo jobInfo = jobQueue.peek();
+        if (jobInfo != null) {
+            final String deviceIp = jobInfo.getDeviceIp();
+            if (deviceIp != null && deviceIp.matches(IP_PATTERN)) {
+                final AtupDevice testDevice = deviceDao.findByIp(deviceIp);
+                final Integer deviceStatus = testDevice.getDeviceStatus();
+                log.info("Device[" + deviceIp + "] status = " + deviceStatus);
+                if (deviceStatus.equals(AtupParam.DEVICE_IDLE)) {
+                    final String launchPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
+                    final AtupTestCase testCase = testCaseDao.findById(jobInfo.getCaseId());
+                    jobQueue.poll();
+                    final Integer status = restPost(launchPath, testCase);
+                    final AtupUser user = userDao.findById(jobInfo.getUserId());
+                    final Date createTime = new Date();
+                    final AtupTestResult testResult = new AtupTestResult(testCase, user, testDevice, status, "", createTime, createTime);
+                    resultDao.save(testResult);
                 }
-            } catch (final Exception e) {
-                log.error(e);
-                highJobMap.put(currentJobKV.getKey(), currentJobKV.getValue());
             }
         }
     }
 
     private Integer restPost(String launchPath, AtupTestCase testCase) {
         final AtupRequest<AtupTestCase, Integer> request = new AtupRequest<>();
-        return request.rest(AtupRequest.POST, launchPath, null, null, MediaType.APPLICATION_JSON_TYPE, testCase, Integer.class);
-    }
-
-    private void remove(final ConcurrentHashMap<String, AtupTestJobInfo> highJobMap, Integer jobId) {
-        for (Map.Entry<String, AtupTestJobInfo> currentJobKV : highJobMap.entrySet()) {
-            if (currentJobKV.getValue().getJobId().equals(jobId)) {
-                highJobMap.remove(currentJobKV.getKey());
-                break;
-            }
-        }
+        return request.rest(AtupRequest.POST, launchPath, MediaType.APPLICATION_JSON_TYPE, testCase, Integer.class);
     }
 }

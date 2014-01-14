@@ -17,6 +17,7 @@ function renderGetAll(data) {
                     + "Device Ip</span>" + SPAN_BEGIN
                     + "User Id</span>" + SPAN_BEGIN2
                     + "Job Priority</span>" + SPAN_BEGIN
+                    + "Create Time</span>" + SPAN_BEGIN
                     + "Manage</span></div>");
             jQuery.each(list, function (i, jobInfo) {
                 var line = "<div align='left'>" + SPAN_BEGIN
@@ -25,6 +26,7 @@ function renderGetAll(data) {
                     + jobInfo.deviceIp + "</span>" + SPAN_BEGIN
                     + jobInfo.userId + "</span>" + SPAN_BEGIN
                     + jobInfo.priority + "</span>" + SPAN_BEGIN
+                    + jobInfo.generatedTime + "</span>" + SPAN_BEGIN
                     + "<input type='button' value='REMOVE' onclick='removeJob(" + jobInfo.jobId + ");'/></span></div>";
                 jQuery("#jobsDiv").append(line);
             });
@@ -35,14 +37,16 @@ function renderGetAll(data) {
                     + "Case Id</span>" + SPAN_BEGIN
                     + "Device Ip</span>" + SPAN_BEGIN
                     + "User Id</span>" + SPAN_BEGIN2
-                    + "Job Priority</span></div>");
+                    + "Job Priority</span>" + SPAN_BEGIN
+                    + "Create Time</span></div>");
             jQuery.each(list, function (i, jobInfo) {
                 var line = "<div align='left'>" + SPAN_BEGIN
                     + jobInfo.jobId + "</span>" + SPAN_BEGIN
                     + jobInfo.caseId + "</span>" + SPAN_BEGIN
                     + jobInfo.deviceIp + "</span>" + SPAN_BEGIN
                     + jobInfo.userId + "</span>" + SPAN_BEGIN
-                    + jobInfo.priority + "</span></div>";
+                    + jobInfo.priority + "</span>" + SPAN_BEGIN
+                    + jobInfo.generatedTime + "</span></div>";
                 jQuery("#jobsDiv").append(line);
             });
         }

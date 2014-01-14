@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path(AtupApi.USER_PATH)
@@ -29,21 +32,27 @@ public class AtupUserResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public javax.ws.rs.core.Response createUser(@Context final HttpHeaders headers, final AtupUserInfo userInfo) {
-        final MultivaluedMap<String, String> headerMap = headers.getRequestHeaders();
-        List<String> userIdInfo = headerMap.get(AtupApi.ATUP_USER_HEAD);
-        List<String> userRoleInfo = headerMap.get(AtupApi.ATUP_USER_ROLE_HEAD);
-        if (userIdInfo == null) {
+        Response response = checkRole(headers, AtupParam.USER_ADMIN);
+        if (response == null) {
+            return createUser(userInfo);
+        } else {
+            return response;
+        }
+    }
+
+    public Response checkRole(HttpHeaders headers, Integer role) {
+        Integer userId = Integer.valueOf(headers.getRequestHeader(AtupApi.ATUP_USER_HEAD).get(0));
+        Integer userRole = Integer.valueOf(headers.getRequestHeader(AtupApi.ATUP_USER_ROLE_HEAD).get(0));
+        if (userId == null) {
             final AtupUserInfo result = new AtupUserInfo("No user info found.", AtupErrorCode.UNAUTHORIZED_ERROR);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
         } else {
-            Integer userId = Integer.valueOf(userIdInfo.get(0));
-            Integer userRole = Integer.valueOf(userRoleInfo.get(0));
             final AtupUser user = service.getUser(userId);
-            if (user.getUserRole().equals(AtupParam.USER_ADMIN) && userRole.equals(AtupParam.USER_ADMIN)) {
-                return createUser(userInfo);
-            } else {
+            if (!user.getUserRole().equals(role) || !userRole.equals(role)) {
                 final AtupUserInfo result = new AtupUserInfo("No permission for this request.", AtupErrorCode.FORBIDDEN_ERROR);
                 return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
+            } else {
+                return null;
             }
         }
     }

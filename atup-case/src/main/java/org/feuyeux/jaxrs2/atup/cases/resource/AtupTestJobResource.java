@@ -3,9 +3,12 @@ package org.feuyeux.jaxrs2.atup.cases.resource;
 import org.feuyeux.jaxrs2.atup.cases.runner.LaunchTestRunner;
 import org.feuyeux.jaxrs2.atup.cases.service.JobLaunchService;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
+import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupVariable;
+import org.feuyeux.jaxrs2.atup.core.info.AtupErrorCode;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestJobListInfo;
+import org.feuyeux.jaxrs2.atup.core.info.AtupUserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
+
 @Component
 @Path(AtupApi.TEST_JOB_PATH)
 public class AtupTestJobResource {
@@ -32,28 +36,33 @@ public class AtupTestJobResource {
 
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public AtupTestJobListInfo retrieveRunningJobs() {
+        return jobLaunchService.getJobs();
+    }
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public AtupTestJobInfo createJob(@Context final HttpHeaders headers, final AtupTestJobInfo jobInfo) {
-        final String userId = headers.getRequestHeader("Atup-User").get(0);
-        jobInfo.setUserId(Integer.valueOf(userId));
+    public AtupTestJobInfo createJob(final AtupTestJobInfo jobInfo) {
         jobInfo.setJobId(JOB_ID.getAndIncrement());
-        final String key = jobInfo.getUserId() + "-" + jobInfo.getCaseId() + "-" + jobInfo.getDeviceIp();
-        return jobLaunchService.addJob(key, jobInfo);
+        return jobLaunchService.addJob(jobInfo);
     }
 
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void removeJob(final AtupTestJobInfo jobInfo) {
-        jobLaunchService.removeJob(jobInfo.getJobId());
-    }
-
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public AtupTestJobListInfo retrieveRunningJobs() {
-        return jobLaunchService.getJobs();
+    public void removeJob(@Context final HttpHeaders headers, final AtupTestJobInfo jobInfo) {
+        final String userId = headers.getRequestHeader("Atup-User").get(0);
+        final String userRole = headers.getRequestHeader("Atup-UserRole").get(0);
+        boolean isJobKiller = userRole.equals(AtupParam.USER_JOB_KILLER);
+        if (isJobKiller || userId.equals(jobInfo.getUserId())) {
+            jobLaunchService.removeJob(jobInfo);
+        } else {
+            final AtupUserInfo result = new AtupUserInfo("No permission for this request.", AtupErrorCode.FORBIDDEN_ERROR);
+            Response.noContent().status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
+        }
     }
 
     @POST

@@ -1,6 +1,12 @@
 package org.feuyeux.jaxrs2.atup.core.info;
 
+import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
+
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.util.Date;
 
 /**
@@ -22,7 +28,7 @@ public class AtupTestJobInfo implements Comparable<AtupTestJobInfo> {
 
     private AtupTestJobInfo() {
     }
-
+    @XmlAttribute
     public Integer getJobId() {
         return jobId;
     }
@@ -31,6 +37,7 @@ public class AtupTestJobInfo implements Comparable<AtupTestJobInfo> {
         this.jobId = jobId;
     }
 
+    @XmlAttribute
     public Integer getUserId() {
         return userId;
     }
@@ -39,6 +46,7 @@ public class AtupTestJobInfo implements Comparable<AtupTestJobInfo> {
         this.userId = userId;
     }
 
+    @XmlAttribute
     public Integer getCaseId() {
         return caseId;
     }
@@ -47,6 +55,7 @@ public class AtupTestJobInfo implements Comparable<AtupTestJobInfo> {
         this.caseId = caseId;
     }
 
+    @XmlAttribute
     public Integer getPriority() {
         return priority;
     }
@@ -55,6 +64,7 @@ public class AtupTestJobInfo implements Comparable<AtupTestJobInfo> {
         this.priority = priority;
     }
 
+    @XmlAttribute
     public String getDeviceIp() {
         return deviceIp;
     }
@@ -63,6 +73,9 @@ public class AtupTestJobInfo implements Comparable<AtupTestJobInfo> {
         this.deviceIp = deviceIp;
     }
 
+    @XmlAttribute
+    @XmlJavaTypeAdapter(JaxbDateSerializer.class)
+    @Temporal(TemporalType.TIMESTAMP)
     public Date getGeneratedTime() {
         return generatedTime;
     }

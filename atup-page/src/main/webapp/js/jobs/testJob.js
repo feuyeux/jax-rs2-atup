@@ -23,8 +23,11 @@ function createJob() {
     var caseId = jQuery("#caseId").val();
     var caseName = jQuery("#caseName").val();
     var priority = jQuery("#priorityList").val();
+    var userId = storage.getItem("userId");
+
+
     if (deviceIp && caseId && caseName && priority) {
-        var postData = JSON.stringify({deviceIp: deviceIp, caseId: caseId, caseName: caseName, priority: priority});
+        var postData = JSON.stringify({deviceIp: deviceIp, caseId: caseId, userId: userId, priority: priority, generatedTime: new Date()});
         restSet(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, POST_METHOD, postData, afterCreate());
     } else {
         jQuery('#resultDiv').html("Required parameter is missing, check the input parameters");
