@@ -3,7 +3,7 @@ function initial() {
     var query = window.location.search.substring(1);
     jQuery("#caseId").val(getValue(query, "caseId"));
     jQuery("#caseName").val(getValue(query, "caseName"));
-    rest(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH, GET_METHOD, null, renderDeviceList);
+    rest(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH, GET_METHOD, renderDeviceList);
     var html = "<option value='3'>HIGH</option><option value='2'>MEDIUM</option><option value='1'>LOW</option>";
     jQuery("#priorityList").empty().append(html);
 }

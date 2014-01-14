@@ -1,6 +1,6 @@
 function loadUsers() {
     checkSignIn();
-    rest(HOST + ATUP_USER_BASE_URI + USER_PATH, GET_METHOD, null, renderGetAll);
+    rest(HOST + ATUP_USER_BASE_URI + USER_PATH, GET_METHOD, renderGetAll);
 }
 function renderGetAll(data) {
     var list = data.userList;

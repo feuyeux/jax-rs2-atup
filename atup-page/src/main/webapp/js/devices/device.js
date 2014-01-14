@@ -8,7 +8,7 @@ function initial() {
         jQuery("#deviceType").val(getValue(query, "deviceType"));
         jQuery("#deviceStatus").val(getValue(query, "deviceStatus"));
     }
-    rest(HOST + ATUP_USER_BASE_URI + USER_PATH, GET_METHOD, null, renderUserList);
+    rest(HOST + ATUP_USER_BASE_URI + USER_PATH, GET_METHOD, renderUserList);
 }
 
 function renderUserList(data) {

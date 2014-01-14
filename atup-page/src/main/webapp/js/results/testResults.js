@@ -1,7 +1,7 @@
 function loadResults(start,size) {
 	checkSignIn();
 	jQuery("#resultsDiv").html("Loading...");
-	rest(HOST + ATUP_CASE_BASE_URI + TEST_RESULT_PATH + "/results?start=" + start + "&size=" + size, GET_METHOD, null, renderGetAll);
+	rest(HOST + ATUP_CASE_BASE_URI + TEST_RESULT_PATH + "/results?start=" + start + "&size=" + size, GET_METHOD, renderGetAll);
 }
 function renderGetAll(data) {
 	var list = data.resultList;

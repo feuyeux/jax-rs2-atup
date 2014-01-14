@@ -1,10 +1,10 @@
 function initial() {
     checkSignIn();
-    rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, null, renderSuiteList0);
+    rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, renderSuiteList0);
     jQuery("#caseName").change(function () {
-        rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, null, renderSuiteList);
+        rest(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=0&size=100", GET_METHOD, renderSuiteList);
         var caseName = jQuery("#caseName").val();
-        rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/" + caseName, GET_METHOD, null, fresh4Update);
+        rest(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/" + caseName, GET_METHOD, fresh4Update);
     });
 }
 function renderSuites(data) {

@@ -1,7 +1,7 @@
 function loadJobs() {
     checkSignIn();
     jQuery("#jobsDiv").html("Loading...");
-    rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, GET_METHOD, null, renderGetAll);
+    rest(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, GET_METHOD, renderGetAll);
 }
 function renderGetAll(data) {
     var list = data.jobList;

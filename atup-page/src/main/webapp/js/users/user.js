@@ -23,7 +23,7 @@ function signIn() {
     var password = jQuery.trim(jQuery("#password").val());
     var hashPassword = md5(password);
     var url = HOST + ATUP_USER_BASE_URI + SIGNIN_PATH + "?user=" + userName + "&password=" + hashPassword;
-    rest(url, GET_METHOD, "", renderSignIn);
+    rest(url, GET_METHOD, renderSignIn);
 }
 /*RENDER*/
 function renderCreate(data) {

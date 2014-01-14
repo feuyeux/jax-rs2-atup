@@ -25,12 +25,15 @@ var ROLE_JOB_KILLER = 2;
 var ROLE_DEVICE_MANAGER = 3;
 var ROLE_USER = 4;
 
+var normal_status = 9200;
+var LOADING = "Loading...";
+function rest(restUrl, httpMethod, callback) {
+    rest0(restUrl, httpMethod, "", "application/json", "json", callback)
+}
 function rest(restUrl, httpMethod, entity, callback) {
     rest0(restUrl, httpMethod, entity, "application/json", "json", callback)
 }
-var normal_status = 9200;
-var LOADING = "Loading...";
-function rest0(restUrl, httpMethod, entity, contentType, dataType, callback) {
+function rest(restUrl, httpMethod, entity, contentType, dataType, callback) {
     var resultLine = jQuery('#resultDiv');
     resultLine.html(LOADING);
     var userId = storage.getItem("userId");
