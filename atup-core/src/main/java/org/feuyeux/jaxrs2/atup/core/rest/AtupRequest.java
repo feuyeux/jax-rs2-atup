@@ -110,7 +110,7 @@ public class AtupRequest<R, E> {
         this.clientConfig.property(ClientProperties.PROXY_PASSWORD, proxyPassword);
     }
 
-    //timeout
+    //timeout milliseconds
     public void timeout(long connectTimeout, long readTimeout) {
         if (this.clientConfig == null) {
             this.clientConfig = new ClientConfig();

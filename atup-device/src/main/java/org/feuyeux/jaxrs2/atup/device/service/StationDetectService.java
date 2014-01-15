@@ -2,6 +2,7 @@ package org.feuyeux.jaxrs2.atup.device.service;
 
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
+import org.feuyeux.jaxrs2.atup.core.constant.AtupVariable;
 import org.feuyeux.jaxrs2.atup.core.dao.AtupDeviceDao;
 import org.feuyeux.jaxrs2.atup.core.domain.AtupDevice;
 import org.feuyeux.jaxrs2.atup.core.rest.AtupRequest;
@@ -26,37 +27,29 @@ public class StationDetectService {
             @Override
             public void run() {
                 try {
-                    detecting();
+                    deviceList = dao.findAll();
+                    for (final AtupDevice atupDevice : deviceList) {
+                        final String detectPath = AtupApi.PROTOCOL + atupDevice.getDeviceHost() + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
+                        final AtupRequest<String, Integer> request = new AtupRequest<>();
+                        request.timeout(AtupVariable.DETECT_CONNECT_TIMEOUT, 0);
+                        try {
+                            final Integer result = request.rest(AtupRequest.GET, detectPath, Integer.class);
+                            log.debug("detecting " + atupDevice.getDeviceHost() + " :" + result);
+                            if (!atupDevice.getDeviceStatus().equals(result)) {
+                                atupDevice.setDeviceStatus(result);
+                                dao.update(atupDevice);
+                            }
+                        } catch (final Exception e) {
+                            log.error(e);
+                            atupDevice.setDeviceStatus(AtupParam.DEVICE_ERROR);
+                            dao.update(atupDevice);
+                        }
+                    }
+
                 } catch (final Exception e) {
                     log.error(e);
                 }
-                //log.debug("test");
             }
-
-            private void detecting() {
-                deviceList = dao.findAll();
-                for (final AtupDevice atupDevice : deviceList) {
-                    final String detectPath = AtupApi.PROTOCOL + atupDevice.getDeviceHost() + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
-                    final AtupRequest<String, Integer> request = new AtupRequest<>();
-                    try {
-                        final Integer result = request.rest(AtupRequest.GET, detectPath, Integer.class);
-                        log.debug("detecting " + atupDevice.getDeviceHost() + " :" + result);
-                        if (!atupDevice.getDeviceStatus().equals(result)) {
-                            atupDevice.setDeviceStatus(result);
-                            dao.update(atupDevice);
-                        }
-                    } catch (final Exception e) {
-                        log.error(e);
-                        atupDevice.setDeviceStatus(AtupParam.DEVICE_ERROR);
-                        dao.update(atupDevice);
-                    }
-                }
-            }
-        }, 0, 10, TimeUnit.SECONDS);
-    }
-
-    public static void main(final String[] args) {
-        final StationDetectService test = new StationDetectService();
-        test.detect();
+        }, 0, AtupVariable.DETECT_INTERVAL, TimeUnit.SECONDS);
     }
 }

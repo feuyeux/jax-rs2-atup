@@ -27,19 +27,6 @@ public class AtupDeviceResource {
     @Autowired
     private StationDetectService detectService;
 
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public AtupDevice createDevice(@Context final HttpHeaders headers, final AtupDevice deviceInfo) {
-        try {
-            fillUser(headers, deviceInfo);
-            return service.createDevice(deviceInfo);
-        } catch (final Exception e) {
-            log.error(e);
-            return null;
-        }
-    }
-
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -79,7 +66,20 @@ public class AtupDeviceResource {
     }
 
     @POST
-    @Path("detect")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public AtupDevice createDevice(@Context final HttpHeaders headers, final AtupDevice deviceInfo) {
+        try {
+            fillUser(headers, deviceInfo);
+            return service.createDevice(deviceInfo);
+        } catch (final Exception e) {
+            log.error(e);
+            return null;
+        }
+    }
+
+    @POST
+    @Path("status")
     public void detect() throws ExecutionException, InterruptedException {
         detectService.detect();
     }
