@@ -91,6 +91,8 @@ public class AtupRequest<R, E> {
                 entity = Entity.entity(requestData, requestDataType);
                 response = invocationBuilder.post(entity);
                 break;
+            default:
+                response = invocationBuilder.get();
         }
         if (response != null) {
             return response.readEntity(returnType);

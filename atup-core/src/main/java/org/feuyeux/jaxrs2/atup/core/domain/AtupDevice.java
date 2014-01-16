@@ -137,7 +137,7 @@ public class AtupDevice implements Serializable {
     @XmlJavaTypeAdapter(JaxbDateSerializer.class)
     @Temporal(TemporalType.TIMESTAMP)
     public Date getCreateTime() {
-        return createTime;
+        return this.createTime;
     }
 
     public void setCreateTime(final Date createTime) {

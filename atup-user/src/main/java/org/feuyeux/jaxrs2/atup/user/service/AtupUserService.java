@@ -38,9 +38,6 @@ public class AtupUserService {
 
     public AtupUser updateUser(final AtupUserInfo userInfo) {
         final AtupUser updatedUser = dao.update(new AtupUser(userInfo));
-        if (updatedUser == null) {
-            //TODO
-        }
         return updatedUser;
     }
 }

@@ -47,9 +47,10 @@ function updateDevice() {
     restSet(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH, PUT_METHOD, putData, renderEdit);
 }
 function renderEdit(data) {
-    jQuery('#resultDiv').html("id=" + data.deviceId);
-    jQuery('#resultDiv').append(" name=" + data.deviceName);
-    jQuery('#resultDiv').append(" host=" + data.deviceHost);
-    jQuery('#resultDiv').append(" status=" + data.deviceStatus);
-    jQuery('#resultDiv').append(" type=" + data.deviceType);
+    var resultDiv = jQuery('#resultDiv');
+    resultDiv.html("id=" + data.deviceId);
+    resultDiv.append(" name=" + data.deviceName);
+    resultDiv.append(" host=" + data.deviceHost);
+    resultDiv.append(" status=" + data.deviceStatus);
+    resultDiv.append(" type=" + data.deviceType);
 }

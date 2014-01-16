@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class StationDetectService {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(StationDetectService.class.getName());
-    private List<AtupDevice> deviceList;
     @Autowired
     AtupDeviceDao dao;
     private final ScheduledExecutorService detectTask = new ScheduledThreadPoolExecutor(1);
@@ -27,7 +26,7 @@ public class StationDetectService {
             @Override
             public void run() {
                 try {
-                    deviceList = dao.findAll();
+                    List<AtupDevice> deviceList = dao.findAll();
                     for (final AtupDevice atupDevice : deviceList) {
                         final String detectPath = AtupApi.PROTOCOL + atupDevice.getDeviceHost() + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
                         final AtupRequest<String, Integer> request = new AtupRequest<>();

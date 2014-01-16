@@ -1,33 +1,37 @@
 package org.feuyeux.jaxrs2.atup.core.info;
 
-import org.feuyeux.jaxrs2.atup.core.util.JaxbDateSerializer;
-
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.Date;
 
 /**
  * ATUP Test Job Info
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- * 09/09/2013
+ *        09/09/2013
  */
 
 @XmlRootElement
-public class AtupTestJobInfo implements Comparable<AtupTestJobInfo> {
+public class AtupTestJobInfo extends AtupInfo implements Comparable<AtupTestJobInfo> {
     private Integer jobId;
     private Integer userId;
     private String deviceIp;
     private Integer caseId;
     private Integer priority;
-    private Date generatedTime;
+    private Long generatedTime;
 
-    private AtupTestJobInfo() {
+    public AtupTestJobInfo() {
+
     }
+
+    public AtupTestJobInfo(Integer userId, String deviceIp, Integer caseId, Integer priority, Long generatedTime) {
+        this.userId = userId;
+        this.deviceIp = deviceIp;
+        this.caseId = caseId;
+        this.priority = priority;
+        this.generatedTime = generatedTime;
+    }
+
     @XmlAttribute
     public Integer getJobId() {
         return jobId;
@@ -74,19 +78,17 @@ public class AtupTestJobInfo implements Comparable<AtupTestJobInfo> {
     }
 
     @XmlAttribute
-    @XmlJavaTypeAdapter(JaxbDateSerializer.class)
-    @Temporal(TemporalType.TIMESTAMP)
-    public Date getGeneratedTime() {
+    public Long getGeneratedTime() {
         return generatedTime;
     }
 
-    public void setGeneratedTime(Date generatedTime) {
+    public void setGeneratedTime(Long generatedTime) {
         this.generatedTime = generatedTime;
     }
 
     @Override
     public String toString() {
-        return "jobId=" + jobId + ",userId=" + userId + ",deviceIp=" + deviceIp + ",caseId=" + caseId + ",priority=" + priority;
+        return "job[" + jobId + "] priority:" + priority + ",generatedTime:" + generatedTime + ",userId=" + userId + ",deviceIp=" + deviceIp + ",caseId=" + caseId;
     }
 
     @Override

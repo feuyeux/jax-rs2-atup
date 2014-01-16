@@ -1,12 +1,5 @@
 package org.feuyeux.jaxrs2.atup.cases.resource;
 
-import java.util.List;
-
-import javax.ws.rs.client.Invocation;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Application;
-import javax.ws.rs.core.MediaType;
-
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestSuiteInfo;
 import org.feuyeux.jaxrs2.atup.core.info.AtupTestSuiteListInfo;
@@ -18,6 +11,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+import java.util.List;
 
 @ContextConfiguration(locations = { "classpath:applicationContext.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)

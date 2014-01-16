@@ -16,8 +16,6 @@ function updateUser() {
     restSet(HOST + ATUP_USER_BASE_URI + USER_PATH, PUT_METHOD, putData, renderUpdate);
 }
 /*GET*/
-function getUser() {
-}
 function signIn() {
     var userName = jQuery("#userName").val();
     var password = jQuery.trim(jQuery("#password").val());
@@ -30,16 +28,17 @@ function renderCreate(data) {
     jQuery('#resultDiv').html("id=" + data.userId);
 }
 function renderUpdate(data) {
-    jQuery("#usersDiv").html("<div><span style='width:100px;display:inline-block;'>User ID</span>");
-    jQuery("#usersDiv").append("<span style='width:100px;display:inline-block;'>User Name</span>");
-    jQuery("#usersDiv").append("<span style='width:100px;display:inline-block;'>User Role</span></div>");
-    jQuery("#usersDiv").append("<div><span style='width:100px;display:inline-block;'>");
-    jQuery("#usersDiv").append(data.userId);
-    jQuery("#usersDiv").append("</span><span style='width:100px;display:inline-block;'>");
-    jQuery("#usersDiv").append(data.userName);
-    jQuery("#usersDiv").append("</span><span style='width:100px;display:inline-block;'>");
-    jQuery("#usersDiv").append(data.userRole);
-    jQuery("#usersDiv").append("</span></div>");
+    var usersDiv = jQuery("#usersDiv");
+    usersDiv.html("<div><span style='width:100px;display:inline-block;'>User ID</span>");
+    usersDiv.append("<span style='width:100px;display:inline-block;'>User Name</span>");
+    usersDiv.append("<span style='width:100px;display:inline-block;'>User Role</span></div>");
+    usersDiv.append("<div><span style='width:100px;display:inline-block;'>");
+    usersDiv.append(data.userId);
+    usersDiv.append("</span><span style='width:100px;display:inline-block;'>");
+    usersDiv.append(data.userName);
+    usersDiv.append("</span><span style='width:100px;display:inline-block;'>");
+    usersDiv.append(data.userRole);
+    usersDiv.append("</span></div>");
 }
 function renderSignIn(data) {
     if (data.userId != null && data.userName != null && data.userRole != null) {

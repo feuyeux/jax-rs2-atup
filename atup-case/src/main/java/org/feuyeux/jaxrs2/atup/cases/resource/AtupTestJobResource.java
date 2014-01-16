@@ -36,12 +36,6 @@ public class AtupTestJobResource {
 
     }
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public AtupTestJobListInfo retrieveRunningJobs() {
-        return jobLaunchService.getJobs();
-    }
-
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -50,25 +44,9 @@ public class AtupTestJobResource {
         return jobLaunchService.addJob(jobInfo);
     }
 
-    @DELETE
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void removeJob(@Context final HttpHeaders headers, final AtupTestJobInfo jobInfo) {
-        final String userId = headers.getRequestHeader("Atup-User").get(0);
-        final String userRole = headers.getRequestHeader("Atup-UserRole").get(0);
-        boolean isJobKiller = userRole.equals(AtupParam.USER_JOB_KILLER);
-        if (isJobKiller || userId.equals(jobInfo.getUserId())) {
-            jobLaunchService.removeJob(jobInfo);
-        } else {
-            final AtupUserInfo result = new AtupUserInfo("No permission for this request.", AtupErrorCode.FORBIDDEN_ERROR);
-            Response.noContent().status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
-        }
-    }
-
     @POST
     @Path("launch")
-    public void launchJob(@Suspended final AsyncResponse asyncResponse) throws ExecutionException, InterruptedException {
-        final int concurrentNumber = 10;
+    public void asyncLaunchJob(@Suspended final AsyncResponse asyncResponse, final int concurrentNumber) throws ExecutionException, InterruptedException {
         List<Callable<String>> tasks = new ArrayList<>();
         for (int i = 0; i < concurrentNumber; i++) {
             Callable<String> launchTask = new LaunchTestRunner(jobLaunchService);
@@ -85,6 +63,27 @@ public class AtupTestJobResource {
             asyncResponse.resume(launchResult.toString());
         } catch (InterruptedException | ExecutionException e) {
             log.error(e.getMessage());
+        }
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public AtupTestJobListInfo retrieveRunningJobs() {
+        return jobLaunchService.getJobs();
+    }
+
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void removeJob(@Context final HttpHeaders headers, final AtupTestJobInfo jobInfo) {
+        final Integer userId = Integer.valueOf(headers.getRequestHeader("Atup-User").get(0));
+        final Integer userRole = Integer.valueOf(headers.getRequestHeader("Atup-UserRole").get(0));
+        boolean isJobKiller = userRole.equals(AtupParam.USER_JOB_KILLER);
+        if (isJobKiller || userId.equals(jobInfo.getUserId())) {
+            jobLaunchService.removeJob(jobInfo);
+        } else {
+            final AtupUserInfo result = new AtupUserInfo("No permission for this request.", AtupErrorCode.FORBIDDEN_ERROR);
+            Response.noContent().status(Response.Status.INTERNAL_SERVER_ERROR).entity(result).build();
         }
     }
 

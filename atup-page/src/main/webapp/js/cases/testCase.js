@@ -41,11 +41,12 @@ function updateCase() {
     restSet(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH, PUT_METHOD, putData, renderEdit);
 }
 function renderEdit(data) {
-    jQuery('#resultDiv').html("id=" + data.caseId);
-    jQuery('#resultDiv').append(" name=" + data.caseName);
-    jQuery('#resultDiv').append(" status=" + data.caseStatus);
-    jQuery('#resultDiv').append(" type=" + data.caseBody);
-    jQuery('#resultDiv').append(" suite=" + data.suite.suiteId + "," + data.suite.suiteName);
+    var resultDiv = jQuery('#resultDiv');
+    resultDiv.html("id=" + data.caseId);
+    resultDiv.append(" name=" + data.caseName);
+    resultDiv.append(" status=" + data.caseStatus);
+    resultDiv.append(" type=" + data.caseBody);
+    resultDiv.append(" suite=" + data.suite.suiteId + "," + data.suite.suiteName);
 }
 
 function fresh4Update(data) {

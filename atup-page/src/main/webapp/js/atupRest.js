@@ -17,7 +17,7 @@ var PUT_METHOD = 'PUT';
 var DELETE_METHOD = 'DELETE';
 
 var SPAN_BEGIN = "<span style='width:100px;display:inline-block;'>";
-var SPAN_BEGIN1 = "<span style='width:150px;display:inline-block;'>";
+//var SPAN_BEGIN1 = "<span style='width:150px;display:inline-block;'>";
 var SPAN_BEGIN2 = "<span style='width:200px;display:inline-block;'>";
 
 var ROLE_ADMIN = 1;
@@ -25,7 +25,7 @@ var ROLE_JOB_KILLER = 2;
 var ROLE_DEVICE_MANAGER = 3;
 var ROLE_USER = 4;
 
-var normal_status = 9200;
+var NORMAL_STATUS = 9200;
 var LOADING = "Loading...";
 function restGet(restUrl, httpMethod, callback) {
     rest(restUrl, httpMethod, "", "application/json", "json", callback);
@@ -44,7 +44,7 @@ function rest(restUrl, httpMethod, entity, contentType, dataType, callback) {
         try {
             if (data === null || data === undefined) {
                 resultLine.html(NO_RESULT);
-            } else if (data.statusCode && data.statusCode != normal_status) {
+            } else if (data.statusCode && data.statusCode != NORMAL_STATUS) {
                 resultLine.html("Error:" + data.errorInfo);
             } else if (callback != null) {
                 resultLine.html("");
@@ -59,29 +59,14 @@ function rest(restUrl, httpMethod, entity, contentType, dataType, callback) {
     });
     resultLine.append(" DONE!");
 }
-function getInfoByQuery() {
-    var url = jQuery("#queryUrl").val();
-    rest(GET_METHOD, null, null, 'json', renderQueryGet);
-}
-function getInfoByPath() {
-    var url = jQuery("#pathUrl").val();
-    rest(GET_METHOD, null, null, 'json', renderPathGet);
-}
-function renderPut(data) {
-    jQuery('#resultDiv').html("id=" + data.bookId);
-}
-/*DELETE*/
-function deleteInfo() {
-    var url = jQuery("#delUrl").val();
-    rest(DELETE_METHOD, null, null, 'text', renderDelete);
-}
+
 function checkSignIn() {
     var storageUserId = storage.getItem("userId");
     if (storageUserId == null) {
         window.location.href = HOST + ATUP_PAGE_BASE_URI + "signIn.html";
     } else {
         var user = storage.getItem("userName");
-        var welcomeDiv = jQuery('#topDiv').html("Welcome " + user);
+        jQuery('#topDiv').html("Welcome " + user);
     }
 }
 function getValue(query, key) {

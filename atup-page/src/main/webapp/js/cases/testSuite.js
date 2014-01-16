@@ -11,8 +11,9 @@ function updateSuite() {
     restSet(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH, PUT_METHOD, putData, renderEdit);
 }
 function renderEdit(data) {
-    jQuery('#resultDiv').html("id=" + data.suiteId);
-    jQuery('#resultDiv').append(" name=" + data.suiteName);
-    jQuery('#resultDiv').append(" status=" + data.suiteStatus);
-    jQuery('#resultDiv').append(" type=" + data.suiteType);
+    var resultDiv = jQuery('#resultDiv');
+    resultDiv.html("id=" + data.suiteId);
+    resultDiv.append(" name=" + data.suiteName);
+    resultDiv.append(" status=" + data.suiteStatus);
+    resultDiv.append(" type=" + data.suiteType);
 }
