@@ -146,6 +146,55 @@ Context.xml:
                     </plugin>
                 </plugins>
 
+#### tomcat deploy ####
+
+[http://tomcat.apache.org/maven-plugin-2.2](http://tomcat.apache.org/maven-plugin-2.2/)
+
+	parent/pom.xml:
+	<plugin>
+		<groupId>org.apache.tomcat.maven</groupId>
+		<artifactId>tomcat7-maven-plugin</artifactId>
+		<version>${tomcat7-maven-plugin.version}</version>
+		<configuration>
+			<url>http://${tomcat.server.ip}:${tomcat.local.port}/manager/text</url>
+			<server>Atup_Tomcat_Staging</server>
+		</configuration>
+	</plugin>
+
+	modules/pom.xml:
+	<plugin>
+		<groupId>org.apache.tomcat.maven</groupId>
+		<artifactId>tomcat7-maven-plugin</artifactId>
+		<executions>
+			<execution>
+				<phase>pre-integration-test</phase>
+				<configuration>
+					<warFile>target/atup-test-station.war</warFile>
+					<path>/${project.build.finalName}</path>
+				</configuration>
+				<goals>
+					<goal>redeploy</goal>
+				</goals>
+			</execution>
+		</executions>
+	</plugin>
+
+	.m2/settings.xml
+	<server>
+       <id>Atup_Tomcat_Staging</id>
+       <username>admin</username>
+       <password>admin</password>
+	</server>
+
+	TOMCAT/conf/tomcat-users.xml
+	<?xml version='1.0' encoding='utf-8'?>
+	<tomcat-users>
+	  <role rolename="manager-gui"/>
+	  <role rolename="manager-script"/>
+	  <user username="admin" password="admin" roles="manager-script,manager-gui"/>
+	</tomcat-users>
+
+    mvn clean install -Dtomcat.server.ip=192.168.1.181 -PCI
 ###Modules###
 
 #### atup-core ####
@@ -164,3 +213,7 @@ REST WADL:
 #### atup-device ####
 
 #### atup-page  ####
+
+
+### JVM ###
+	-Xms1024m -Xmx1024m -XX:PermSize=512m -XX:MaxPermSize=1024m

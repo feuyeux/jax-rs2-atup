@@ -17,6 +17,9 @@
     </modules>
 
     <properties>
+        <tomcat.server.ip>192.168.1.180</tomcat.server.ip>
+        <tomcat.local.port>8080</tomcat.local.port>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <JDK.version>1.7</JDK.version>
@@ -35,6 +38,7 @@
         <maven-resources-plugin.version>2.6</maven-resources-plugin.version>
         <maven-eclipse-plugin.version>2.9</maven-eclipse-plugin.version>
         <maven-failsafe-plugin.version>2.16</maven-failsafe-plugin.version>
+        <tomcat7-maven-plugin.version>2.2</tomcat7-maven-plugin.version>
         <jetty-maven-plugin.version>9.1.0.RC0</jetty-maven-plugin.version>
 
         <main.basedir>${project.basedir}</main.basedir>
@@ -79,6 +83,19 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+                        <version>${tomcat7-maven-plugin.version}</version>
+                        <configuration>
+                            <url>http://${tomcat.server.ip}:${tomcat.local.port}/manager/text</url>
+                            <server>Atup_Tomcat_Staging</server>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 
@@ -192,6 +209,12 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <!--
+    <pluginGroups>
+        <pluginGroup>org.apache.tomcat.maven</pluginGroup>
+    </pluginGroups>
+     -->
 
     <pluginRepositories>
         <pluginRepository>

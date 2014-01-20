@@ -33,7 +33,7 @@ public interface AtupParam {
     Integer RESULT_UNKOWN = 2;
 
     /*Test Job*/
-    Integer HIGH = 3;
-    Integer MEDIUM = 2;
-    Integer LOW = 1;
+    Integer HIGH = 0;
+    Integer MEDIUM = 1;
+    Integer LOW = 2;
 }
