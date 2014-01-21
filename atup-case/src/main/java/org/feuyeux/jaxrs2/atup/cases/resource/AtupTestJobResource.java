@@ -41,12 +41,15 @@ public class AtupTestJobResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public AtupTestJobInfo createJob(final AtupTestJobInfo jobInfo) {
         jobInfo.setJobId(JOB_ID.getAndIncrement());
+        if (jobInfo.getGeneratedTime() == null) {
+            jobInfo.setGeneratedTime(System.nanoTime());
+        }
         return jobLaunchService.addJob(jobInfo);
     }
 
     @POST
-    @Path("launch")
-    public void asyncLaunchJob(@Suspended final AsyncResponse asyncResponse, final int concurrentNumber) throws ExecutionException, InterruptedException {
+    @Path("jobs")
+    public void asyncLaunchJob(@Suspended final AsyncResponse asyncResponse, @QueryParam("count")final int concurrentNumber) throws ExecutionException, InterruptedException {
         List<Callable<String>> tasks = new ArrayList<>();
         for (int i = 0; i < concurrentNumber; i++) {
             Callable<String> launchTask = new LaunchTestRunner(jobLaunchService);

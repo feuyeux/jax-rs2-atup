@@ -21,6 +21,7 @@ import java.util.Date;
 @XmlRootElement
 @NamedQueries({@NamedQuery(name = "findByDeviceIp", query = "SELECT atupDevice FROM AtupDevice atupDevice WHERE atupDevice.deviceHost= :deviceHost"),
         @NamedQuery(name = "findDevicesByUser", query = "SELECT atupDevice FROM AtupDevice atupDevice WHERE atupDevice.user.userId= :userId")})
+@Cacheable(false)
 public class AtupDevice implements Serializable {
     private static final long serialVersionUID = 1L;
     private Integer deviceId;

@@ -1,6 +1,10 @@
 function loadDevices() {
     checkSignIn();
     jQuery("#devicesDiv").html("Loading...");
+    restCall();
+    setInterval(restCall, 10000);
+}
+function restCall(){
     var userRole = storage.getItem("userRole");
     if (ROLE_DEVICE_MANAGER == userRole) {
         restGet(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH + "/all", GET_METHOD, renderGetAll);

@@ -10,9 +10,9 @@
 ### Unit Test ###
 > mvn clean install -PTI
 >
-> curl -X POST http://localhost:8080/atup-device/rest-api/devices/detect
+> curl -X POST http://localhost:8080/atup-device/rest-api/devices/status
 >
-> curl -X POST http://localhost:8080/atup-case/rest-api/testjobs/launch
+> curl -X POST http://localhost:8080/atup-case/rest-api/testjobs/jobs?count=1
 
 ### Datasource Setting ###
 Context.xml:
@@ -211,6 +211,8 @@ REST WADL:
 #### atup-case ####
 
 #### atup-device ####
+REST WADL:
+[http://localhost:8080/atup-device/rest-api/application.wadl](http://localhost:8080/atup-device/rest-api/application.wadl)
 
 #### atup-page  ####
 

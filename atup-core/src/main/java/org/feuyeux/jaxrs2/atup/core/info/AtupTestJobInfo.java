@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author feuyeux@gmail.com
  * @since 1.0
- *        09/09/2013
+ * 09/09/2013
  */
 
 @XmlRootElement
@@ -103,7 +103,7 @@ public class AtupTestJobInfo extends AtupInfo implements Comparable<AtupTestJobI
 
         if (obj.getClass().equals(AtupTestJobInfo.class)) {
             AtupTestJobInfo other = (AtupTestJobInfo) obj;
-            return other.jobId.equals(this.jobId) && other.userId.equals(this.userId);
+            return other.deviceIp.equals(this.deviceIp) && other.userId.equals(this.userId) && other.caseId.equals(this.caseId);
         }
         return false;
     }

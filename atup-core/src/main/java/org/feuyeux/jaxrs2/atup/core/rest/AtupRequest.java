@@ -113,7 +113,7 @@ public class AtupRequest<R, E> {
     }
 
     //timeout milliseconds
-    public void timeout(long connectTimeout, long readTimeout) {
+    public void timeout(int connectTimeout, int readTimeout) {
         if (this.clientConfig == null) {
             this.clientConfig = new ClientConfig();
         }

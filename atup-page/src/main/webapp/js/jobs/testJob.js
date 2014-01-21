@@ -4,7 +4,7 @@ function initial() {
     jQuery("#caseId").val(getValue(query, "caseId"));
     jQuery("#caseName").val(getValue(query, "caseName"));
     restGet(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH, GET_METHOD, renderDeviceList);
-    var html = "<option value='3'>HIGH</option><option value='2'>MEDIUM</option><option value='1'>LOW</option>";
+    var html = "<option value='0'>HIGH</option><option value='1'>MEDIUM</option><option value='2'>LOW</option>";
     jQuery("#priorityList").empty().append(html);
 }
 function renderDeviceList(data) {

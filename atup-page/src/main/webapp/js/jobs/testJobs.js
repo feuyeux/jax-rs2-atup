@@ -1,10 +1,14 @@
 function loadJobs() {
     checkSignIn();
     jQuery("#jobsDiv").html("Loading...");
+    restCall();
+    setInterval(restCall, 10000);
+}
+function restCall() {
     restGet(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, GET_METHOD, renderGetAll);
 }
 function renderGetAll(data) {
-    var list = data.jobList;
+    var list = data.jobs;
     if (list == null || list.length == 0) {
         jQuery("#jobsDiv").html("No job is arranging.");
     } else {
@@ -24,7 +28,7 @@ function renderGetAll(data) {
                     + jobInfo.jobId + "</span>" + SPAN_BEGIN
                     + jobInfo.caseId + "</span>" + SPAN_BEGIN
                     + jobInfo.deviceIp + "</span>" + SPAN_BEGIN
-                    + jobInfo.userId + "</span>" + SPAN_BEGIN
+                    + jobInfo.userId + "</span>" + SPAN_BEGIN2
                     + jobInfo.priority + "</span>" + SPAN_BEGIN
                     + jobInfo.generatedTime + "</span>" + SPAN_BEGIN
                     + "<input type='button' value='REMOVE' onclick='removeJob(" + jobInfo.jobId + ");'/></span></div>";
@@ -44,7 +48,7 @@ function renderGetAll(data) {
                     + jobInfo.jobId + "</span>" + SPAN_BEGIN
                     + jobInfo.caseId + "</span>" + SPAN_BEGIN
                     + jobInfo.deviceIp + "</span>" + SPAN_BEGIN
-                    + jobInfo.userId + "</span>" + SPAN_BEGIN
+                    + jobInfo.userId + "</span>" + SPAN_BEGIN2
                     + jobInfo.priority + "</span>" + SPAN_BEGIN
                     + jobInfo.generatedTime + "</span></div>";
                 jQuery("#jobsDiv").append(line);
@@ -52,7 +56,6 @@ function renderGetAll(data) {
         }
     }
 }
-
 function removeJob(jobId) {
     var jobInfo = JSON.stringify({jobId: jobId});
     restSet(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, DELETE_METHOD, jobInfo, loadJobs());

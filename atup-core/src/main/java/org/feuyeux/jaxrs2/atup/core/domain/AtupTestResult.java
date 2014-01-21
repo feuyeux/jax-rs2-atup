@@ -37,6 +37,15 @@ public class AtupTestResult implements Serializable {
     public AtupTestResult() {
     }
 
+    public AtupTestResult(final AtupTestCase testCase, final Integer resultStatus, final String resultBody, final Date createTime,
+                          final Date updateTime) {
+        this.testCase = testCase;
+        this.resultStatus = resultStatus;
+        this.resultBody = resultBody;
+        this.createTime = createTime;
+        this.updateTime = updateTime;
+    }
+
     public AtupTestResult(final AtupTestCase testCase, final AtupUser user, final AtupDevice device, final Integer resultStatus, final String resultBody, final Date createTime,
                           final Date updateTime) {
         this.testCase = testCase;
@@ -136,5 +145,14 @@ public class AtupTestResult implements Serializable {
 
     public void setDevice(final AtupDevice device) {
         this.device = device;
+    }
+
+    @Override
+    public String toString() {
+        return new StringBuilder().append("resultId:").append(resultId == null ? "nil" : resultId.toString()).append(",testCase=")
+                .append(testCase).append(",user=").append(user).append(",resultStatus=")
+                .append(resultStatus).append(",resultBody=").append(resultBody).append(",device=")
+                .append(device).append(",createTime=").append(createTime).append(",updateTime=")
+                .append(updateTime).toString();
     }
 }

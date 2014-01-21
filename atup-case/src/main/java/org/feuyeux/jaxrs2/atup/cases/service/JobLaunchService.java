@@ -79,10 +79,10 @@ public class JobLaunchService {
         }
         if (jobInfo != null) {
             final String deviceIp = jobInfo.getDeviceIp();
-            if (deviceIp != null && deviceIp.matches(IP_PATTERN)) {
+            if (deviceIp != null && (deviceIp.matches(IP_PATTERN) || deviceIp.toUpperCase().equals("LOCALHOST"))) {
                 /*1.fetch device from DB*/
                 final AtupDevice testDevice = fetchDeviceFromDB(deviceIp);
-                if (testDevice.getDeviceStatus().equals(AtupParam.DEVICE_IDLE)) {
+                if (AtupParam.DEVICE_IDLE.equals(testDevice.getDeviceStatus())) {
                     /*2. fetch test case from DB*/
                     final AtupTestCase testCase = fetchTestCaseFromDB(jobInfo.getCaseId());
                     /*3. launch test case and get the asynchronous result, then save it*/
@@ -92,13 +92,18 @@ public class JobLaunchService {
                         jobQueue.offer(jobInfo);
                     }
                 }
+            } else {
+                synchronized (jobQueue) {
+                    jobQueue.offer(jobInfo);
+                }
             }
         }
     }
 
     private void launchTest(Integer userId, AtupDevice testDevice, AtupTestCase testCase) {
-        final Integer status = restAsyncPost(testDevice.getDeviceHost(), testCase);
-        addTestResultToDB(userId, testDevice, testCase, status);
+        AtupTestResult testResult = restAsyncPost(testDevice.getDeviceHost(), testCase);
+        testResult.setDevice(testDevice);
+        addTestResultToDB(userId, testResult);
     }
 
     private AtupTestCase fetchTestCaseFromDB(Integer testCaseId) {
@@ -113,16 +118,15 @@ public class JobLaunchService {
         return testDevice;
     }
 
-    private Integer restAsyncPost(String deviceIp, AtupTestCase testCase) {
+    private AtupTestResult restAsyncPost(String deviceIp, AtupTestCase testCase) {
         final String launchPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
-        final AtupRequest<AtupTestCase, Integer> request = new AtupRequest<>();
-        return request.rest(AtupRequest.POST, launchPath, MediaType.APPLICATION_JSON_TYPE, testCase, Integer.class);
+        final AtupRequest<AtupTestCase, AtupTestResult> request = new AtupRequest<>();
+        return request.rest(AtupRequest.POST, launchPath, MediaType.APPLICATION_JSON_TYPE, testCase, AtupTestResult.class);
     }
 
-    private void addTestResultToDB(Integer userId, AtupDevice testDevice, AtupTestCase testCase, Integer status) {
+    private void addTestResultToDB(Integer userId, AtupTestResult testResult) {
         final AtupUser user = userDao.findById(userId);
-        final Date createTime = new Date();
-        final AtupTestResult testResult = new AtupTestResult(testCase, user, testDevice, status, "", createTime, createTime);
+        testResult.setUser(user);
         resultDao.save(testResult);
     }
 }

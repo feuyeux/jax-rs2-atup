@@ -34,17 +34,18 @@ public class StationDetectService {
                         try {
                             final Integer result = request.rest(AtupRequest.GET, detectPath, Integer.class);
                             log.debug("detecting " + atupDevice.getDeviceHost() + " :" + result);
-                            if (!atupDevice.getDeviceStatus().equals(result)) {
+                            if (!result.equals(atupDevice.getDeviceStatus())) {
                                 atupDevice.setDeviceStatus(result);
                                 dao.update(atupDevice);
                             }
                         } catch (final Exception e) {
                             log.error(e);
-                            atupDevice.setDeviceStatus(AtupParam.DEVICE_ERROR);
-                            dao.update(atupDevice);
+                            if (!AtupParam.DEVICE_ERROR.equals(atupDevice.getDeviceStatus())) {
+                                atupDevice.setDeviceStatus(AtupParam.DEVICE_ERROR);
+                                dao.update(atupDevice);
+                            }
                         }
                     }
-
                 } catch (final Exception e) {
                     log.error(e);
                 }

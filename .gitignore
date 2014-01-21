@@ -13,6 +13,6 @@ work
 *.iml
 nb-configuration.xml
 Thumbs.db
-.xml~
-.log
-.sh~
+*.xml~
+*.log
+*.sh~

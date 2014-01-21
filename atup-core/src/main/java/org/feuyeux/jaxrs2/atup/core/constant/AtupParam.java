@@ -24,8 +24,13 @@ public interface AtupParam {
     Integer DEVICE_RUNNING = 1;
     Integer DEVICE_ERROR = 2;
 
-    Integer DEVICE_SPEED = 11;
-    Integer DEVICE_QUALITY = 21;
+    Integer DEVICE_SPEED = 10;
+    Integer DEVICE_SMOCKING = 11;
+    Integer DEVICE_SANITY = 12;
+    Integer DEVICE_REGRESSIVE = 13;
+    Integer DEVICE_QUALITY = 20;
+    Integer DEVICE_SYSTEM = 21;
+    Integer DEVICE_PERFORMANCE = 22;
 
     /*Test Result*/
     Integer RESULT_SUCCESS = 0;
