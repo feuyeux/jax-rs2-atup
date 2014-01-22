@@ -13,6 +13,10 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class TIAtupStationResource extends JerseyTest {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(TIAtupStationResource.class.getName());
@@ -50,5 +54,40 @@ public class TIAtupStationResource extends JerseyTest {
         final AtupRequest<AtupTestCase, AtupTestResult> request = new AtupRequest<>();
         final AtupTestResult result = request.rest(AtupRequest.POST, resourcePath, null, null, MediaType.APPLICATION_JSON_TYPE, testCase, AtupTestResult.class);
         log.debug("testLaunch2:" + result);
+    }
+
+    @Test
+    public void testDeviceStatus() throws InterruptedException {
+        ExecutorService executorService = Executors.newFixedThreadPool(1);
+        ExecutorService executorService2 = Executors.newFixedThreadPool(1);
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    testKeepAlive();
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        executorService2.submit(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 5; i++) {
+                    testLaunch2();
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        Thread.sleep(120000);
     }
 }

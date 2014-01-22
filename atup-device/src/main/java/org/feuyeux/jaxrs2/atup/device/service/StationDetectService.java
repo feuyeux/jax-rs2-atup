@@ -28,12 +28,14 @@ public class StationDetectService {
                 try {
                     List<AtupDevice> deviceList = dao.findAll();
                     for (final AtupDevice atupDevice : deviceList) {
-                        final String detectPath = AtupApi.PROTOCOL + atupDevice.getDeviceHost() + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
+                        String deviceIp = atupDevice.getDeviceHost();
+                        final String detectPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
+                        log.debug("detectPath= " + detectPath);
                         final AtupRequest<String, Integer> request = new AtupRequest<>();
                         request.timeout(AtupVariable.DETECT_CONNECT_TIMEOUT, 0);
                         try {
                             final Integer result = request.rest(AtupRequest.GET, detectPath, Integer.class);
-                            log.debug("detecting " + atupDevice.getDeviceHost() + " :" + result);
+                            log.debug("detecting " + deviceIp + " :" + result);
                             if (!result.equals(atupDevice.getDeviceStatus())) {
                                 atupDevice.setDeviceStatus(result);
                                 dao.update(atupDevice);

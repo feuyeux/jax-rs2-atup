@@ -61,7 +61,8 @@ public class AtupTestJobResource {
         StringBuilder launchResult = new StringBuilder();
         try {
             for (int i = 0; i < concurrentNumber; i++) {
-                launchResult.append(resultFutures.get(i).get());
+                Future<String> future = resultFutures.get(i);
+                launchResult.append(future.get());
             }
             asyncResponse.resume(launchResult.toString());
         } catch (InterruptedException | ExecutionException e) {

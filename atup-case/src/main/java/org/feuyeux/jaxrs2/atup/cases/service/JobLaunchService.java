@@ -120,7 +120,7 @@ public class JobLaunchService {
 
     private AtupTestResult restAsyncPost(String deviceIp, AtupTestCase testCase) {
         final String launchPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
-        final AtupRequest<AtupTestCase, AtupTestResult> request = new AtupRequest<>();
+        final AtupAsyncRequest<AtupTestCase, AtupTestResult> request = new AtupAsyncRequest<>();
         return request.rest(AtupRequest.POST, launchPath, MediaType.APPLICATION_JSON_TYPE, testCase, AtupTestResult.class);
     }
 

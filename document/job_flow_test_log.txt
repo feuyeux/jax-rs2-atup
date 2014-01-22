@@ -1,0 +1,36 @@
+add devices
+add cases
+curl -X POST http://localhost:8080/atup-device/rest-api/devices/status
+
+http://localhost:8080/atup-page/devices/devices.html
+Device IDDevice NameDevice IPStatusLast Updated
+1LocalHostlocalhost022/01/2014 10:00:37
+2TestStation1192.168.1.180023/01/2014 01:54:13
+3TestStation2192.168.1.181023/01/2014 01:58:20
+
+http://localhost:8080/atup-page/cases/testCases.html
+Case IDCase NameCase StatusCase bodyLast Updated
+1C11aaa22/01/2014 01:14:25
+2C21bbb22/01/2014 02:25:20
+3C31ccc22/01/2014 02:25:25
+4C41ddd22/01/2014 09:35:18
+5C51eee22/01/2014 09:35:25
+
+http://localhost:8080/atup-page/jobs/runningJobs.html
+Job IdCase IdDevice IpUser IdJob PriorityCreate Time
+01192.168.1.180405861190495510
+34192.168.1.181405905300964951
+12192.168.1.180415883712598472
+45localhost415914636399995
+23192.168.1.180425892445249335
+
+SELECT
+	*
+FROM
+	jaxrs2_atup.test_result
+ORDER BY
+	create_time DESC
+LIMIT 0,
+ 10
+ 
+curl -X POST http://localhost:8080/atup-case/rest-api/testjobs/jobs?count=5

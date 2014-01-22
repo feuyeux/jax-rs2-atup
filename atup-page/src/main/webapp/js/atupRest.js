@@ -25,6 +25,10 @@ var ROLE_JOB_KILLER = 2;
 var ROLE_DEVICE_MANAGER = 3;
 var ROLE_USER = 4;
 
+var DEVICE_STATUS_IDLE="0";
+var DEVICE_STATUS_BUSY="1";
+var DEVICE_STATUS_ERROR="2";
+
 var NORMAL_STATUS = 9200;
 var LOADING = "Loading...";
 function restGet(restUrl, httpMethod, callback) {

@@ -14,3 +14,5 @@ nano TOMCAT/conf/tomcat-users.xml
   <role rolename="manager-script"/>
   <user username="admin" password="admin" roles="manager-script,manager-gui"/>
 </tomcat-users>
+
+ mvn clean install -Dtomcat.server.ip=192.168.1.181 -PCI

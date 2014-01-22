@@ -125,6 +125,32 @@ public class AtupTestCase implements Serializable {
 
     @Override
     public String toString() {
-        return "caseId=" + caseId + "caseName=" + caseName + "suite=" + suite + "caseBody=" + caseBody + "caseStatus=" + caseStatus;
+        StringBuilder builder = new StringBuilder();
+        if (caseId != null) {
+            builder.append("caseId=").append(caseId);
+        } else {
+            builder.append("caseId=nil");
+        }
+        if (caseName != null && !caseName.isEmpty()) {
+            builder.append(",caseName=").append(caseName);
+        } else {
+            builder.append(",caseName=nil");
+        }
+        if (suite != null) {
+            builder.append(",suite=").append(suite);
+        } else {
+            builder.append(",suite=nil");
+        }
+        if (caseBody != null && !caseBody.isEmpty()) {
+            builder.append(",caseBody=").append(caseBody);
+        } else {
+            builder.append(",caseBody=nil");
+        }
+        if (caseStatus != null) {
+            builder.append(",caseStatus=").append(caseStatus);
+        } else {
+            builder.append(",caseStatus=nil");
+        }
+        return builder.toString();
     }
 }

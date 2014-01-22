@@ -34,7 +34,7 @@ function createDevice() {
     var deviceIp = $("#deviceIp0").val();
     var deviceName = $("#deviceName0").val();
     var deviceType = $("#deviceType0").val();
-    var postData = JSON.stringify({deviceHost: deviceIp, deviceName: deviceName, deviceType: deviceType, deviceStatus: '1'});
+    var postData = JSON.stringify({deviceHost: deviceIp, deviceName: deviceName, deviceType: deviceType, deviceStatus: DEVICE_STATUS_ERROR});
     restSet(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH, POST_METHOD, postData, renderEdit);
 }
 function updateDevice() {
