@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="off">
 	<Appenders>
-		<File name="file" fileName="atup_case.log">
-			<PatternLayout>
+        <File name="file" fileName="d:/atup_log/atup_case.log">
+        <PatternLayout>
 				<Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
 			</PatternLayout>
 		</File>
 		<Console name="STDOUT" target="SYSTEM_OUT">
-			<PatternLayout pattern="%m%n" />
-		</Console>
+            <PatternLayout pattern="%c{1.} %m%n"/>
+        </Console>
 	</Appenders>
 	<Loggers>
 		<Root level="DEBUG">
