@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="off">
     <Appenders>
-        <File name="file" fileName="d:/atup_log/atup_device.log">
+        <File name="file" fileName="${sys:user.home}/atup_log/atup_device.log">
             <PatternLayout>
                 <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
             </PatternLayout>

@@ -149,10 +149,10 @@ public class AtupTestResult implements Serializable {
 
     @Override
     public String toString() {
-        return new StringBuilder().append("resultId:").append(resultId == null ? "nil" : resultId.toString()).append(",testCase=")
+        return new StringBuilder().append("AtupTestResult[resultId:").append(resultId == null ? "nil" : resultId.toString()).append(",testCase=")
                 .append(testCase).append(",user=").append(user).append(",resultStatus=")
                 .append(resultStatus).append(",resultBody=").append(resultBody).append(",device=")
                 .append(device).append(",createTime=").append(createTime).append(",updateTime=")
-                .append(updateTime).toString();
+                .append(updateTime).append("]").toString();
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
 @Component
 @Path(AtupApi.TEST_SUITE_PATH)
 public class AtupTestSuiteResource {

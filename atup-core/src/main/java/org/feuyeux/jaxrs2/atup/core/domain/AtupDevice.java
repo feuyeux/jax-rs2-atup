@@ -159,6 +159,6 @@ public class AtupDevice implements Serializable {
 
     @Override
     public String toString() {
-        return deviceId + "-" + deviceHost + "-" + deviceName + "-" + deviceStatus + "-" + deviceType + "-" + user;
+        return "AtupDevice[" + deviceId + "-" + deviceHost + "-" + deviceName + "-" + deviceStatus + "-" + deviceType + "-" + user + "]";
     }
 }

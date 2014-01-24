@@ -17,17 +17,17 @@ var PUT_METHOD = 'PUT';
 var DELETE_METHOD = 'DELETE';
 
 var SPAN_BEGIN = "<span style='width:100px;display:inline-block;'>";
-//var SPAN_BEGIN1 = "<span style='width:150px;display:inline-block;'>";
 var SPAN_BEGIN2 = "<span style='width:200px;display:inline-block;'>";
+var SPAN_BEGIN4 = "<span style='width:400px;display:inline-block;'>";
 
 var ROLE_ADMIN = 1;
 var ROLE_JOB_KILLER = 2;
 var ROLE_DEVICE_MANAGER = 3;
 var ROLE_USER = 4;
 
-var DEVICE_STATUS_IDLE="0";
-var DEVICE_STATUS_BUSY="1";
-var DEVICE_STATUS_ERROR="2";
+var DEVICE_STATUS_IDLE = "0";
+var DEVICE_STATUS_BUSY = "1";
+var DEVICE_STATUS_ERROR = "2";
 
 var NORMAL_STATUS = 9200;
 var LOADING = "Loading...";
@@ -42,7 +42,7 @@ function rest(restUrl, httpMethod, entity, contentType, dataType, callback) {
     resultLine.html(LOADING);
     var userId = storage.getItem("userId");
     var userRole = storage.getItem("userRole");
-    var request = jQuery.ajax({type: httpMethod, url: restUrl, headers: {'Atup-User': userId,'Atup-UserRole': userRole}, data: entity, contentType: contentType, dataType: dataType,
+    var request = jQuery.ajax({type: httpMethod, url: restUrl, headers: {'Atup-User': userId, 'Atup-UserRole': userRole}, data: entity, contentType: contentType, dataType: dataType,
         crossDomain: true});
     request.done(function (data) {
         try {

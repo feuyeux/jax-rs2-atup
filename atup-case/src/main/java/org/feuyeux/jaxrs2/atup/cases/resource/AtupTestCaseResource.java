@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
 @Component
 @Path(AtupApi.TEST_CASE_PATH)
 public class AtupTestCaseResource {

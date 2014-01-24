@@ -26,7 +26,7 @@ public class AtupTestResultResource {
     @Path("results")
     @Produces(MediaType.APPLICATION_JSON)
     public AtupTestResultListInfo getResultsByUser(@Context final HttpHeaders headers, @QueryParam("start") final Integer start,
-            @QueryParam("size") final Integer size) {
+                                                   @QueryParam("size") final Integer size) {
         final String userId = headers.getRequestHeader("Atup-User").get(0);
         if (start == null || size == null) {
             return new AtupTestResultListInfo(AtupErrorInfo.INVALID_PARAM, AtupErrorCode.INVALID_PARAM);

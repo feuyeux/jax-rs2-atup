@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Time: 12:22 AM
  */
 public class TUJobQueue {
+    private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(TUJobQueue.class.getName());
     final PriorityQueue<AtupTestJobInfo> jobQueue = new PriorityQueue<>();
     final Random random = new Random(System.nanoTime());
     static final AtomicInteger JOB_ID = new AtomicInteger();
@@ -35,14 +36,14 @@ public class TUJobQueue {
             Arrays.sort(jobs);
         }
 
-        System.out.println("********");
+        log.debug("********");
         for (AtupTestJobInfo job : jobs) {
-            System.out.println(job.toString());
+            log.debug(job.toString());
         }
 
-        System.out.println("********");
+        log.debug("********");
         while (jobQueue.size() > 0) {
-            System.out.println(jobQueue.poll());
+            log.debug(jobQueue.poll());
         }
     }
 }

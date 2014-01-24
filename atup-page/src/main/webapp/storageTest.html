@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<script>
-	function loadDemo() {
-		// make sure the browser supports sessionStorage
-		if (typeof (window.sessionStorage) === "undefined") {
-			alert("Your browser does not support HTML5 storage");
-			return;
-		}
-		var storage = window.sessionStorage;
-		storage.setItem("userId", "eric");
-		storage.setItem("password", "han");
-		alert(storage.getItem("userId") + "," + storage.getItem("password"));
-	}
-	loadDemo();
-</script>
+    <meta charset="utf-8">
+    <script>
+        function loadDemo() {
+            // make sure the browser supports sessionStorage
+            if (typeof (window.sessionStorage) === "undefined") {
+                alert("Your browser does not support HTML5 storage");
+                return;
+            }
+            var storage = window.sessionStorage;
+            storage.setItem("userId", "eric");
+            storage.setItem("password", "han");
+            alert(storage.getItem("userId") + "," + storage.getItem("password"));
+        }
+        loadDemo();
+    </script>
 </head>
 </html>

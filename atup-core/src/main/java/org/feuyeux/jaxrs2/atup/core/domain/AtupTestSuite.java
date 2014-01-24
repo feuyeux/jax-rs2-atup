@@ -82,6 +82,6 @@ public class AtupTestSuite implements Serializable {
 
     @Override
     public String toString() {
-        return suiteId + "::" + this.suiteName + "::" + this.suiteType + "::" + this.suiteStatus;
+        return "AtupTestSuite" + suiteId + "::" + this.suiteName + "::" + this.suiteType + "::" + this.suiteStatus + "]";
     }
 }

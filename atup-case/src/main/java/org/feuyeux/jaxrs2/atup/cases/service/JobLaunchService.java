@@ -2,6 +2,7 @@ package org.feuyeux.jaxrs2.atup.cases.service;
 
 import org.feuyeux.jaxrs2.atup.core.constant.AtupApi;
 import org.feuyeux.jaxrs2.atup.core.constant.AtupParam;
+import org.feuyeux.jaxrs2.atup.core.constant.AtupVariable;
 import org.feuyeux.jaxrs2.atup.core.dao.AtupDeviceDao;
 import org.feuyeux.jaxrs2.atup.core.dao.AtupTestCaseDao;
 import org.feuyeux.jaxrs2.atup.core.dao.AtupTestResultDao;
@@ -18,17 +19,16 @@ import org.springframework.stereotype.Service;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Arrays;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 @Service
 public class JobLaunchService {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(JobLaunchService.class.getName());
     private final PriorityQueue<AtupTestJobInfo> jobQueue;
+    private final HashMap<String, Short> lockMap = new HashMap<>();
     private static final String SEG = "([01]?\\d\\d?|2[0-4]\\d|25[0-5])";
     private static final String IP_PATTERN = "^" + SEG + "\\." + SEG + "\\." + SEG + "\\." + SEG + "$";
-
-    //private final ScheduledExecutorService launchTask;
 
     @Autowired
     AtupDeviceDao deviceDao;
@@ -40,7 +40,6 @@ public class JobLaunchService {
     AtupUserDao userDao;
 
     public JobLaunchService() {
-        //launchTask = new ScheduledThreadPoolExecutor(1);
         jobQueue = new PriorityQueue<>();
     }
 
@@ -67,36 +66,58 @@ public class JobLaunchService {
         return new AtupTestJobListInfo(Arrays.asList(jobs));
     }
 
-//    public void launch() throws InterruptedException, ExecutionException {
-//        launchTask.scheduleWithFixedDelay(new Runnable() {
-//        }, 0, 10, TimeUnit.SECONDS);
-//    }
-
-    public void launch() {
+    public boolean launch() {
         final AtupTestJobInfo jobInfo;
+        final String deviceIp;
         synchronized (jobQueue) {
             jobInfo = jobQueue.poll();
+            deviceIp = jobInfo.getDeviceIp();
+            if (deviceIp == null) {
+                return false;
+            }
+            if (null == lockMap.get(deviceIp)) {
+                lockMap.put(deviceIp, new Short("1"));
+            }
         }
         if (jobInfo != null) {
-            final String deviceIp = jobInfo.getDeviceIp();
-            if (deviceIp != null && (deviceIp.matches(IP_PATTERN) || deviceIp.toUpperCase().equals("LOCALHOST"))) {
-                /*1.fetch device from DB*/
-                final AtupDevice testDevice = fetchDeviceFromDB(deviceIp);
-                if (AtupParam.DEVICE_IDLE.equals(testDevice.getDeviceStatus())) {
-                    /*2. fetch test case from DB*/
-                    final AtupTestCase testCase = fetchTestCaseFromDB(jobInfo.getCaseId());
-                    /*3. launch test case and get the asynchronous result, then save it*/
-                    launchTest(jobInfo.getUserId(), testDevice, testCase);
-                } else {
-                    synchronized (jobQueue) {
-                        jobQueue.offer(jobInfo);
+            synchronized (lockMap.get(deviceIp)) {
+                if (deviceIp.matches(IP_PATTERN) || deviceIp.toUpperCase().equals("LOCALHOST")) {
+                         /*1.fetch device from DB*/
+                    final AtupDevice testDevice = fetchDeviceFromDB(deviceIp);
+                    Integer deviceStatus = testDevice.getDeviceStatus();
+                    log.debug("**** 1 fetch-Device-FromDB **** " + jobInfo + " deviceStatus=" + deviceStatus);
+                    if (AtupParam.DEVICE_IDLE.equals(deviceStatus)) {
+                            /*2. fetch test case from DB*/
+                        log.debug("**** 2 fetch-TestCase-FromDB **** " + jobInfo);
+                        final AtupTestCase testCase = fetchTestCaseFromDB(jobInfo.getCaseId());
+                            /*3. launch test case and get the asynchronous result, then save it*/
+                        log.debug("**** 3 launchTest **** " + jobInfo);
+                        launchTest(jobInfo.getUserId(), testDevice, testCase);
+                        return true;
                     }
                 }
-            } else {
-                synchronized (jobQueue) {
-                    jobQueue.offer(jobInfo);
-                }
             }
+        }
+        if (jobInfo != null) {
+            log.debug("**** 5 offer queue> " + jobInfo);
+            synchronized (jobQueue) {
+                jobQueue.offer(jobInfo);
+            }
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    Integer fetchDeviceStatus(String deviceIp) {
+        final String detectPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
+        final AtupRequest<String, Integer> request = new AtupRequest<>();
+        request.timeout(AtupVariable.DETECT_CONNECT_TIMEOUT, 0);
+        try {
+            return request.rest(AtupRequest.GET, detectPath, Integer.class);
+        } catch (final Exception e) {
+            log.error(e);
+            return AtupParam.DEVICE_ERROR;
         }
     }
 
@@ -120,7 +141,8 @@ public class JobLaunchService {
 
     private AtupTestResult restAsyncPost(String deviceIp, AtupTestCase testCase) {
         final String launchPath = AtupApi.PROTOCOL + deviceIp + ":" + AtupApi.SERVICE_PORT + AtupApi.SERVICE_PATH;
-        final AtupAsyncRequest<AtupTestCase, AtupTestResult> request = new AtupAsyncRequest<>();
+        final AtupRequest<AtupTestCase, AtupTestResult> request = new AtupRequest<>();
+        request.setAsync(true);
         return request.rest(AtupRequest.POST, launchPath, MediaType.APPLICATION_JSON_TYPE, testCase, AtupTestResult.class);
     }
 

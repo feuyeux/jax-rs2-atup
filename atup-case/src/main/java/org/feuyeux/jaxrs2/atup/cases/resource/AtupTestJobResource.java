@@ -49,21 +49,22 @@ public class AtupTestJobResource {
 
     @POST
     @Path("jobs")
-    public void asyncLaunchJob(@Suspended final AsyncResponse asyncResponse, @QueryParam("count")final int concurrentNumber) throws ExecutionException, InterruptedException {
-        List<Callable<String>> tasks = new ArrayList<>();
+    public void asyncLaunchJob(@Suspended final AsyncResponse asyncResponse, @QueryParam("count") final int concurrentNumber) throws ExecutionException, InterruptedException {
+        List<Callable<Boolean>> tasks = new ArrayList<>();
         for (int i = 0; i < concurrentNumber; i++) {
-            Callable<String> launchTask = new LaunchTestRunner(jobLaunchService);
+            Callable<Boolean> launchTask = new LaunchTestRunner(jobLaunchService);
             tasks.add(launchTask);
         }
 
         ExecutorService executorService = Executors.newFixedThreadPool(concurrentNumber);
-        List<Future<String>> resultFutures = executorService.invokeAll(tasks);
+        List<Future<Boolean>> resultFutures = executorService.invokeAll(tasks);
         StringBuilder launchResult = new StringBuilder();
         try {
             for (int i = 0; i < concurrentNumber; i++) {
-                Future<String> future = resultFutures.get(i);
-                launchResult.append(future.get());
+                Future<Boolean> future = resultFutures.get(i);
+                launchResult.append(future.get()).append("\n");
             }
+            configResponse(asyncResponse);
             asyncResponse.resume(launchResult.toString());
         } catch (InterruptedException | ExecutionException e) {
             log.error(e.getMessage());

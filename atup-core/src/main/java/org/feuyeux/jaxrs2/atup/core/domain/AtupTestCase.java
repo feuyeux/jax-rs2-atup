@@ -125,7 +125,7 @@ public class AtupTestCase implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder("AtupTestCase[");
         if (caseId != null) {
             builder.append("caseId=").append(caseId);
         } else {
@@ -151,6 +151,6 @@ public class AtupTestCase implements Serializable {
         } else {
             builder.append(",caseStatus=nil");
         }
-        return builder.toString();
+        return builder.append("]").toString();
     }
 }

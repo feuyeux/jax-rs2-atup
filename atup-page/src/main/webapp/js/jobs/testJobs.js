@@ -17,7 +17,7 @@ function renderGetAll(data) {
             jQuery("#jobsDiv").html(
                 "<div align='left'>" + SPAN_BEGIN
                     + "Job Id</span>" + SPAN_BEGIN
-                    + "Case Id</span>" + SPAN_BEGIN
+                    + "Case Id</span>" + SPAN_BEGIN2
                     + "Device Ip</span>" + SPAN_BEGIN
                     + "User Id</span>" + SPAN_BEGIN2
                     + "Job Priority</span>" + SPAN_BEGIN
@@ -26,7 +26,7 @@ function renderGetAll(data) {
             jQuery.each(list, function (i, jobInfo) {
                 var line = "<div align='left'>" + SPAN_BEGIN
                     + jobInfo.jobId + "</span>" + SPAN_BEGIN
-                    + jobInfo.caseId + "</span>" + SPAN_BEGIN
+                    + jobInfo.caseId + "</span>" + SPAN_BEGIN2
                     + jobInfo.deviceIp + "</span>" + SPAN_BEGIN
                     + jobInfo.userId + "</span>" + SPAN_BEGIN2
                     + jobInfo.priority + "</span>" + SPAN_BEGIN

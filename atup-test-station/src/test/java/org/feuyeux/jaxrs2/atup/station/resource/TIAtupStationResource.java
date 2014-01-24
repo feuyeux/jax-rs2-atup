@@ -13,10 +13,8 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 public class TIAtupStationResource extends JerseyTest {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(TIAtupStationResource.class.getName());

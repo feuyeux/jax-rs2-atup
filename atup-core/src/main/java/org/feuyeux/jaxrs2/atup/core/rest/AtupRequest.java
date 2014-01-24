@@ -1,5 +1,6 @@
 package org.feuyeux.jaxrs2.atup.core.rest;
 
+import org.feuyeux.jaxrs2.atup.core.constant.AtupVariable;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.client.ClientProperties;
 import org.springframework.util.CollectionUtils;
@@ -7,6 +8,8 @@ import org.springframework.util.CollectionUtils;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Set;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 /**
  * ATUP Rest Request
@@ -16,11 +19,14 @@ import java.util.Set;
  * 09/09/2013
  */
 public class AtupRequest<R, E> {
+    private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(AtupRequest.class.getName());
+
     public static final String GET = "GET";
     private static final String DELETE = "DELETE";
     private static final String PUT = "PUT";
     public static final String POST = "POST";
     private ClientConfig clientConfig;
+    private boolean isAsync = false;
     private Set<Class<?>> clientRegisters;
 
     public AtupRequest() {
@@ -28,6 +34,10 @@ public class AtupRequest<R, E> {
 
     public AtupRequest(final ClientConfig clientConfig) {
         this.clientConfig = clientConfig;
+    }
+
+    public void setAsync(boolean isAsync) {
+        this.isAsync = isAsync;
     }
 
     public void setClientRegisters(final Set<Class<?>> clientRegisters) {
@@ -88,9 +98,21 @@ public class AtupRequest<R, E> {
                 response = invocationBuilder.put(entity);
                 break;
             case POST:
-                entity = Entity.entity(requestData, requestDataType);
-                response = invocationBuilder.post(entity);
-                break;
+                if (isAsync) {
+                    final AsyncInvoker async = invocationBuilder.async();
+                    entity = Entity.entity(requestData, requestDataType);
+                    final Future<E> responseFuture = async.post(entity, returnType);
+                    try {
+                        return responseFuture.get(AtupVariable.ASYNC_LAUNCH_TEST_TIMEOUT + 2, TimeUnit.SECONDS);
+                    } catch (Exception e) {
+                        log.error(e);
+                    }
+                    break;
+                } else {
+                    entity = Entity.entity(requestData, requestDataType);
+                    response = invocationBuilder.post(entity);
+                    break;
+                }
             default:
                 response = invocationBuilder.get();
         }
