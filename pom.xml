@@ -4,7 +4,7 @@
     <groupId>org.feuyeux.jaxrs2.atup</groupId>
     <artifactId>atup</artifactId>
     <packaging>pom</packaging>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>0.0.4-SNAPSHOT</version>
     <name>ATUP Project Parent</name>
 
     <modules>
