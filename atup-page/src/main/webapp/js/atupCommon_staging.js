@@ -1,7 +1,12 @@
-var ATUP_CASE_HOST = "http://10.11.72.57:8080/";
-var ATUP_DEVICE_HOST = "http://10.11.72.57:8080/";
-var ATUP_USER_HOST = "http://10.11.72.57:8080/";
-var ATUP_PAGE_HOST = "http://10.11.72.57/";
+//var ATUP_CASE_HOST = "http://10.11.72.57:8080/";
+//var ATUP_DEVICE_HOST = "http://10.11.72.57:8080/";
+//var ATUP_USER_HOST = "http://10.11.72.57:8080/";
+//var ATUP_PAGE_HOST = "http://10.11.72.57/";
+
+var ATUP_CASE_HOST = "http://192.168.1.180:8080/";
+var ATUP_DEVICE_HOST = "http://192.168.1.180:8080/";
+var ATUP_USER_HOST = "http://192.168.1.180:8080/";
+var ATUP_PAGE_HOST = "http://192.168.1.160/";
 
 var ATUP_CASE_BASE_URI = 'atup-case/rest-api';
 var ATUP_DEVICE_BASE_URI = 'atup-device/rest-api';

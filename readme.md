@@ -163,7 +163,7 @@ sql-maven-plugin
         </dependencies>
         <configuration>
             <driver>com.mysql.jdbc.Driver</driver>
-            <url>jdbc:mysql://${tomcat.server.ip}:3306</url>
+            <url>jdbc:mysql://${mysql.server.ip}:3306</url>
             <username>root</username>
             <password>root</password>
         </configuration>
@@ -189,7 +189,7 @@ sql-maven-plugin
         </executions>
     </plugin>
 
-    mvn clean install -DskipTests -Dtomcat.server.ip=10.11.72.57 -PCI
+    mvn clean install -DskipTests -Dmysql.server.ip=10.11.72.57 -PCI
 
 #### tomcat deploy ####
 
@@ -256,9 +256,8 @@ sql-maven-plugin
                     <phase>package</phase>
                     <configuration>
                         <target>
-                            <scp todir="${userid}:${password}@${host}:/${remoteDir}" trust="true"
-                                 failonerror="true">
-                                <fileset dir="src/main/webapp"/>
+                            <scp todir="${u}:${p}@${h}:/${d}" trust="true" failonerror="true">
+                            <fileset dir="${project.build.directory}/${project.artifactId}-${project.version}"/>
                             </scp>
                         </target>
                     </configuration>
@@ -283,14 +282,14 @@ sql-maven-plugin
     </plugins>
     </build>
     <properties>
-        <host>10.11.72.57</host>
-        <userid>erichan</userid>
-        <password>han</password>
-        <remoteDir>/usr/share/nginx/html/atup-page</remoteDir>
+        <h>${nginx.server.ip}</h>
+        <u>erichan</u>
+        <p>han</p>
+        <d>/usr/share/nginx/html/atup-page</d>
     </properties>
     </profile>
 
-    mvn clean install -DskipTests -PCI
+    mvn clean install -DskipTests -Du=eric -Dp=han -Dd=/home/eric/nginx/atup-page -PCI
 ###Modules###
 
 #### atup-core ####

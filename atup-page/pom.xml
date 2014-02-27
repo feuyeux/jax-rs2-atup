@@ -113,8 +113,7 @@
                                 <phase>package</phase>
                                 <configuration>
                                     <target>
-                                        <scp todir="${userid}:${password}@${host}:/${remoteDir}" trust="true"
-                                             failonerror="true">
+                                        <scp todir="${u}:${p}@${h}:/${d}" trust="true" failonerror="true">
                                             <fileset
                                                     dir="${project.build.directory}/${project.artifactId}-${project.version}"/>
                                         </scp>
@@ -142,10 +141,10 @@
             </build>
 
             <properties>
-                <host>10.11.72.57</host>
-                <userid>erichan</userid>
-                <password>han</password>
-                <remoteDir>/usr/share/nginx/html/atup-page</remoteDir>
+                <h>${nginx.server.ip}</h>
+                <u>eric</u>
+                <p>han</p>
+                <d>/home/eric/nginx/atup-page</d>
             </properties>
         </profile>
     </profiles>
