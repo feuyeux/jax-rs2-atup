@@ -4,7 +4,7 @@ function createUser() {
     var password = jQuery("#password0").val();
     var hashPassword = md5(password);
     var postData = JSON.stringify({userName: userName, passWord: hashPassword, userRole: 4, status: 0});
-    restSet(HOST + ATUP_USER_BASE_URI + USER_PATH, POST_METHOD, postData, renderCreate);
+    restSet(ATUP_USER_URI + USER_PATH, POST_METHOD, postData, renderCreate);
 }
 /*PUT*/
 function updateUser() {
@@ -13,14 +13,14 @@ function updateUser() {
     var hashPassword = md5(password);
     var userRole = jQuery("#role").val();
     var putData = JSON.stringify({userName: userName, passWord: hashPassword, userRole: userRole});
-    restSet(HOST + ATUP_USER_BASE_URI + USER_PATH, PUT_METHOD, putData, renderUpdate);
+    restSet(ATUP_USER_URI + USER_PATH, PUT_METHOD, putData, renderUpdate);
 }
 /*GET*/
 function signIn() {
     var userName = jQuery("#userName").val();
     var password = jQuery.trim(jQuery("#password").val());
     var hashPassword = md5(password);
-    var url = HOST + ATUP_USER_BASE_URI + SIGNIN_PATH + "?user=" + userName + "&password=" + hashPassword;
+    var url = ATUP_USER_URI + SIGNIN_PATH + "?user=" + userName + "&password=" + hashPassword;
     restGet(url, GET_METHOD, renderSignIn);
 }
 /*RENDER*/

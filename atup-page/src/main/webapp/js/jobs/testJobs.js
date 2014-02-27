@@ -5,7 +5,7 @@ function loadJobs() {
     setInterval(restCall, 10000);
 }
 function restCall() {
-    restGet(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, GET_METHOD, renderGetAll);
+    restGet(ATUP_CASE_URI + TEST_JOB_PATH, GET_METHOD, renderGetAll);
 }
 function renderGetAll(data) {
     var list = data.jobs;
@@ -58,5 +58,5 @@ function renderGetAll(data) {
 }
 function removeJob(jobId) {
     var jobInfo = JSON.stringify({jobId: jobId});
-    restSet(HOST + ATUP_CASE_BASE_URI + TEST_JOB_PATH, DELETE_METHOD, jobInfo, loadJobs());
+    restSet(ATUP_CASE_URI + TEST_JOB_PATH, DELETE_METHOD, jobInfo, loadJobs());
 }

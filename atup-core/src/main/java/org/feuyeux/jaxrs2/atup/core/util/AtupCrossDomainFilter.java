@@ -12,20 +12,19 @@ import java.io.IOException;
 
 @Provider
 public class AtupCrossDomainFilter implements ContainerRequestFilter, ContainerResponseFilter {
-    public static final String ACCESS_CONTROL_ALLOW_ORIGIN = "Access-Control-Allow-Origin";
     private final Logger log = LogManager.getLogger(AtupCrossDomainFilter.class.getName());
 
     @Override
-    public void filter(final ContainerRequestContext creq, final ContainerResponseContext cres) throws IOException {
-        cres.getHeaders().add(ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-        cres.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");
-        cres.getHeaders().add("Access-Control-Allow-Credentials", "true");
-        cres.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
-        cres.getHeaders().add("Access-Control-Max-Age", "1209600");
+    public void filter(final ContainerRequestContext requestContext) throws IOException {
+        log.debug(requestContext.getHeaders().getFirst("Access-Control-Allow-Origin"));
     }
 
     @Override
-    public void filter(final ContainerRequestContext requestContext) throws IOException {
-        log.debug(requestContext.getHeaders().getFirst(ACCESS_CONTROL_ALLOW_ORIGIN));
+    public void filter(final ContainerRequestContext requestContext, final ContainerResponseContext responseContext) throws IOException {
+        responseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
+        responseContext.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization, Atup-User, Atup-UserRole");
+        responseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
+        responseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
+        responseContext.getHeaders().add("Access-Control-Max-Age", "1209600");
     }
 }

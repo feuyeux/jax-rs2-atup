@@ -146,6 +146,51 @@ Context.xml:
                     </plugin>
                 </plugins>
 
+#### mysql initialize ####
+sql-maven-plugin
+
+    parent/pom.xml:
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>sql-maven-plugin</artifactId>
+        <version>${sql-maven-plugin.version}</version>
+        <dependencies>
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+        </dependencies>
+        <configuration>
+            <driver>com.mysql.jdbc.Driver</driver>
+            <url>jdbc:mysql://${tomcat.server.ip}:3306</url>
+            <username>root</username>
+            <password>root</password>
+        </configuration>
+    </plugin>
+
+    modules/pom.xml:
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>sql-maven-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>create-db</id>
+                <phase>pre-integration-test</phase>
+                <goals>
+                    <goal>execute</goal>
+                </goals>
+                <configuration>
+                    <srcFiles>
+                        <srcFile>../document/atup-ddl/atup-user.sql</srcFile>
+                    </srcFiles>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+
+    mvn clean install -DskipTests -Dtomcat.server.ip=10.11.72.57 -PCI
+
 #### tomcat deploy ####
 
 [http://tomcat.apache.org/maven-plugin-2.2](http://tomcat.apache.org/maven-plugin-2.2/)
@@ -194,7 +239,58 @@ Context.xml:
 	  <user username="admin" password="admin" roles="manager-script,manager-gui"/>
 	</tomcat-users>
 
-    mvn clean install -Dtomcat.server.ip=192.168.1.181 -PCI
+    mvn clean install -DskipTests -Dtomcat.server.ip=192.168.1.181 -PCI
+
+#### nginx deploy ####
+    <profile>
+        <id>CI</id>
+        <build>
+        <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-antrun-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+                <execution>
+                    <id>deploy package</id>
+                    <phase>package</phase>
+                    <configuration>
+                        <target>
+                            <scp todir="${userid}:${password}@${host}:/${remoteDir}" trust="true"
+                                 failonerror="true">
+                                <fileset dir="src/main/webapp"/>
+                            </scp>
+                        </target>
+                    </configuration>
+                    <goals>
+                        <goal>run</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.ant</groupId>
+                    <artifactId>ant-jsch</artifactId>
+                    <version>1.9.2</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.jcraft</groupId>
+                    <artifactId>jsch</artifactId>
+                    <version>0.1.50</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+    </build>
+    <properties>
+        <host>10.11.72.57</host>
+        <userid>erichan</userid>
+        <password>han</password>
+        <remoteDir>/usr/share/nginx/html/atup-page</remoteDir>
+    </properties>
+    </profile>
+
+    mvn clean install -DskipTests -PCI
 ###Modules###
 
 #### atup-core ####
@@ -209,6 +305,8 @@ REST WADL:
 - xer xer
 
 #### atup-case ####
+REST WADL:
+[http://localhost:8080/atup-case/rest-api/application.wadl](http://localhost:8080//atup-case/rest-api/application.wadl)
 
 #### atup-device ####
 REST WADL:
@@ -218,4 +316,4 @@ REST WADL:
 
 
 ### JVM ###
-	-Xms1024m -Xmx1024m -XX:PermSize=512m -XX:MaxPermSize=1024m
+	-Xmx1024m

@@ -43,7 +43,7 @@ function rest(restUrl, httpMethod, entity, contentType, dataType, callback) {
     var userId = storage.getItem("userId");
     var userRole = storage.getItem("userRole");
     var request = jQuery.ajax({type: httpMethod, url: restUrl, headers: {'Atup-User': userId, 'Atup-UserRole': userRole}, data: entity, contentType: contentType, dataType: dataType,
-        crossDomain: true});
+        crossDomain: true});//'Access-Control-Allow-Origin': '*',
     request.done(function (data) {
         try {
             if (data === null || data === undefined) {
@@ -67,7 +67,7 @@ function rest(restUrl, httpMethod, entity, contentType, dataType, callback) {
 function checkSignIn() {
     var storageUserId = storage.getItem("userId");
     if (storageUserId == null) {
-        window.location.href = HOST + ATUP_PAGE_BASE_URI + "signIn.html";
+        window.location.href = ATUP_PAGE_URI + "signIn.html";
     } else {
         var user = storage.getItem("userName");
         jQuery('#topDiv').html("Welcome " + user);

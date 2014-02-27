@@ -15,5 +15,6 @@ class AtupTestCaseApplication extends ResourceConfig {
         register(AtupTestCaseResource.class);
         register(AtupTestResultResource.class);
         register(AtupTestJobResource.class);
+        register(org.feuyeux.jaxrs2.atup.core.util.AtupCrossDomainFilter.class);
     }
 }

@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS `jaxrs2_atup`;
+USE  `jaxrs2_atup`;
+
+DROP TABLE IF EXISTS `atup_device`;
 CREATE TABLE `atup_device` (
   `device_id` int(11) NOT NULL AUTO_INCREMENT,
   `device_host` varchar(255) DEFAULT NULL,

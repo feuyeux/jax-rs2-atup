@@ -1,3 +1,7 @@
+CREATE DATABASE IF NOT EXISTS `jaxrs2_atup`;
+USE  `jaxrs2_atup`;
+
+DROP TABLE IF EXISTS `test_result`;
 CREATE TABLE `test_result` (
   `result_id` int(11) NOT NULL AUTO_INCREMENT,
   `result_body` varchar(255) DEFAULT NULL,

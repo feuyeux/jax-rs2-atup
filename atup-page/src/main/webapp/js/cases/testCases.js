@@ -1,6 +1,6 @@
 function loadCases(start, size) {
     checkSignIn();
-    restGet(HOST + ATUP_CASE_BASE_URI + TEST_CASE_PATH + "/cases?start=" + start + "&size=" + size, GET_METHOD, renderGetAll);
+    restGet(ATUP_CASE_URI + TEST_CASE_PATH + "/cases?start=" + start + "&size=" + size, GET_METHOD, renderGetAll);
 }
 function renderGetAll(data) {
     var list = data.testCaseList;

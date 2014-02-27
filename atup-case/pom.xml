@@ -86,6 +86,51 @@
                 </plugins>
             </build>
         </profile>
+
+        <profile>
+            <id>CI</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>sql-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>create-db</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                    <goal>execute</goal>
+                                </goals>
+                                <configuration>
+                                    <srcFiles>
+                                        <srcFile>../document/atup-ddl/atup-suite.sql</srcFile>
+                                        <srcFile>../document/atup-ddl/atup-case.sql</srcFile>
+                                        <srcFile>../document/atup-ddl/atup-result.sql</srcFile>
+                                    </srcFiles>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.tomcat.maven</groupId>
+                        <artifactId>tomcat7-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <phase>pre-integration-test</phase>
+                                <configuration>
+                                    <warFile>target/${project.build.finalName}.war</warFile>
+                                    <path>/${project.build.finalName}</path>
+                                </configuration>
+                                <goals>
+                                    <goal>redeploy</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <dependencies>

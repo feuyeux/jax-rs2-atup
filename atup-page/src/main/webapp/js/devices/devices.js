@@ -7,9 +7,9 @@ function loadDevices() {
 function restCall() {
     var userRole = storage.getItem("userRole");
     if (ROLE_DEVICE_MANAGER == userRole) {
-        restGet(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH + "/all", GET_METHOD, renderGetAll);
+        restGet(ATUP_DEVICE_URI + DEVICE_PATH + "/all", GET_METHOD, renderGetAll);
     } else {
-        restGet(HOST + ATUP_DEVICE_BASE_URI + DEVICE_PATH, GET_METHOD, renderGetAll);
+        restGet(ATUP_DEVICE_URI + DEVICE_PATH, GET_METHOD, renderGetAll);
     }
 }
 function renderGetAll(data) {

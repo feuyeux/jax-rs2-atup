@@ -8,5 +8,6 @@ import javax.ws.rs.ApplicationPath;
 class AtupDeviceApplication extends ResourceConfig {
     public AtupDeviceApplication() {
         register(org.feuyeux.jaxrs2.atup.device.resource.AtupDeviceResource.class);
+        register(org.feuyeux.jaxrs2.atup.core.util.AtupCrossDomainFilter.class);
     }
 }

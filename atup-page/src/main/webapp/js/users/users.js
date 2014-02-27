@@ -1,6 +1,6 @@
 function loadUsers() {
     checkSignIn();
-    restGet(HOST + ATUP_USER_BASE_URI + USER_PATH, GET_METHOD, renderGetAll);
+    restGet(ATUP_USER_URI + USER_PATH, GET_METHOD, renderGetAll);
 }
 function renderGetAll(data) {
     var list = data.userList;
@@ -27,5 +27,5 @@ function renderGetAll(data) {
 
 function disableUser(userId) {
     var putData = JSON.stringify({userId: userId, status: 1});
-    restSet(HOST + ATUP_USER_BASE_URI + USER_PATH, PUT_METHOD, putData, loadUsers);
+    restSet(ATUP_USER_URI + USER_PATH, PUT_METHOD, putData, loadUsers);
 }

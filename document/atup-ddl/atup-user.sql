@@ -1,5 +1,8 @@
-DROP TABLE IF EXISTS `atup_user`;
+DROP DATABASE IF EXISTS `jaxrs2_atup`;
+CREATE DATABASE `jaxrs2_atup`;
+USE  `jaxrs2_atup`;
 
+DROP TABLE IF EXISTS `atup_user`;
 CREATE TABLE `atup_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(255) DEFAULT NULL,

@@ -37,7 +37,7 @@
                             <execution>
                                 <phase>pre-integration-test</phase>
                                 <configuration>
-                                    <warFile>target/atup-test-station.war</warFile>
+                                    <warFile>target/${project.build.finalName}.war</warFile>
                                     <path>/${project.build.finalName}</path>
                                 </configuration>
                                 <goals>

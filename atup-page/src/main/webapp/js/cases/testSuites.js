@@ -1,7 +1,7 @@
 function loadSuites(start, size) {
     checkSignIn();
     jQuery("#suitesDiv").html("Loading...");
-    restGet(HOST + ATUP_CASE_BASE_URI + TEST_SUITE_PATH + "/suites?start=" + start + "&size=" + size, GET_METHOD, renderGetAll);
+    restGet(ATUP_CASE_URI + TEST_SUITE_PATH + "/suites?start=" + start + "&size=" + size, GET_METHOD, renderGetAll);
 }
 function renderGetAll(data) {
     var list = data.suiteList;
