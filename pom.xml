@@ -27,7 +27,7 @@
         <JDK.version>1.7</JDK.version>
         <jersey.version>2.6</jersey.version>
         <junit.version>4.11</junit.version>
-        <log4j2.version>2.0-beta9</log4j2.version>
+        <log4j2.version>2.0-rc1</log4j2.version>
         <spring.version>3.2.5.RELEASE</spring.version>
         <eclipselink.version>2.5.0</eclipselink.version>
         <jquery.version>2.0.3</jquery.version>
