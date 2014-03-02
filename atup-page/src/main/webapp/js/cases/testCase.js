@@ -30,7 +30,7 @@ function createCase() {
     var caseName = jQuery("#caseName0").val();
     var caseBody = jQuery("#caseBody0").val();
     var postData = JSON.stringify({caseName: caseName, caseBody: caseBody, caseStatus: 1, suite: {suiteId: suiteId}});
-    restSet(HOST + ATUP_CASE_URI + TEST_CASE_PATH, POST_METHOD, postData, renderEdit);
+    restSet(ATUP_CASE_URI + TEST_CASE_PATH, POST_METHOD, postData, renderEdit);
 }
 function updateCase() {
     var suiteId = jQuery("#suiteList").val();
@@ -38,7 +38,7 @@ function updateCase() {
     var caseBody = jQuery("#caseBody").val();
     var caseStatus = jQuery("#caseStatus").val();
     var putData = JSON.stringify({caseName: caseName, caseBody: caseBody, caseStatus: caseStatus, suite: {suiteId: suiteId}});
-    restSet(HOST + ATUP_CASE_URI + TEST_CASE_PATH, PUT_METHOD, putData, renderEdit);
+    restSet( ATUP_CASE_URI + TEST_CASE_PATH, PUT_METHOD, putData, renderEdit);
 }
 function renderEdit(data) {
     var resultDiv = jQuery('#resultDiv');

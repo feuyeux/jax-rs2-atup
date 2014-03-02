@@ -21,7 +21,7 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@ContextConfiguration(locations = {"classpath:applicationContext.xml.bk"})
+@ContextConfiguration(locations = {"classpath:applicationContext2.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TIAtupUserResource extends JerseyTest {
     private final Logger log = LogManager.getLogger(TIAtupUserResource.class.getName());
@@ -47,6 +47,7 @@ public class TIAtupUserResource extends JerseyTest {
         }
     }
 
+    @Test
     public void testGetUser() {
         String userName = null;
         final AtupUserInfo user = CreateUser.buildUserInfo();
@@ -67,5 +68,4 @@ public class TIAtupUserResource extends JerseyTest {
             Assert.assertEquals(userName, atupUserInfo.getUserName());
         }
     }
-
 }

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext2.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TUDeviceDao {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(TUDeviceDao.class.getName());

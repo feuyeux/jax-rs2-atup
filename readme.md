@@ -28,6 +28,8 @@ Context.xml:
         	maxWait="-1" />
 	
 ### Maven Setting ###
+default CI build:
+mvn clean install -DskipTest -PCI
 ####resources properties####
 [http://mojo.codehaus.org/properties-maven-plugin/usage.html](http://mojo.codehaus.org/properties-maven-plugin/usage.html)
 

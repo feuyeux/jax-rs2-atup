@@ -1,0 +1,1 @@
+this directory is only for nginx which is running out of jvm

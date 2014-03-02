@@ -68,7 +68,7 @@ public class AtupTestCase implements Serializable {
         this.caseName = caseName;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "suiteId")
     @XmlElement
     public AtupTestSuite getSuite() {

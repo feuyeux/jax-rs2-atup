@@ -18,7 +18,7 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext2.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TITestCaseResource extends JerseyTest {
     @Override

@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
 
-@ContextConfiguration(locations = {"classpath:applicationContext.xml"})
+@ContextConfiguration(locations = {"classpath:applicationContext2.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TUTestSuiteDao {
     @Autowired
