@@ -1,15 +1,24 @@
 package org.feuyeux.jaxrs2.atup.core.rest;
 
-import org.feuyeux.jaxrs2.atup.core.constant.AtupVariable;
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.ClientProperties;
-import org.springframework.util.CollectionUtils;
-
-import javax.ws.rs.client.*;
-import javax.ws.rs.core.MediaType;
 import java.util.Set;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+
+import javax.ws.rs.client.AsyncInvoker;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.feuyeux.jaxrs2.atup.core.constant.AtupVariable;
+import org.glassfish.jersey.apache.connector.ApacheClientProperties;
+import org.glassfish.jersey.apache.connector.ApacheConnectorProvider;
+import org.glassfish.jersey.client.ClientConfig;
+import org.glassfish.jersey.client.ClientProperties;
+import org.springframework.util.CollectionUtils;
 
 /**
  * ATUP Rest Request
@@ -20,10 +29,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class AtupRequest<R, E> {
     private final org.apache.logging.log4j.Logger log = org.apache.logging.log4j.LogManager.getLogger(AtupRequest.class.getName());
-
+	private static final int MAX_LISTENERS = 5;
+	private static final int MAX_ITEMS = 10;
     public static final String GET = "GET";
-    private static final String DELETE = "DELETE";
-    private static final String PUT = "PUT";
+    public static final String DELETE = "DELETE";
+    public static final String PUT = "PUT";
     public static final String POST = "POST";
     private ClientConfig clientConfig;
     private boolean isAsync = false;
@@ -36,6 +46,14 @@ public class AtupRequest<R, E> {
         this.clientConfig = clientConfig;
     }
 
+	public void useApacheConnector() {
+		PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
+		cm.setMaxTotal(MAX_LISTENERS * MAX_ITEMS);
+		cm.setDefaultMaxPerRoute(MAX_LISTENERS * MAX_ITEMS);
+		clientConfig.property(ApacheClientProperties.CONNECTION_MANAGER, cm);
+		clientConfig.connectorProvider(new ApacheConnectorProvider());
+	}
+	
     public void setAsync(boolean isAsync) {
         this.isAsync = isAsync;
     }
