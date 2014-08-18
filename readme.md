@@ -194,6 +194,7 @@ sql-maven-plugin
     mvn clean install -DskipTests -Dmysql.server.ip=10.11.72.57 -PCI
 
 #### tomcat deploy ####
+[jetty plugin](http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html)
 
 [http://tomcat.apache.org/maven-plugin-2.2](http://tomcat.apache.org/maven-plugin-2.2/)
 
